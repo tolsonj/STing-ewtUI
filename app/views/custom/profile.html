@@ -1,0 +1,169 @@
+ <div  align="center" ng-show="spinnerShow" style="padding-bottom:5px;">
+    <img src="app/img/spinner.gif" style="width:20px;height:20px;"   />
+    <span style="color:#EE3E41;font-size:18px;"> Please wait...</span>
+</div>
+ <div class="panel panel-default" ng-show="!spinnerShow">
+  <div ng-cloak class="errmsg">
+          <div  class="alert alert-danger errGET" ng-cloak ng-show="failShowGet">
+            <strong>Sorry! We couldn't connect with the backend server</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+            <strong>Record added successfully</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+            <strong>Record saved successfully</strong>
+          </div>
+  </div>
+	<div class="panel-heading" style="color:#AA0001"><h3>Profile</h3></div>
+	<div class="panel-body">
+             <table  style="width:800px;" class="custom-pagination tab"   ng-table="tableParams" show-filter="false" >
+                 <tr  ng-repeat="profile in loggedUser" ng-form="profile.userForm1">
+                     <th style="text-align:left" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;First Name</th>
+                       <td style="text-align:left" ng-switch="profile.isEditing">
+                         <span ng-switch-default class="editable-text"><input type="text" class="input_txt"  ng-model="profile.firstname" readonly /></span>
+                         <div class="controls" ng-class="firstname.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                           <input  type="text" name="firstname" ng-model="profile.profileinfo.firstname" class="editable-input form-control input-sm" required />
+                           <span class="text-danger" ng-show="profile.submitted && profile.userForm1.firstname.$error.required">* This field is required</span>
+                         </div>
+                       </td>
+                 </tr>
+                 <tr  ng-repeat="profile in loggedUser" ng-form="profile.userForm2">
+                     <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Last Name</th>
+                     <td  style="text-align:left" data-title="'Last Name '"  ng-switch="profile.isEditing">
+                       <span ng-switch-default class="editable-text"><input type="text" class="input_txt"  ng-model="profile.lastname" readonly /></span>
+                       <div class="controls" ng-class="lastname.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                         <input type="text" name="lastname" ng-model="profile.profileinfo.lastname" class="editable-input form-control input-sm" required />
+                         <span class="text-danger" ng-show="profile.submitted && profile.userForm2.lastname.$error.required">* This field is required</span>
+                       </div>
+                     </td>
+                 </tr>
+                 <tr  ng-repeat="profile in loggedUser" ng-form="profile.userForm3">
+   		              <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UserName</th>
+                     <td style="text-align:left"  data-title="'UserName '"  ng-switch="profile.isEditing">
+   				              <span ng-switch-default class="editable-text"><input type="text" class="input_txt" ng-model="profile.username" readonly /></span>
+   					            <div class="controls" ng-class="username.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+   						            <input type="text" name="username" ng-model="profile.profileinfo.username" class="editable-input form-control input-sm" readonly  />
+   						            <span class="text-danger" ng-show="profile.submitted && profile.userForm3.username.$error.required">* This field is required</span>
+   					            </div>
+   			            </td>
+                 </tr>
+                 <tr ng-repeat="profile in loggedUser" ng-form="profile.userForm4">
+   		              <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Password</th>
+                     <td style="text-align:left"  data-title="'Password'"  ng-switch="profile.isEditing">
+   				              <span ng-switch-default class="editable-text"> <input type="password" class="input_txt" ng-model="profile.password" readonly /></span>
+   					            <div class="controls" ng-class="password.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+   						          <input type="password" name="password" ng-model="profile.profileinfo.password"  class="editable-input form-control input-sm" required />
+   						          <span class="text-danger" ng-show="profile.submitted && profile.userForm4.password.$error.required">* This field is required</span>
+                         <span class="text-danger" ng-show="profile.submitted && profile.userForm4.password.$error.pattern">* Input should match 'a-zA-Z0-9' and 6-10 length</span>
+   					            </div>
+   			            </td>
+                 </tr>
+                 <tr ng-repeat="profile in loggedUser" ng-form="profile.userForm0">
+                     <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirm Password</th>
+                     <td style="text-align:left"  data-title="'Confirm Password'"  ng-switch="profile.isEditing">
+                         <span ng-switch-default class="editable-text"> <input type="password" class="input_txt" ng-model="profile.password" readonly /></span>
+                         <div class="controls" ng-class="password.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                         <input type="password" name="confirm_password" ng-model="profile.profileinfo.confirm_password" ui-validate="'$value==profile.profileinfo.password'" ui-validate-watch="'password'"  class="editable-input form-control input-sm"  />
+                         <span class="text-danger" ng-show="profile.submitted && profile.userForm0.confirm_password.$error.validator">Password does Not match</span>
+                         </div>
+                     </td>
+                 </tr>
+
+
+                 <tr  ng-repeat="profile in loggedUser" ng-form="profile.userForm5">
+                   <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Email</th>
+                   <td style="text-align:left"  data-title="'Email'"  ng-switch="profile.isEditing">
+   				              <span ng-switch-default class="editable-text"> <input type="email" class="input_txt" ng-model="profile.email" readonly /></span>
+   					            <div class="controls" ng-class="email.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+   						          <input type="email" name="email" ng-model="profile.profileinfo.email" class="editable-input form-control input-sm" required />
+   						          <span class="text-danger" ng-show="profile.submitted && profile.userForm5.email.$error.required">* This field is required</span>
+   					            </div>
+   			           </td>
+                  </tr>
+                  <!-- <tr ng-repeat="profile in loggedUser" ng-form="profile.userForm6">
+                    <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address</th>
+                    <td  data-title="'Address'"  ng-switch="profile.isEditing">
+                      <span ng-switch-default class="editable-text"> <input type="text" style="height:80px" class="input_txt" ng-model="profile.address" readonly /></span>
+                      <div class="controls" ng-class="address.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                      <input type="text" name="address" style="height:80px" ng-model="profile.profileinfo.address" class="editable-input form-control input-sm" required />
+                      <span class="text-danger" ng-show="profile.submitted && profile.userForm6.address.$error.required">* This field is required</span>
+                      </div>
+                   </td>
+                 </tr> -->
+                  <tr ng-repeat="profile in loggedUser" ng-form="profile.userForm7">
+                    <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Phone</th>
+                    <td style="text-align:left"  data-title="'Phone'"  ng-switch="profile.isEditing">
+                      <span ng-switch-default class="editable-text"> <input type="text" class="input_txt" ng-model="profile.phone" readonly /></span>
+                      <div class="controls" ng-class="phone.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                      <input type="text" name="phone" ng-model="profile.profileinfo.phone" class="editable-input form-control input-sm" required />
+                      <span class="text-danger" ng-show="profile.submitted && profile.userForm7.phone.$error.required">* This field is required</span>
+                      </div>
+                   </td>
+                 </tr>
+
+				 <tr ng-repeat="profile in loggedUser" ng-form="profile.userForm7">
+                    <th style="text-align:left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Signature image</th>
+                    <td  style="text-align:left" data-title="'Sign'"  ng-switch="profile.isEditing">
+                      <span ng-switch-default class="editable-text">
+
+					  <!--
+                 <img ng-if="profile.userSignUrl!=null" ng-src="{{imgServerUrl}}{{profile.userSignUrl}}" style="width:100px;height:100px;" />
+                 -->
+                 <img ng-if="profile.userSignUrl!=null" ng-src="{{imgServerUrl}}?imageFile={{profile.userSignUrl}}" style="width:500px;height:150px;" />
+
+
+					  <span ng-if="profile.userSignUrl==null">user sign image not found </span>
+
+
+
+					  </span>
+                      <div class="controls" ng-class="phone.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+
+					 <input type="file" ng-model="profile.profileinfo.userSign" class="form-control input-sm" name="userSign" id="filePicker"  />
+
+
+                      <span class="text-danger" ng-show="profile.submitted && profile.userForm7.phone.$error.required">* This field is required</span>
+                      </div>
+                   </td>
+                 </tr>
+
+                 <tr ng-repeat="profile in loggedUser" ng-form="profile.userForm8">
+                   <td></td>
+                   <td data-title="''" style="text-align:left" >
+   			               <!--<a href="" ng-click="editDialog(user)" class="btn btn-primary" id="editdlg" value="Edit" >Edit</a>-->
+   			               <p class="form-group" ng-if="profile.isEditing" >
+   				                   <!--<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ng-disabled="userForm.$pristine || userForm.$invalid"><span class="fa fa-check"></span></a>-->
+                              <!--<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>-->
+                              <button type="submit" ng-model="savedialog" ng-click="saveDialog()" ng-disabled="userForm8.$pristine || userForm8.$invalid"  class="btn btn-primary btn-sm">Save</button>
+                              <button type="submit" ng-click="editDialog(false)" class="btn btn-default btn-sm">Cancel</button>
+   			               </p>
+   			               <p class="form-group" ng-if="!profile.isEditing" style="align:left" >
+   				                   <!--<a class="btn btn-danger btn-sm" ng-click="deleteDialog()" ><span class="fa fa-trash"></span></a>-->
+                              <button  style="align:left"  type="submit"  ng-click="editDialog(true)" class="btn btn-primary btn-sm">Edit Profile</button>
+   			              </p>
+   		            </td>
+                 </tr>
+         </table>
+
+   	  <div class="txtclr" ng-hide="onexistfail"><span ></span>* Your UserName  already exists</div>
+      </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="deleteDialogId" type="text/ng-template">
+   <div class="ngdialog-message"></div><h3>Delete</h3><p> Are you sure?</p><button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button><button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+</script>
+<link rel="stylesheet" type="text/css" media="all" href="master/css/profiles.css" />

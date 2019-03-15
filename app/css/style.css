@@ -1,0 +1,52 @@
+
+.table td.MyRight {
+  text-align: center;
+}
+
+.table td.MyRight2 {
+  text-align: right;
+}
+
+
+.table td.MyRight1 {
+  text-align: center;
+}
+
+.table td.MyCenter {
+  text-align: center;
+}
+.table-nonfluid {
+   width: auto;
+}
+
+.table .my_item, .text {
+  text-align: center;
+  color:#973B7D;
+  font-style:bold;
+}
+
+.table .my_item1 {
+  text-align: center;
+  color:#973B7D;
+  font-style:bold;
+}
+
+.table .my_item3 {
+  text-align: center;
+  color:#973B7D;
+  font-style:bold;
+}
+
+.My-Text {
+  text-align: left;
+  color:#1C94C4;
+  font-style:bold;
+}
+
+.well{
+color:#973B7D;
+}
+
+.Ring_Descr {
+  color:#1C94C4;
+}

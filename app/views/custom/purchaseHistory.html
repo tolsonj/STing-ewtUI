@@ -1,0 +1,116 @@
+
+  <!-- Header div starts -->
+  <div class="container-fluid panel panel-default" style="margin-top:-24px;" >
+      <div class="row-fluid">
+
+              <h1 class="well" style="color:#AA0001;border:0px"  >
+                  <a href="index.htm">
+                      <img src="app/img/shopping-cart-logo.jpg" height="100" width="100" alt="logo"/>
+                  </a>
+                    Happy deals
+              </h1>
+              <div ng-view></div>
+      </div>
+  </div>
+  <!-- Header div ends -->
+  <!-- Total items in cart (default) div starts -->
+    <div class="panel panel-default">
+    <div id="right" class="panel-heading" style="color:#AA0001"><h3>Purchase History</h3></div>
+    <div id="left" style="visibility:hidden" >
+                <i class="fa fa-shopping-cart fa-3x" />
+                <a href="app/views/custom/product.html" title="go to shopping cart" ng-click="goShoppingcart()" >
+                  <b>{{totItems}}</b> items, <b>&nbsp; {{sum | currency}}</b>
+                </a>
+
+    </div>
+    <!-- Total items in cart (dafault) div ends -->
+
+    <div class="panel-body">
+        <!-- All Shopping items shown (First) div starts -->
+
+        <table ng-table="tableParams"   show-filter="true" class="table table-responsive custom-pagination tab">
+        <tr ng-repeat="purchase in $data" ng-form="purchase.userForm">
+
+    		<td  data-title="'Item '" filter="{ 'size': 'text' }"  >
+    					<span  class="editable-text"><a href="app/views/custom/shopping.html" ng-click="viewProduct(product)"> <img   ng-src={{purchase.imageUrl}}></a></span>
+
+    		</td>
+        <td  data-title="'Description '" filter="{ 'size': 'text' }"  >
+          <span   class="editable-text">
+            <a href="app/views/custom/shopping.html"  style="font-size:18px;" ng-click="viewProduct(product)">{{purchase.product }} </a></br>
+        </span>
+        </td>
+        <td  data-title="'Price '" filter="{ 'size': 'text' }"  >
+              <span  class="editable-text">{{purchase.totalPrice | currency}}</span>
+        </td>
+        <td  data-title="'Purchased On '" filter="{ 'size': 'text' }"  >
+              <span  class="editable-text">{{purchase.purchasedOn | date:'MM/dd/yyyy @ h:mma' }}</span>
+        </td>
+        <td  data-title="'Paid Status '" filter="{ 'size': 'text' }"  >
+              <span  class="editable-text">{{purchase.status }}</span>
+        </td>
+        <td  data-title="'Name '" filter="{ 'size': 'text' }"  >
+              <span  class="editable-text">{{purchase.username }}</span>
+        </td>
+        </tr>
+    </table>
+    </div>
+    </div>
+        <!-- All Shopping items shown (First) div ends -->
+
+
+
+
+
+
+
+<style>
+
+.ng-table-pager {
+    display: none;
+}
+.custom-pagination .ng-table-pager {
+    display: block;
+}
+
+#left{
+float:left;
+width:15%;
+height: 50px;
+margin-top: 30px;
+font-weight: bold;
+
+
+}
+#right{
+float:left;
+width:85%;
+}
+
+
+#product_left{
+float:left;
+width:80%;
+height: 50px;
+padding-left:30px;
+
+
+
+
+
+}
+#product_right{
+float:left;
+width:20%;
+padding-right:30px;
+
+
+
+
+
+
+}
+
+</style>
+
+    <link href="app/css/style.css" rel="stylesheet" type="text/css"/>

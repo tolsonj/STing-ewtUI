@@ -1,0 +1,131 @@
+[
+
+  {
+    "text": "Orders",
+    "sref": "app.orders",
+    "icon": "fa fa-file-text-o"
+  }, {
+    "text": "Upload",
+    "sref": "app.uploadLargeFiles",
+    "icon": "icon-user"
+  }, {
+    "text": "Completed",
+    "sref": "app.completedOrders",
+    "icon": "fa fa-file-text-o"
+  }, {
+    "text": "Dispatch",
+    "sref": "app.dispatchsnew",
+    "icon": "icon-microphone"
+  }, {
+    "text": "Containers",
+    "sref": "app.containers",
+    "icon": "fa fa-trash-o"
+  }, {
+    "text": "ContainerSize",
+    "sref": "app.containersize",
+    "icon": "fa fa-truck"
+  }, {
+    "text": "Customers",
+    "sref": "app.customers",
+    "icon": "fa fa-group"
+  },
+
+  {
+    "text": "Vehicles",
+    "sref": "app.vehicles",
+    "icon": "fa fa-truck"
+  }, {
+    "text": "Sites",
+    "sref": "app.sites",
+    "icon": "icon-pointer"
+  }, {
+    "text": "Landfills",
+    "sref": "app.landfills",
+    "icon": "fa fa-thumb-tack"
+  }, {
+    "text": "Drivers",
+    "sref": "app.drivers",
+    "icon": "icon-disc"
+  }, {
+    "text": "CustomerAdmin",
+    "sref": "app.customeradmin",
+    "icon": "icon-user",
+    "translate": "CustomerAdmin"
+  }, {
+    "text": "Profile",
+    "sref": "app.profile",
+    "icon": "fa fa-user",
+    "translate": "Profile"
+  }, {
+    "text": "Browse",
+    "sref": "app.browse",
+    "icon": "fa fa-file-text-o",
+    "translate": "Browse"
+
+  }, {
+    "text": "History",
+    "sref": "app.invoicehistory",
+    "icon": "fa fa-history",
+    "translate": "History"
+  }
+
+  , {
+    "text": "User",
+    "sref": "app.useradmin",
+    "icon": "icon-user",
+    "translate": "User"
+  }, {
+    "text": "Approval",
+    "sref": "app.approval",
+    "icon": "fa fa-unlock",
+    "translate": "Approval"
+  }, {
+    "text": "UserLog",
+    "sref": "app.useractivity",
+    "icon": "icon-user",
+    "translate": "UserLog"
+  }, {
+    "text": "Maps",
+    "sref": "app.maps",
+    "icon": "fa fa-map-marker",
+    "translate": "Maps"
+  }, {
+    "text": "Company",
+    "sref": "app.company",
+    "icon": "fa fa-building",
+    "translate": "Company"
+
+  }, {
+    "text": "CompanyAdmins",
+    "sref": "app.companyadmins",
+    "icon": "fa fa-building",
+    "translate": "CompanyAdmins"
+
+  }, {
+    "text": "Bol History",
+    "sref": "app.bolhistory",
+    "icon": "fa fa-history",
+    "translate": "Bol History"
+  }, {
+    "text": "BOL entry form",
+    "sref": "app.customerdetails",
+    "icon": "fa fa-building",
+    "translate": "BOL Entry"
+  }, {
+    "text": "Export BOL data",
+    "sref": "app.exportbol",
+    "icon": "fa fa-building",
+    "translate": "Export BOL"
+  }, {
+    "text": "Export Assignment data",
+    "sref": "app.exportassignment",
+    "icon": "fa fa-building",
+    "translate": "Export Assignment"
+
+  }, {
+    "text": "Logout",
+    "sref": "page.logout",
+    "icon": "icon-logout",
+    "translate": "Logout"
+  }
+]

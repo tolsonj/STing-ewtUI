@@ -1,0 +1,6 @@
+!app/views/custom
+app/js
+bower_components
+master/node_modules
+vendor
+

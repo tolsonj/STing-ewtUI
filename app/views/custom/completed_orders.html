@@ -1,0 +1,102 @@
+
+
+
+<div class="panel panel-default">
+	<div class="errmsg">
+					<div class="alert alert-danger errGET" ng-show="failShowGet">
+						<strong>Sorry! We couldn't connect with the backend server</strong>
+					</div>
+	</div>
+	<div class="panel-heading"><h2>Completed Order History</h2></div>
+	<div class="panel-body">
+
+		<div class="divwidth"  >
+						<div  >
+							<div class="demo" >
+								<h4>Select Start and End date</h4>
+								<input type="text" id="config-demo" class="form-control">
+								<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+							</div>
+						</div>
+
+							<form>
+							<div class="row divspace">
+								<div class="col-md-4 hidediv" >
+									<div class="form-group">
+										<label for="startDate">startDate</label>
+										<input type="text" class="form-control" id="startDate" value="07/01/2015">
+									</div>
+									<div class="form-group">
+										<label for="endDate">endDate</label>
+										<input type="text" class="form-control" id="endDate" value="07/15/2015">
+									</div>
+								</div>
+
+								<div class="col-md-4 hidediv" >
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="ranges" checked="checked"> ranges (with example predefined ranges)
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="autoUpdateInput" checked="checked"> autoUpdateInput
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="alwaysShowCalendars" checked="checked"> alwaysShowCalendars
+										</label>
+									</div>
+								</div>
+							</div>
+							</form>
+		</div>
+<table ng-table="tableParams" show-filter="true" class="table">
+    <tr ng-repeat="user in data" ng-form="user.userForm"   >
+	    <td width="80" data-title="'Id'" class="fontscolor" filter="{ 'ID': 'text' }"  ng-switch="user.isEditing">
+		 <span ng-switch-default class="editable-text">{{user.ID}}</span>
+
+        </td>
+
+		<td width="170" data-title="'Customer Name'" class="fontscolor" ng-model="custmodel"  filter="{ 'NAME': 'text' }" ng-switch="user.isEditing">
+			<!--<span ng-switch-default class="editable-text">{{user.customer.name}}</span>-->
+			<span ng-switch-default class="editable-text">{{user.NAME}}</span>
+
+        </td>
+
+
+		<td data-title="'Site Name'"  filter="{ 'SITE_NAME': 'text' }" ng-switch="user.isEditing">
+			<span ng-switch-default class="editable-text">{{user.SITE_NAME + "," + user.SITE_STREET + ","+ user.SITE_CITY}}</span>
+
+        </td>
+
+
+		 <td width="120" data-title="'Container Size'"  filter="{ 'SIZE': 'text' }" ng-switch="user.isEditing">
+			<span ng-switch-default class="editable-text">{{user.CONTAINER_SIZE}}</span>
+        </td>
+		<td width="170" data-title="'Create Order Date'"  filter="{ 'ORDER_DATE': 'text' }" ng-switch="user.isEditing">
+			<!--<span ng-switch-default class="editable-text">{{user.orderDate | date: "yyyy-MM-ddTHH:mm:ssz"}}</span> -->
+			<span ng-switch-default class="editable-text">{{user.ORDER_DATE | date: "MM/dd/yyyy @h:mma"}}</span>
+
+
+        </td>
+		<td width="140" data-title="'Service Type'"  filter="{ 'SERVICE_TYPE': 'text' }"  ng-switch="user.isEditing">
+		 <span ng-switch-default class="editable-text">{{user.SERVICE_TYPE}}</span>
+
+        </td>
+		<td data-title="'Instruction'"  filter="{ 'INSTRUCTION': 'text' }" ng-switch="user.isEditing">
+			<span ng-switch-default class="editable-text">{{user.INSTRUCTION}}</span>
+
+        </td>
+
+
+    </tr>
+</table>
+
+</div>
+</div>
+<link rel="stylesheet" type="text/css" media="all"  href="master/css/completed_orders.css" />
+<link rel="stylesheet" type="text/css" media="all" href="master/css/daterangepicker.css" />
+<script type="text/javascript" src="master/js/moment.js"></script>
+<script type="text/javascript" src="master/js/daterangepicker.js"></script>

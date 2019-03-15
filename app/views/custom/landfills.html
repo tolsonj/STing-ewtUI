@@ -1,0 +1,185 @@
+
+<div class="panel panel-default">
+	<div class="errmsg">
+ 					 <div  class="alert alert-danger errGET" ng-show="failShowGet">
+ 						 <strong>Sorry! We couldn't connect with the backend server</strong>
+ 					 </div>
+ 					 <div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+ 						 <strong>Record added successfully</strong>
+ 					 </div>
+ 					 <div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+ 						 <strong>Record saved successfully</strong>
+ 					 </div>
+  </div>
+
+	<div class="panel-heading"><h2>Landfills Form</h2></div>
+
+	<div class="panel-body">
+	<form name="landForm" class="form-horizontal" role="form" method="get" action="#" style="padding-left: 9px">
+	<table class="table ng-table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Street</th>
+			<th>Secondary Street</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Zip</th>
+			<th>Phone</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><input ng-model="addlandfillInfo.name" name="name" class="form-control input-sm" required/></td>
+			<td><input ng-model="addlandfillInfo.street" name="street" class="form-control input-sm" required/></td>
+			<td><input ng-model="addlandfillInfo.secondaryStreet" name="secondaryStreet" class="form-control input-sm" required/></td>
+			<td><input ng-model="addlandfillInfo.city" name="city" class="form-control input-sm" required/></td>
+			<td><input ng-model="addlandfillInfo.state" name="state" class="form-control input-sm" required/></td>
+			<td><input ng-model="addlandfillInfo.postalCode" name="postalCode" class="form-control input-sm" required/></td>
+			<td><input ng-model="addlandfillInfo.phone" name="phone" class="form-control input-sm" required/></td>
+			<td>
+				<span class="btn btn-primary btn-lg">
+				<i class="fa fa-plus"></i><input type="button" ng-click="addDialog()" class="addbtn" value="Add Sites" /></td>
+			</span>
+		   </td>
+		</tr>
+		<!--<tr><td colspan="7"><h3><div class="label label-success err"  ng-show="successShow" >Form added successfully</div><div class="label label-danger err" ng-show="failShow" >Form added Failed</div></h3></td></tr>
+		<tr>-->
+		<tr>
+			<td><span ng-show="landForm.name.$dirty &amp;&amp; landForm.name.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="landForm.street.$dirty &amp;&amp; landForm.street.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="landForm.secondaryStreet.$dirty &amp;&amp; landForm.secondaryStreet.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="landForm.city.$dirty &amp;&amp; landForm.city.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="landForm.state.$dirty &amp;&amp; landForm.state.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="landForm.postalCode.$dirty &amp;&amp; landForm.postalCode.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="landForm.phone.$dirty &amp;&amp; landForm.phone.$error.required" class="text-danger">* This field is required</span></td>
+
+			</tr>
+	</tbody>
+</table>
+
+
+</form>
+</div>
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h2>Landfills History</h2></div>
+	<div class="panel-body">
+<table ng-table="tableParams" show-filter="true" class="table">
+      <tr ng-repeat="landfill in $data" ng-form="landfill.userForm">
+				<td  header="'ng-table/headers/checkbox.html'" ng-switch="landfill.isEditing" >
+					<span ng-switch-default class="editable-text">
+							<input type="checkbox" id="checkboxes" ng-model="checkboxes.items[landfill.id]" ng-click="getcheckboxId(landfill,checkboxes.items[landfill.id])" class="editable-input input-sm"   />
+					</span>
+					<div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+							<input type="checkbox" ng-model="checkboxes.items[landfill.id]" ng-click="getcheckboxId(landfill)" disabled="disabled" class="editable-input input-sm" readonly  />
+					</div>
+				</td>
+
+	  <td  data-title="'Id '" filter="{ 'id': 'text' }"  ng-switch="landfill.isEditing">
+		 <span ng-switch-default class="editable-text">{{landfill.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="landfill.landfillInfo.id" class="editable-input form-control input-sm" readonly />
+			  <span class="text-danger" ng-show="landfill.submitted && landfill.userForm.id.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+	  <td  data-title="'Name '" filter="{ 'name': 'text' }"  ng-switch="landfill.isEditing">
+		 <span ng-switch-default class="editable-text">{{landfill.name}}</span>
+            <div class="controls" ng-class="name.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="landfill.landfillInfo.name" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="landfill.submitted && landfill.userForm.name.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+	  <td  data-title="'Phone '" filter="{ 'phone': 'text' }"  ng-switch="landfill.isEditing">
+		 <span ng-switch-default class="editable-text">{{landfill.phone}}</span>
+            <div class="controls" ng-class="phone.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="phone" ng-model="landfill.landfillInfo.phone" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="landfill.submitted && landfill.userForm.phone.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+   <td  data-title="'City '" filter="{ 'city': 'text' }"  ng-switch="landfill.isEditing">
+		 <span ng-switch-default class="editable-text">{{landfill.city}}</span>
+            <div class="controls" ng-class="city.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="city" ng-model="landfill.landfillInfo.city" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="landfill.submitted && landfill.userForm.city.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+
+
+  <td data-title="''">
+			<p class="form-group" ng-if="landfill.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!landfill.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(landfill.name)" ><span class="fa fa-trash"></span></a>
+			</p>
+	  </td>
+
+
+
+
+    <!--<td data-title="'Name'" filter="{'name': 'text'}">{{landfill.name}}</td>
+    <td data-title="'Phone'" filter="{'phone': 'text'}">{{landfill.phone}}</td>
+    <td data-title="'city'" filter="{'city': 'text'}">{{landfill.city}}</td>
+    <td data-title="'id'" filter="{'id': 'text'}">{{landfill.id}}</td>
+    <td>
+    <a href="" ng-click="editDialog(landfill)" class="btn btn-primary">Edit</a>
+      <a href="" ng-click="deleteDialog(landfill)" class="btn btn-danger">Delete</a>
+    </td>-->
+  </tr>
+
+	<tr>
+		<td></td><td></td><td></td><td></td><td></td>
+		 <td><input type="button" class="btn btn-danger" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+	</tr>
+
+</table>
+</div>
+</div>
+    <script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the Landfill <b>{{getlandName}}</b> ?</p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+      </div>
+   </script>
+	 <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+          <input type="checkbox"  ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+   </script>
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/landfills.css" />
+<!--Get loggitude and latitude tho' location name starts-->
+<div style="visibility:hidden">
+     <h3> Enter an adress and press the button</h3>
+
+    <input id="address" type="text" placeholder="Enter address here" />
+    <button id="btn">Get LatLong</button>
+    <div>
+        <p>Latitude:
+            <input type="text" id="latitude" readonly />
+        </p>
+        <p>Longitude:
+            <input type="text" id="longitude" readonly />
+        </p>
+    </div>
+</div> <!--Get loggitude and latitude tho' location name ends-->
+
+<div style="visibility:hidden" ng-init="loadScript()">
+<div style="height:900px"  class="form-group col-lg-12" id="googleMap">
+      <center>Waiting for the map...</center>
+</div>
+</div>

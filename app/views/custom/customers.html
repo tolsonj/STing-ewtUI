@@ -1,0 +1,272 @@
+
+
+
+<div class="panel panel-default">
+	<div style="position: absolute; left: 50%;width:50%;text-align:center;margin-top:10px;">
+					<div style="position: relative; left: -50%;font-size:18px " class="alert alert-danger" ng-show="failShowGet">
+						<strong>Sorry! We couldn't connect with the backend server</strong>
+					</div>
+					<div style="position: relative; left: -50%;font-size:18px; " class="alert alert-success" role="alert" ng-show="successShow">
+						<strong>Form add successfully</strong>
+					</div>
+					<div style="position: relative; left: -50%;font-size:18px; " class="alert alert-success" role="alert" ng-show="uptsuccessShow">
+						<strong>Record saved successfully</strong>
+					</div>
+	</div>
+
+	<div class="panel-heading"><h2>Customers Form</h2></div>
+	<div class="panel-body">
+	<!--<div class="panel-heading"><h2>Customers Form</h2></div>-->
+
+
+
+	<form name="customerForm" class="form-horizontal" role="form" method="get" action="#" >
+
+<table class="table ng-table" border="0" >
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Street</th>
+			<th>Secondary Street</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Zip</th>
+			<th>Phone</th>
+			<th>Fax</th>
+			<th>Website</th>
+			<th>Federal Tax Id</th>
+			<th>Notes</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+
+			<td><input ng-model="addcust.name" name="name" class="form-control input-sm" required/></td>
+			<td><input ng-model="addcust.street" name="street" class="form-control input-sm" /></td>
+			<td><input ng-model="addcust.secondaryStreet" name="secondaryStreet" class="form-control input-sm" /></td>
+			<td><input ng-model="addcust.city" name="city" class="form-control input-sm" /></td>
+			<td><input ng-model="addcust.state" name="state" class="form-control input-sm" /></td>
+			<td><input ng-model="addcust.postalCode" name="postalCode" class="form-control input-sm" /></td>
+			<td><input ng-model="addcust.phone" name="phone" class="form-control input-sm" required/></td>
+			<td><input ng-model="addcust.fax" name="fax" class="form-control input-sm" /></td>
+			<td><input ng-model="addcust.website" name="website" class="form-control input-sm" /></td>
+			<td><input ng-model="addcust.federalTaxId" name="federalTaxId" class="form-control input-sm" /></td>
+			<td><input style="width:90px" name="notes"  ng-model="addcust.notes" class="form-control input-sm" /></td>
+			<tr>
+			<td><span ng-show="customerForm.name.$dirty &amp;&amp; customerForm.name.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.street.$dirty &amp;&amp; customerForm.street.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.secondaryStreet.$dirty &amp;&amp; customerForm.secondaryStreet.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.city.$dirty &amp;&amp; customerForm.city.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.state.$dirty &amp;&amp; customerForm.state.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.postalCode.$dirty &amp;&amp; customerForm.postalCode.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.phone.$dirty &amp;&amp; customerForm.phone.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.fax.$dirty &amp;&amp; customerForm.fax.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.website.$dirty &amp;&amp; customerForm.website.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.federalTaxId.$dirty &amp;&amp; customerForm.federalTaxId.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="customerForm.notes.$dirty &amp;&amp; customerForm.notes.$error.required" class="text-danger">* This field is required</span></td>
+			</tr>
+			<tr>
+			<td>
+				<span class="btn btn-primary btn-lg">
+				<i class="fa fa-plus"></i><input type="button" ng-click="addDialog()" style="background-color: Transparent; background-repeat:no-repeat;border: none; cursor:pointer;overflow: hidden;outline:none;" value="Add Customers" /></td>
+				<!--<td colspan="8"><h3><div class="label label-success err"  ng-show="successShow" >Form added successfully</div><div class="label label-danger err" ng-show="failShow" >Form added Failed</div></h3></td>-->
+				</span>
+			</td>
+			</tr>
+		</tr>
+	</tbody>
+</table>
+</form>
+</div>
+</div>
+
+
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h2>Customers History</h2></div>
+	<div class="panel-body">
+<table ng-table="tableParams" show-filter="true" class="table">
+    <tr ng-repeat="customer in $data"  ng-form="customer.userForm">
+
+			<td  header="'ng-table/headers/checkbox.html'" ng-switch="customer.isEditing" >
+				<span ng-switch-default class="editable-text">
+						<input type="checkbox" data-ng-disabled="customer.id == '{{findorders(customer.id).CUSTOMER_ID}}'"  ng-model="checkboxes.items[customer.id]" ng-click="getcheckboxId(customer,checkboxes.items[customer.id])" class="editable-input input-sm"   />
+				</span>
+				<div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+						<input type="checkbox" ng-model="checkboxes.items[customer.id]" ng-click="getcheckboxId(customer)" disabled="disabled" class="editable-input input-sm" readonly  />
+				</div>
+			</td>
+
+	  <td  data-title="'ID '" filter="{ 'id': 'text' }"  ng-switch="customer.isEditing">
+		 <span ng-switch-default class="editable-text">{{customer.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="customer.cust.id" class="editable-input form-control input-sm" readonly />
+
+            </div>
+    </td>
+
+    <td  data-title="'Name '" filter="{ 'name': 'text' }"  ng-switch="customer.isEditing">
+		 <span ng-switch-default class="editable-text"><a ng-href="/#/app/customer-view/{{$index}}">{{customer.name}}</a></span>
+            <div class="controls" ng-class="name.$invalid && name.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="customer.cust.name" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="customer.submitted && customer.userForm.name.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+
+			<td  data-title="'Street '" filter="{ 'street': 'text' }"  ng-switch="customer.isEditing">
+			 <span ng-switch-default class="editable-text">{{customer.street}}</span>
+	            <div class="controls" ng-class="street.$invalid && street.$dirty ? 'has-error' : ''" ng-switch-when="true">
+	              <input type="text" name="name" ng-model="customer.cust.street" class="editable-input form-control input-sm" required />
+				  <span class="text-danger" ng-show="customer.submitted && customer.userForm.street.$error.required">* This field is required</span>
+	            </div>
+	      </td>
+
+				<td  data-title="'secondaryStreet '" filter="{ 'street': 'text' }"  ng-switch="customer.isEditing">
+				 <span ng-switch-default class="editable-text">{{customer.secondaryStreet}}</span>
+		            <div class="controls" ng-class="secondaryStreet.$invalid && secondaryStreet.$dirty ? 'has-error' : ''" ng-switch-when="true">
+		              <input type="text" name="name" ng-model="customer.cust.secondaryStreet" class="editable-input form-control input-sm" required />
+					  <span class="text-danger" ng-show="customer.submitted && customer.userForm.secondaryStreet.$error.required">* This field is required</span>
+		            </div>
+		      </td>
+
+
+	<td  data-title="'Phone '" filter="{ 'phone': 'text' }"  ng-switch="customer.isEditing">
+		 <span ng-switch-default class="editable-text">{{customer.phone}}</span>
+            <div class="controls" ng-class="phone.$invalid && phone.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="phone" ng-model="customer.cust.phone" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="customer.submitted && customer.userForm.phone.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+
+
+    <!--<td data-title="'City'" filter="{'city': 'text'}">{{customer.city}}</td>-->
+
+
+	<td  data-title="'City '" filter="{ 'city': 'text' }"  ng-switch="customer.isEditing">
+		 <span ng-switch-default class="editable-text">{{customer.city}}</span>
+            <div class="controls" ng-class="city.$invalid && city.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="city" ng-model="customer.cust.city" class="editable-input form-control input-sm"  />
+			  <span class="text-danger" ng-show="customer.submitted && customer.userForm.city.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+
+    <!--<td data-title="'State'" filter="{'state': 'text'}">{{customer.state}}</td>-->
+
+	<td  data-title="'State '" filter="{ 'state': 'text' }"  ng-switch="customer.isEditing">
+		 <span ng-switch-default class="editable-text">{{customer.state}}</span>
+            <div class="controls" ng-class="state.$invalid && state.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="state" ng-model="customer.cust.state" class="editable-input form-control input-sm"  />
+			  <span class="text-danger" ng-show="customer.submitted && customer.userForm.state.$error.required">* This field is required</span>
+            </div>
+            </div>
+
+      </td>
+
+   <!-- <td>
+    <a href="" ng-click="editDialog(customer)" class="btn btn-primary" id="editCustDlg" value="Edit" >Edit</a>
+    <a href="" ng-click="deleteDialog(customer)" class="btn btn-danger" id="delCustDlg" value="Delete" >Delete</a>
+    </td>-->
+
+	<td data-title="''">
+			<p class="form-group" ng-if="customer.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!customer.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(customer.name)" ><span class="fa fa-trash"></span></a>
+			</p>
+	  </td>
+
+
+  </tr>
+
+	<tr>
+		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		 <td><input type="button" class="btn btn-danger" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+	</tr>
+
+</table>
+</div>
+</div>
+
+<script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the Customer <b>{{getcustName}}</b> ?</p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr"  ng-model="deleteYes">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default" ng-model="deleteNo" >No</button>
+      </div>
+   </script>
+	 <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+	 			 <input type="checkbox"  ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+	 </script>
+
+   <style>
+   .err{
+		position:fixed;
+		align:center;
+	}
+   </style>
+	 <style>
+
+	 // flash message
+
+	 .alert-dismissable .close, .alert-dismissible .close {
+	     position: relative;
+	     top: -2px;
+	     right: -21px;
+	     color: inherit;
+	 }
+	 .alert-success {
+	     color: #3c763d;
+	     background-color: #dff0d8;
+	     border-color: #d6e9c6;
+	 }
+	 .alert-success hr {
+	     border-top-color: #c9e2b3;
+	 }
+	 .alert-success .alert-link {
+	     color: #2b542c;
+	 }
+	 .alert-info {
+	     color: #31708f;
+	     background-color: #d9edf7;
+	     border-color: #bce8f1;
+	 }
+	 .alert-info hr {
+	     border-top-color: #a6e1ec;
+	 }
+	 .alert-info .alert-link {
+	     color: #245269;
+	 }
+	 .alert-warning {
+	     color: #8a6d3b;
+	     background-color: #fcf8e3;
+	     border-color: #faebcc;
+	 }
+	 .alert-warning hr {
+	     border-top-color: #f7e1b5;
+	 }
+	 .alert-warning .alert-link {
+	     color: #66512c;
+	 }
+	 .alert-danger {
+	     color: #a94442;
+	     background-color: #f2dede;
+	     border-color: #ebccd1;
+	 }
+	 .alert-danger hr {
+	     border-top-color: #e4b9c0;
+	 }
+	 .alert-danger .alert-link {
+	     color: #EB3131;
+	 }
+
+
+	 </style>

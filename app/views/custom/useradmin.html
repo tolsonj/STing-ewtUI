@@ -1,0 +1,441 @@
+ <div  align="center" ng-show="onLoadspinnerShow" style="padding-bottom:5px;"> <img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#EE3E41;font-size:18px;"> Please wait...</span> </div>
+<div ng-show="!onLoadspinnerShow">
+<div class="panel panel-default"  >
+  <div class="errmsg">
+          <div  class="alert alert-danger errGET" ng-show="externalkey_err">
+            <strong>External Key already exist. </strong>
+          </div>
+ 					<div  class="alert alert-danger errGET" ng-show="failShowGet">
+ 						<strong>Sorry! We couldn't connect with the backend server</strong>
+ 					</div>
+
+
+  </div>
+<div class="panel-heading" style="color:#AA0001"><h3>Invite User</h3></div>
+<div class="panel-body">
+<table border="0" class="divhgt"><tr><td>
+       <span class="btn btn-primary btn-sm">
+				<i class="fa fa-users"></i><input type="button" ng-click="inviteDialog()"   class="addbtn" value="Invite User" />
+				</span></td>
+				<td class="divtd"></td>
+				<td>
+
+				<div ng-show="inviteSpinnerShow" class="pull-left"> <img src="app/img/spinner.gif" style="width:25px;height:25px;"   /><span style="color:#04F2FC;font-size:18px;"> Please wait...</span> </div>
+			 <div ng-show="authMsg"  align="center" class="alert alert-success text-center divhgt1"><b>{{authMsg}}</b></div>	</td>
+			 </tr>
+</table>
+</div>
+</div>
+
+
+<div class="panel panel-default">
+<div class="panel-heading" style="color:#AA0001"><h3>Add User</h3></div>
+
+<div  class="alert alert-success" align="center" role="alert" ng-show="successShow">
+ 						<strong>New user added successfully</strong>
+</div>
+
+<div class="alert alert-danger" align="center" role="alert"  ng-hide="!existfail">* Sorry Error Occured! Username <b>{{adduser.username}}</b> already taken , Please try new one.</div>
+<div class="panel-body" style="overflow:visible;">
+	  <form name="adminForm" class="form-horizondal" role="form" method="get" action="#" >
+
+			<div class="form-group">
+		<div class="row" style="padding-left:30px;">
+
+
+
+            <div class="col-lg-1 col-md-1 col-sm-1">
+                <label>UserName</label>
+				<div  style="padding-top:10px;">
+          <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+
+
+
+               <input ng-show="showHiddenFields"  type="text" name="fakeusernameremembered"/>
+               <input type="text" ng-model="adduser.username" class="form-control input-sm" name="name" required />
+			   </div>
+            </div>
+
+			 <div class="col-lg-1 col-md-1 col-sm-1">
+                <label>Password</label>
+				<div  style="padding-top:10px;">
+               <input ng-show="showHiddenFields" type="password" name="fakepasswordremembered"/>
+               <input type="password" ng-model="adduser.password" class="form-control input-sm" name="pwd"  required />
+			   </div>
+            </div>
+
+			 <div class="col-lg-2 col-md-1 col-sm-1">
+                <label>Email</label>
+				<div  style="padding-top:10px;">
+               <input ng-show="showHiddenFields" type="text" name="fakeemail"/>
+               <input type="text" ng-model="adduser.email" class="form-control input-sm" name="email" required/>
+			   </div>
+            </div>
+
+			 <div class="col-lg-1 col-md-1 col-sm-1">
+                <label>Phone</label>
+				<div  style="padding-top:10px;">
+            <input ng-show="showHiddenFields"  type="text" name="fakephone"/>
+               <input type="text" ng-model="adduser.phone" class="form-control input-sm" name="phone" required >
+			   </div>
+            </div>
+
+
+			<div class="col-lg-2 col-md-2 col-sm-2">
+                <label>Sign</label>
+				<div  style="padding-top:10px;">
+               <input type="file" ng-model="adduser.userSign" class="form-control input-sm" name="userSign" id="filePicker"  />
+			   </div>
+            </div>
+
+			 <div class="col-lg-3 col-md-3 col-sm-3" >
+                <label>CustomerName </label>
+				<div style="padding-top:0px;">
+              <ui-select name="customerName"  ng-model="adduser.customerName" on-select="getselectval($item,'add')" >
+      				<ui-select-match placeholder="Select Customer and Id">{{$select.selected.name}} {{$select.selected.customerNumber}}</ui-select-match>
+      				<ui-select-choices repeat="customer.name as customer in customer | propsFilter: {name: $select.search}">
+      				<div ng-bind-html="customer.name +'   |   '+ customer.customerNumber  | highlight: $select.search"></div>
+      				</ui-select-choices>
+			</ui-select>
+			</div>
+            </div>
+
+			 <div class="col-lg-1 col-md-1 col-sm-1">
+                <label>Customer number </label>
+				<div  style="padding-top:10px;">
+              <input type="text" ng-model="adduser.customerNumber" class="form-control input-sm" name="customerNumber"   />
+			  </div>
+            </div>
+
+
+
+			<div class="col-lg-1 col-md-1 col-sm-1">
+                <label>Roles</label>
+				<div  style="padding-top:10px;">
+             <select  ng-model="adduser.selectedRole" data-ng-init="adduser.selectedRole = secRole[0]" ng-change="changeRoles(adduser.selectedRole)" data-ng-options="secRole.authority for secRole in secRole | filter: shouldShow" class="form-control input-sm" ></select>
+			 </div>
+            </div>
+
+			 <div class="col-lg-0 col-md-0 col-sm-0">
+               <label>Enabled</label>
+               <div  style="padding-top:10px;"><input type="checkbox" ng-model="adduser.enabled"  ng-init="adduser.enabled = true" class="input-sm"  />
+			   </div>
+            </div>
+
+
+
+			<input type="checkbox" class="texthide" ng-model="adduser.accountExpired"   />
+
+			<input type="checkbox" class="texthide" ng-model="adduser.accountLocked"   />
+
+			<input type="checkbox" class="texthide" ng-model="adduser.passwordExpired"   />
+
+            </div>
+
+			<div class="row pull-right" >
+             <span class="btn btn-primary btn-sm" >
+				<i class="fa fa-plus"></i><input type="button" ng-click="addDialog()" class="addbtn" value="Add User" />
+			</span>
+            </div>
+
+				<div class="row" style="padding-left:30px;">
+			<div class="col-lg-2 col-md-2 col-sm-2" ><span ng-show="adminForm.name.$dirty &amp;&amp; adminForm.name.$error.required" class="text-danger">* Username is required</span></div>
+			<div class="col-lg-2 col-md-2 col-sm-2" ><span ng-show="adminForm.pwd.$dirty &amp;&amp; adminForm.pwd.$error.required" class="text-danger">* Password is required</span></div>
+		  <div class="col-lg-2 col-md-2 col-sm-2" ><span ng-show="adminForm.email.$dirty &amp;&amp; adminForm.email.$error.required" class="text-danger">* Email is required</span></div>
+		  <div class="col-lg-2 col-md-3 col-sm-2" ><span ng-show="adminForm.phone.$dirty &amp;&amp; adminForm.phone.$error.required" class="text-danger">* Phone is required</span></div>
+		  <div class="col-lg-2 col-md-3 col-sm-2" ><span ng-show="adminForm.userSign.$dirty &amp;&amp; adminForm.userSign.$error.required" class="text-danger">* user sign is required</span></div>
+		   <div class="col-lg-1 col-md-1 col-sm-1" ><span ng-show="adminForm.customerName.$dirty &amp;&amp; adminForm.customerName.$error.required" class="text-danger">* Customer name is required</span></div>
+		  <div class="col-lg-1 col-md-1 col-sm-1" ><span ng-show="adminForm.customerNumber.$dirty &amp;&amp; adminForm.customerNumber.$error.required" class="text-danger">* This field is required</span></div>
+			<div class="col-lg-1 col-md-1 col-sm-1" ></div>
+			<div class="col-lg-1 col-md-1 col-sm-1" ><div class="txtclr" ng-hide="titleEnabled"><span ></span>* This field is required</div></div>
+			<div class="col-lg-1 col-md-1 col-sm-1" ><div class="txtclr" ng-hide="titleEnabled"><span ></span>* This field is required</div></div>
+		</div>
+		 </div>
+
+
+
+	   </form>
+</div>
+</div>
+
+   <div class="panel panel-default">
+<div class="panel-heading" style="color:#AA0001"><h3>User List</h3></div>
+
+<div  class="alert alert-success" align="center" role="alert" ng-show="uptsuccessShow">
+ 						<strong>Record updated successfully</strong>
+</div>
+<div class="panel-body useradd">
+
+<div class="row">
+
+  <div class="col-md-12 col-sm-12 col-lg-12">
+    <div class="table-responsive">
+
+      <table  ng-table="tableParams" show-filter="true" class="table">
+         <tr ng-repeat="admin in $data" ng-form="admin.userForm">
+
+      <td  header="'ng-table/headers/checkbox.html'" class="col-lg-0 col-md-0 col-sm-0" ng-switch="admin.isEditing"  >
+        <span ng-switch-default class="editable-text">
+            <input type="checkbox" data-ng-disabled="admin.username == '{{chkname}}'"   ng-model="checkboxes.items[admin.id]" ng-click="getcheckboxId(admin,checkboxes.items[admin.id])" class="editable-input input-sm"   />
+        </span>
+        <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+            <input type="checkbox" ng-model="checkboxes.items[admin.id]" ng-click="getcheckboxId(admin)" disabled="disabled" class="editable-input input-sm" readonly  />
+        </div>
+      </td>
+
+
+			<td  data-title="'UserName '"  class="col-lg-1 col-md-1 col-sm-1" ng-switch="admin.isEditing" filter="{ 'username': 'text' }">
+				<span ng-switch-default class="editable-text"><input type="text"  ng-model="admin.username" readonly /></span>
+					<div class="controls" ng-class="username.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+						<input type="text" name="username" ng-model="admin.admininfo.username" class="editable-input form-control input-sm" required />
+						<span class="text-danger" ng-show="admin.submitted && admin.userForm.username.$error.required">* This field is required</span>
+					</div>
+
+			</td>
+
+
+			<td  data-title="'Password '"  class="col-lg-1 col-md-1 col-sm-1" ng-switch="admin.isEditing">
+				<span ng-switch-default class="editable-text"> <input type="password" ng-model="admin.password" readonly /></span>
+					<div class="controls" ng-class="password.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+						<input type="password" name="password" ng-model="admin.admininfo.password" class="editable-input form-control input-sm" required />
+						<span class="text-danger" ng-show="admin.submitted && admin.userForm.password.$error.required">* This field is required</span>
+					</div>
+			</td>
+
+      <td  data-title="'Email Id '"  class="col-lg-1 col-md-1 col-sm-1" ng-switch="admin.isEditing" filter="{ 'email': 'text' }">
+				<span ng-switch-default class="editable-text"><input type="text"  ng-model="admin.email" readonly /></span>
+					<div class="controls" ng-class="email.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+						<input type="text" name="email" ng-model="admin.admininfo.email" class="editable-input form-control input-sm"  />
+						<span class="text-danger" ng-show="admin.submitted && admin.userForm.email.$error.required">* This field is required</span>
+					</div>
+
+			</td>
+
+
+      <td  data-title="'Phone'"  class="col-lg-0 col-md-0 col-sm-0" ng-switch="admin.isEditing" filter="{ 'phone': 'text' }">
+        <span ng-switch-default class="editable-text"><input type="text"  ng-model="admin.phone" readonly /></span>
+          <div class="controls" ng-class="phone.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+            <input type="text" name="phone" ng-model="admin.admininfo.phone" class="editable-input form-control input-sm"  />
+            <span class="text-danger" ng-show="admin.submitted && admin.userForm.phone.$error.required">* This field is required</span>
+          </div>
+      </td>
+
+	  <td data-title="'Customer Name'" class="col-lg-1 col-md-1 col-sm-1" ng-switch="admin.isEditing"  filter="{ 'customerName': 'text' }" ng-style="{'padding-top':(admin.isEditing?'0px':'8px')}">
+             <span ng-switch-default class="editable-text"><input type="text"  ng-model="admin.customerName" readonly /></span>
+               <div class="controls" ng-class="enabled.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+
+				<ui-select name="cusname"  ng-model="admin.admininfo.customerName" on-select="getselectval($item,'edit')" >
+      				<ui-select-match placeholder="Select Customer and Id">{{$select.selected.name}} {{$select.selected.customerNumber}}</ui-select-match>
+      				<ui-select-choices repeat="customer.name as customer in customer | propsFilter: {name: $select.search}">
+      				<div ng-bind-html="customer.name +'   |   '+ customer.customerNumber  | highlight: $select.search"></div>
+      				</ui-select-choices>
+      </ui-select>
+
+
+
+
+                 <div class="txtclr" ng-hide="titleEnabled1"><span ></span>* This field is required</div>
+               </div>
+
+             </td>
+
+
+
+
+      <td  data-title="'Customer Number'"  class="col-lg-1 col-md-1 col-sm-1" ng-switch="admin.isEditing" filter="{ 'customerNumber': 'text' }">
+        <span ng-switch-default class="editable-text"><input type="text"  ng-model="admin.customerNumber" readonly /></span>
+          <div class="controls" ng-class="customerNumber.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+            <input type="text" name="customerNumber" ng-model="admin.admininfo.customerNumber" class="editable-input form-control input-sm" />
+            <span class="text-danger" ng-show="admin.submitted && admin.userForm.customerNumber.$error.required">* This field is required</span>
+          </div>
+
+      </td>
+
+
+	  <td  data-title="'Sign'"  class="col-lg-3 col-md-3 col-sm-3" ng-switch="admin.isEditing" >
+        <span ng-switch-default class="editable-text">
+
+
+
+	<!-- 	<img ng-if="admin.userSignUrl!=null" ng-src="{{imgServerUrl}}{{admin.userSignUrl}}" style="width:100px;height:50px;" /> -->
+      <img ng-if="admin.userSignUrl!=null" ng-src="{{imgServerUrl}}?imageFile={{admin.userSignUrl}}" style="width:200px;height:45px;" />
+
+			<span ng-if="admin.userSignUrl==null">no sign</span>
+
+		</span>
+          <div class="controls" ng-class="userSign.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+
+
+			 <input type="file" ng-model="admin.admininfo.userSign" class="form-control input-sm" name="userSign" id="filePicker2"  />
+
+
+            <span class="text-danger" ng-show="admin.submitted && admin.userForm.userSign.$error.required">* This field is required</span>
+          </div>
+
+      </td>
+
+
+
+		    <td data-title="'Enabled'" class="col-lg-0 col-md-0 col-sm-0" ng-switch="admin.isEditing">
+			   <span ng-switch-default class="editable-text">
+					<input type="checkbox" ng-model="admin.enabled" ng-checked="admin.enabled" disabled="disabled" />
+			  </span>
+			  <div class="controls" ng-class="enabled.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+					<input type="checkbox" name="enabled" ng-model="admin.admininfo.enabled" class="editable-input  input-sm"  />
+			  </div>
+
+            </td>
+            <td data-title="'Account Expired'" class="col-lg-0 col-md-0 col-sm-0" ng-switch="admin.isEditing">
+			  <span ng-switch-default class="editable-text">
+					<input type="checkbox" ng-model="admin.accountExpired" ng-checked="admin.accountExpired"  disabled="disabled" />
+			  </span>
+			  <div class="controls" ng-class="accountExpired.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+					<input type="checkbox" name="accountExpired" ng-model="admin.admininfo.accountExpired" class="editable-input  input-sm"  />
+
+			  </div>
+            </td>
+
+
+
+            <td data-title="'Account Locked'" class="col-lg-0 col-md-0 col-sm-0" ng-switch="admin.isEditing">
+			  <span ng-switch-default class="editable-text">
+					<input type="checkbox" ng-model="admin.accountLocked" ng-checked="admin.accountLocked" disabled="disabled" />
+			  </span>
+			  <div class="controls" ng-class="accountLocked.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+					<input type="checkbox" name="accountLocked" ng-model="admin.admininfo.accountLocked" class="editable-input  input-sm"  />
+
+			  </div>
+            </td>
+			<td data-title="'Password Expired'" class="col-lg-0 col-md-0 col-sm-0" ng-switch="admin.isEditing">
+
+			   <span ng-switch-default class="editable-text">
+					<input type="checkbox" ng-model="admin.passwordExpired" ng-checked="admin.passwordExpired" disabled="disabled" />
+			  </span>
+			  <div class="controls" ng-class="passwordExpired.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+					<input type="checkbox" name="passwordExpired" ng-model="admin.admininfo.passwordExpired" class="editable-input  input-sm"  />
+
+			  </div>
+            </td>
+
+            <td data-title="'Role User'" class="col-lg-2 col-md-2 col-sm-2" ng-switch="admin.isEditing">
+               <span ng-switch-default class="editable-text" ng-repeat="name in admin.Authority | filter: shouldShow"> {{name.authority}}</span>
+               <div class="controls" ng-switch-when="true">
+                    <!-- select  style="width:110px;" name="ROLE_USER" ng-model="admin.admininfo.ruser" ng-change="userEdit(admin.admininfo.ruser)" data-ng-options="secRole.authority for secRole in secRole | filter: shouldShow"  class="form-control input-sm"></select-->
+                    {{admin.admininfo.selectionx}} <br>
+                   <multiselect ng-model="admin.admininfo.selectionx" options="options"></multiselect>
+                 <div class="txtclr" ng-hide="titleEnabled1"><span ></span>* This field is required</div>
+               </div>
+
+             </td>
+
+    </td>
+
+		<!--   <td data-title="'Role User'" ng-switch="admin.isEditing"  ng-repeat='(k,v) in admin.Authority'>
+			  <span ng-switch-default class="editable-text">
+				<input type="checkbox" ng-model="admin.ruser"  ng-checked="v.authority == 'ROLE_USER'" disabled="disabled" />
+			  </span>
+			  <div class="controls" ng-class="enabled.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+					<input type="checkbox" name="ROLE_USER" ng-model="admin.admininfo.ruser" ng-checked="v.authority == 'ROLE_USER'" ng-change="userEdit(admin.admininfo.ruser)"   class="editable-input  input-sm"  />
+					<div class="txtclr" ng-hide="titleEnabled1"><span ></span>* This field is required</div>
+			  </div>
+
+            </td>
+            <td data-title="'Role Admin'" ng-switch="admin.isEditing" ng-repeat='(k,v) in admin.Authority'>
+			 <span ng-switch-default class="editable-text">
+               <input type="checkbox" ng-model="admin.radmin" ng-checked="v.authority == 'ROLE_ADMIN'" disabled="disabled" />
+			 </span>
+			 <div class="controls" ng-class="enabled.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+					<input type="checkbox" name="ROLE_ADMIN" ng-model="admin.admininfo.radmin" ng-change="adminEdit(admin.admininfo.radmin)"  ng-checked="v.authority == 'ROLE_ADMIN'" class="editable-input  input-sm"  />
+			  </div>
+            </td>
+
+            <td data-title="'Role Driver'" ng-switch="admin.isEditing" ng-repeat='(k,v) in admin.Authority'>
+          <span ng-switch-default class="editable-text">
+               <input type="checkbox" ng-model="admin.rdriver" ng-checked="v.authority == 'ROLE_DRIVER'" disabled="disabled" />
+          </span>
+          <div class="controls" ng-class="enabled.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+          <input type="checkbox" name="ROLE_ADMIN" ng-model="admin.admininfo.rdriver" ng-change="adminEdit(admin.admininfo.rdriver)"  ng-checked="v.authority == 'ROLE_DRIVER'" class="editable-input  input-sm"  />
+          </div>
+        </td>-->
+
+
+
+           <td data-title="''" class="col-lg-2 col-md-2 col-sm-2">
+			<!--<a href="" ng-click="editDialog(user)" class="btn btn-primary" id="editdlg" value="Edit" >Edit</a>-->
+			<p class="form-group" ng-if="admin.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ng-disabled="userForm.$pristine || userForm.$invalid"><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!admin.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" data-ng-disabled="admin.username == '{{chkname}}'" ng-click="deleteDialog(admin.username)" ><span class="fa fa-trash"></span></a>
+			</p>
+		</td>
+         </tr>
+         <tr>
+       		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+       		 <td><input type="button" class="btn btn-danger btn-sm" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+       	</tr>
+      </table>
+	  <div class="txtalign" ng-hide="onexistfail"><span ></span>* Sorry Error Occured! Your UserName may be already exists</div>
+
+	  </div> <!-- table responsive class end -->
+	  </div> <!-- column end -->
+	  </div> <!-- row end -->
+</div>
+</div>
+
+<script id="deleteDialogId" type="text/ng-template">
+   <div class="ngdialog-message"></div><h3>Delete</h3><p> Are you sure want to delete the user <b>{{getUsername}} </b> ?</p><button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button><button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+</script>
+
+<script type="text/ng-template" id="inviteDialogId">
+  <div class="ngdialog-message"><h3>Invite User</h3>
+	   <form role="form" name="inviteForm" novalidate="" class="form-validate mb-lg">
+	   <div class="form-group has-feedback">
+               <input  type="text" name="email" placeholder="Enter email" autocomplete="off" ng-model="invitor.email"  class="form-control" />
+               <span class="fa fa-envelope form-control-feedback text-muted"></span>
+               <span ng-show="inviteForm.email.$dirty &amp;&amp; inviteForm.email.$error.email" class="text-danger">This field must be a valid email address</span>
+     </div>
+    <!-- <div class="form-group has-feedback">
+            <select ng-model="invitor.setrole" data-ng-init="invitor.setrole = secRole[0]" ng-change="getuseRole(invitor.setrole)" data-ng-options="secRole.authority for secRole in secRole | filter: shouldShow"  class="form-control input-sm"></select>
+    </div> -->
+    <div class="form-group has-feedback">
+          <!--  <select ng-model="invitor.custname"  data-ng-options="customer.name for customer in customer"  class="form-control input-sm"></select>-->
+            <ui-select name="cusname"  ng-model="invitor.custname" on-select="getselectval($item,'invite')" >
+      				<ui-select-match placeholder="Select Customer and Id">{{$select.selected.name}} {{$select.selected.customerNumber}}</ui-select-match>
+      				<ui-select-choices repeat="customer.id as customer in customer | propsFilter: {name: $select.search}">
+      				<div ng-bind-html="customer.name +'   |   '+ customer.customerNumber  | highlight: $select.search"></div>
+      				</ui-select-choices>
+      			</ui-select>
+
+
+
+    </div>
+			<button type="button" ng-click="confirm(invitor)" class="btn btn-primary btn-sm mr">Confirm</button>
+			<button type="button" ng-click="closeThisDialog('button')" class="btn btn-default btn-sm">Cancel</button>
+
+         </form>
+  </div>
+  </div>
+</script>
+<script type="text/ng-template" id="ng-table/headers/checkbox.html">
+    <input type="checkbox"  ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+</script>
+<style>
+.col-lg-2 {
+    width: 12%;
+}
+.padt10{
+padding-top:0px;
+}
+.table-responsive {
+    /* overflow-x: auto; */
+    min-height: 0.01%;
+    overflow-x: auto;
+}
+</style>
+
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/useradmin.css" />
+<script type="text/javascript" src="master/js/bootstrap.js"></script>

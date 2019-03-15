@@ -1,0 +1,30 @@
+ <div  align="center" ng-show="onLoadspinnerShow" style="padding-bottom:5px;"> <img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#EE3E41;font-size:18px;"> Please wait...</span> </div> 
+<div class="panel panel-default" ng-show="!onLoadspinnerShow">
+  <div ng-cloak class="errmsg">
+          <div  class="alert alert-danger errGET" ng-cloak ng-show="failShowGet">
+            <strong>Sorry! We couldn't connect with the backend server</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+            <strong>User activated successfully</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+            <strong>Record saved successfully</strong>
+          </div>
+  </div>
+	<div class="panel-heading" style="color:#AA0001"><h3>Approval</h3></div>
+	<div class="panel-body">
+    <table ng-table="tableParams" show-filter="true" class="table tab">
+        <tr  ng-repeat="user in $data" >
+    	<td data-title="'User Name'" ng-model="activeinfo.username"    >
+                    {{user.username}}
+                    </td>
+    				<td data-title="'Status'">
+    				<input type="button" value="Inactive" ng-click="activeDialog(user.enabled,user.username,$index)" ng-model="user.enabled" class="btn btn-warning btn-sm"/>
+           </td>
+    	</tr>
+    </table>
+  </div>
+    </div>
+
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/approvals.css" />

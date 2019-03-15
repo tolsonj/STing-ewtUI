@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "tag": "3323APA",
+    "model": "Mustang",
+    "make": "Ford",
+    "year": "1966",
+    "description": "car description",
+    "class": "com.wds.MCF.Vehicle",
+    "name": "Ford Fastback Mustang"
+  },
+   {
+    "id": 2,
+    "tag": "1222AA",
+    "model": "Prues",
+    "make": "Benz",
+    "year": "2013",
+    "description": "car description",
+    "class": "com.wds.MCF.Vehicle",
+    "name": "Benz"
+  },
+  {
+    "id": 3,
+    "tag": "3323APA",
+    "model": "Alpha",
+    "make": "TheCar",
+    "year": "1944",
+    "description": "car description",
+    "class": "com.wds.MCF.Vehicle",
+    "name": "Truck"
+  }
+]

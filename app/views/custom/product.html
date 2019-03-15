@@ -1,0 +1,116 @@
+<div  class="panel panel-default">
+  <!-- jQuery, Angular -->
+  <div class="container-fluid">
+      <div class="row-fluid">
+
+              <h1 class="well" >
+                  <a href="index.htm">
+                      <img src="app/img/shopping-cart-logo.jpg" height="100" width="100" alt="logo"/>
+                  </a>
+                 Happy deals
+              </h1>
+              <div ng-view></div>
+
+
+
+      </div>
+  </div>
+
+  <p class="My-Text">
+      <img ng-src="http://localhost:8080/MCF_backend/opt/products/watch1.png" alt="{{product.name}}"/>
+    <b>  Wrist Watch : [Analog]</b><br />
+  </p>
+  <ul class="Ring_Descr">
+  	<li>Milgrain, pave floral or embossed designs</li>
+  	<li>Sentimental touches</li>
+  	<li>Strong use of embellishment</li>
+  	<li>The wearer would love a wedding in a romantic setting like a castle or a garden full of flowers</li>
+  </ul>
+  <div class="container-fluid">
+      <div class="row-fluid">
+        <div id="left">
+          <p style="width:1250px;border: 1px solid #D3D3D3;border-radius:2px;height:80px;text-align:center;">
+          <a href="index.htm#/cart" title="go to shopping cart" >
+                              <i class="fa fa-shopping-cart fa-2x" style="color:black" />&nbsp;
+                            <b>{{productQty}}</b> items, <b>&nbsp;{{totPrice | currency}}</b>
+                            <span ><br />This product is in the cart</span>
+          </a>
+          </p>
+
+
+
+        </div>
+        <div id="right">
+      <div >
+          <select ng-model="itemQty"  ng-change="getQuantity(itemQty)" >
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="1">5</option>
+            <option value="2">6</option>
+            <option value="3">7</option>
+            <option value="4">8</option>
+            <option value="1">9</option>
+            <option value="2">10</option>
+            <option value="3">11</option>
+            <option value="4">12+</option>
+   </select>
+</div>
+      <div style="margin-top:5px">
+            <button
+                class="btn btn-block btn-success"
+                ng-click="addtoCart()">
+                <i class="fa fa-shopping-cart fa-1x icon-white" /> &nbsp; Add to cart
+            </button>
+            <button
+                class="btn btn-block btn-warning"
+                ng-click="buynow()"
+                ng-disabled="">
+
+                <i class="fa fa-youtube-play" aria-hidden="true"/> &nbsp; Buy now
+            </button>
+            <button
+                class="btn btn-block"
+                ng-click="gotoStore()">
+                <i class="icon-chevron-left" /> Back to store
+            </button>
+      </div>
+      </div>
+    </div>
+
+
+<style>
+
+.ng-table-pager {
+    display: none;
+}
+.custom-pagination .ng-table-pager {
+    display: block;
+}
+
+#left{
+float:left;
+width:80%;
+height: 50px;
+padding-left:30px;
+
+
+
+
+
+}
+#right{
+float:left;
+width:20%;
+padding-right:30px;
+
+
+
+
+
+
+}
+</style>
+
+    <link href="app/css/style.css" rel="stylesheet" type="text/css"/>

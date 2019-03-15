@@ -1,0 +1,188 @@
+<div class="panel panel-default ng-scope">
+
+  <div class="errmsg">
+          <div  class="alert alert-danger errGET" ng-show="failShowGet">
+            <strong>Sorry! We couldn't connect with the backend server</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+            <strong>Record added successfully</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+            <strong>Record saved successfully</strong>
+          </div>
+          <div  class="alert alert-warning warningmsg" role="alert" ng-show="shownotallow">
+            <strong>Couldn't complete Internal order before we complete the External</strong>
+          </div>
+          <div  class="alert alert-warning warningmsg" role="alert" ng-show="cancelnotallow">
+            <strong>Couldn't allow Cancel/Cancel-TripCharge orders</strong>
+          </div>
+  </div>
+
+    <div  class="panel-heading UI"><h2>Dispatch [{{dataCount}}]</h2></div>
+    <div id="tabs"  class="panel-body">
+
+<div  data-ng-init="getcount()" class="ordcnt"><b>COUNT OF ORDERS: {{countord}}</b></div>
+		<div class="row divpad" >
+
+
+		 <div >
+		<carousel interval="false">
+		<slide ng-repeat="slideCollection in groupedSlides" active="slide.active"  active="slide.active">
+        <div class="divmar" >
+
+
+				 <div class="col-md-1">
+			  </div>
+
+			 <div class="col-md-1">
+			<p title="{{slideCollection.driver1.name}}" data-toggle="tooltip" class="circle  makeDraggable drv_cir{{slideCollection.driver1.id}}" data-id="{{slideCollection.driver1.id}}" data-name="{{slideCollection.driver1.name}}"
+				ng-class="{'sky_blue_border':slideCollection.driver1.driverStatus=='deck','sky_blue_bk':slideCollection.driver1.driverStatus=='progress','grey':(slideCollection.driver1.driverStatus==null || slideCollection.driver1.driverStatus=='NaN')}"  >
+					<!--{{slideCollection.driver1.id}}
+					<br/> reset-->
+					{{formatName(slideCollection.driver1.name) }}</p>
+			  </div>
+
+
+				<div ng-if="slideCollection.driver2.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver2.id}}" data-id="{{slideCollection.driver2.id}}" ng-class="{'sky_blue_border':slideCollection.driver2.driverStatus=='deck','sky_blue_bk':slideCollection.driver2.driverStatus=='progress','grey':(slideCollection.driver2.driverStatus==null || slideCollection.driver2.driverStatus=='NaN')}" data-name="{{slideCollection.driver2.name}}"><!--{{slideCollection.driver2.id}}<br/>-->{{formatName(slideCollection.driver2.name) }}</p>
+			  </div>
+
+				<div ng-if="slideCollection.driver3.id>1" class="col-md-1" >
+			<p class="circle  makeDraggable drv_cir{{slideCollection.driver3.id}}" data-id="{{slideCollection.driver3.id}}" data-name="{{slideCollection.driver3.name}}" ng-class="{'sky_blue_border':slideCollection.driver3.driverStatus=='deck','sky_blue_bk':slideCollection.driver3.driverStatus=='progress','grey':(slideCollection.driver3.driverStatus==null || slideCollection.driver3.driverStatus=='NaN')}"><!--{{slideCollection.driver3.id}}<br/>-->{{formatName(slideCollection.driver3.name) }}</p>
+			  </div>
+
+				<div ng-if="slideCollection.driver4.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver4.id}}" data-id="{{slideCollection.driver4.id}}" ng-class="{'sky_blue_border':slideCollection.driver4.driverStatus=='deck','sky_blue_bk':slideCollection.driver4.driverStatus=='progress','grey':(slideCollection.driver4.driverStatus==null || slideCollection.driver4.driverStatus=='NaN')}"><!--{{slideCollection.driver4.id}}<br/>-->{{formatName(slideCollection.driver4.name) }}</p>
+			  </div>
+
+			  <div ng-if="slideCollection.driver5.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver5.id}}" data-id="{{slideCollection.driver5.id}}" ng-class="{'sky_blue_border':slideCollection.driver5.driverStatus=='deck','sky_blue_bk':slideCollection.driver5.driverStatus=='progress','grey':(slideCollection.driver5.driverStatus==null || slideCollection.driver5.driverStatus=='NaN')}" data-name="{{slideCollection.driver5.name}}"><!--{{slideCollection.driver5.id}}<br/>-->{{formatName(slideCollection.driver5.name) }}</p>
+			  </div>
+
+			  <div ng-if="slideCollection.driver6.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver6.id}}" data-id="{{slideCollection.driver6.id}}" ng-class="{'sky_blue_border':slideCollection.driver6.driverStatus=='deck','sky_blue_bk':slideCollection.driver6.driverStatus=='progress','grey':(slideCollection.driver6.driverStatus==null || slideCollection.driver6.driverStatus=='NaN')}" data-name="{{slideCollection.driver6.name}}"><!--{{slideCollection.driver6.id}}<br/>-->{{formatName(slideCollection.driver6.name) }}</p>
+			  </div>
+
+			 <div ng-if="slideCollection.driver7.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver7.id}}" data-id="{{slideCollection.driver7.id}}" ng-class="{'sky_blue_border':slideCollection.driver7.driverStatus=='deck','sky_blue_bk':slideCollection.driver7.driverStatus=='progress','grey':(slideCollection.driver7.driverStatus==null || slideCollection.driver7.driverStatus=='NaN')}" data-name="{{slideCollection.driver7.name}}"><!--{{slideCollection.driver7.id}}<br/>-->{{formatName(slideCollection.driver7.name) }}</p>
+			  </div>
+
+			  <div ng-if="slideCollection.driver8.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver8.id}}" data-id="{{slideCollection.driver8.id}}" ng-class="{'sky_blue_border':slideCollection.driver8.driverStatus=='deck','sky_blue_bk':slideCollection.driver8.driverStatus=='progress','grey':(slideCollection.driver8.driverStatus==null || slideCollection.driver8.driverStatus=='NaN')}" data-name="{{slideCollection.driver8.name}}"><!--{{slideCollection.driver8.id}}<br/>-->{{formatName(slideCollection.driver8.name) }}</p>
+			  </div>
+
+			  <div ng-if="slideCollection.driver9.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver9.id}}" data-id="{{slideCollection.driver9.id}}" ng-class="{'sky_blue_border':slideCollection.driver9.driverStatus=='deck','sky_blue_bk':slideCollection.driver9.driverStatus=='progress','grey':(slideCollection.driver9.driverStatus==null || slideCollection.driver9.driverStatus=='NaN')}" data-name="{{slideCollection.driver9.name}}"><!--{{slideCollection.driver9.id}}<br/>-->{{formatName(slideCollection.driver9.name) }}</p>
+			  </div>
+
+			  <div ng-if="slideCollection.driver10.id>1" class="col-md-1" >
+					<p class="circle  makeDraggable drv_cir{{slideCollection.driver10.id}}" data-id="{{slideCollection.driver10.id}}" ng-class="{'sky_blue_border':slideCollection.driver10.driverStatus=='deck','sky_blue_bk':slideCollection.driver10.driverStatus=='progress','grey':(slideCollection.driver10.driverStatus==null || slideCollection.driver10.driverStatus=='NaN')}" data-name="{{slideCollection.driver10.name}}"><!--{{slideCollection.driver10.id}}<br/>-->{{formatName(slideCollection.driver10.name) }}</p>
+
+			  </div>
+
+
+
+        </div>
+      </slide>
+    </carousel>
+  </div>
+
+
+
+		</div>
+
+<div class="divhgt"></div>
+        <div class="row table" id="scrollable-area" >
+			<table ng-table="tableParams" id="sortable" show-filter="true" class="table custom-pagination">
+            <tbody draggable="$data">
+            <tr  data-oid={{user.ID}} class="makeDroppable trdrop" title="{{user.INSTRUCTION}}" id="tr{{user.ID}}" ng-attr-context-menu="{{(user.PARENT_ORDER == 0 && (user.DRIVER_ID !=null || user.driverid !=null )) ? 'MenuOptions' : 'NotMenuOptions'}}"      ng-repeat="user in $data |  filter:scheduleFilter "  ng-hide="user.SERVICE_TYPE == 'Cancel' || user.SERVICE_TYPE == 'Cancel-TripCharge'"    ng-class="{'del_color':user.SERVICE_TYPE=='DEL','rty_color':(user.SERVICE_TYPE=='RTY' && user.PARENT_ORDER==0),'rel_color':user.SERVICE_TYPE=='REL','swp_color':user.SERVICE_TYPE=='SWP','intrty_color':(user.SERVICE_TYPE=='iRTY' && user.PARENT_ORDER!=0),'intlnd_color':(user.SERVICE_TYPE=='iRTY' && user.PARENT_ORDER!=0 && user.LANDFILL_CNAME !=null),'iRTR_color':(user.SERVICE_TYPE=='iRTR'),'LLO_color':(user.SERVICE_TYPE=='LLO')} ">
+                <td data-title="'Id'" width="50px"   filter="{ 'ID': 'text' }">
+                {{user.PARENT_ORDER == 0 ? user.ID : user.INTERNAL_ORDERID}}
+                </td>
+				<td data-title="'Driver'" width="50px"   >
+                <p class="tblcircle automgrt{{user.driverid}} driver{{user.driverid}} ord{{user.ID}}" id="getRow{{user.ID}}" data-rowclass="{{user.ID}}"
+				ng-class="{'sky_blue_border':(user.ORDER_STATUS=='deck' || user.orderDeck=='ondeck'),'sky_blue_bk':((user.ORDER_STATUS=='progress') || (user.orderSts=='prog')  ),'grey':((user.ORDER_STATUS==null || user.ORDER_STATUS=='NaN' ) && ((user.orderSts==null || user.orderSts=='PNaN' )  && (user.orderDeck==null || user.orderDeck=='DNaN' || user.orderDeck=='' )))}" >
+
+				<!--{{user.DRIVER_ID >0 ? user.DRIVER_ID : user.driverid}} <br/>-->
+				{{user.DRIVER_NAME==null ? '':formatName(user.DRIVER_NAME)}}
+				{{(user.driverid >0) ? formatName(user.drivername): ''}}
+
+				<!--main {{user.ORDER_STATUS}}
+				p{{user.orderSts}}
+				d{{user.orderDeck}}
+				DV{{user.DRIVER_ID}}
+				dv{{user.driverid}}
+				A {{user.auto_sts}}-->
+
+
+				</p>
+                </td>
+                <!--<td data-title="'Order Date'"   filter="{ 'ORDER_DATE': 'text' }">
+                {{user.ORDER_DATE |  date:'MM/dd/yyyy @ h:mma'}}
+                </td>-->
+				<td data-title="'Schedule Date'" sortable="'SCHEDULE_DATE'" filter="{ 'SCHEDULE_DATE': 'text' }">
+        <!--  <br ng-if="(user.SCHEDULE_DATE | date:'d M')  == (setTomo  | date:'d M')">
+            <div ng-class ="{'txtbold':(user.SCHEDULE_DATE | date:'d M')  == (setTomo  | date:'d M') }" >   {{user.SCHEDULE_DATE |  date:'MM/dd/yyyy @ h:mma'}} </div>
+          <br ng-if="(user.SCHEDULE_DATE | date:'d M')  == (setTomo  | date:'d M')">-->
+          <div>   {{user.SCHEDULE_DATE |  date:'MM/dd/yyyy @ h:mma'}} </div>
+                </td>
+                <td data-title="'Customer'"   filter="{ 'NAME': 'text' }">
+                    {{user.NAME}}
+                </td>
+                <td data-title="'Address'" width="300px"   filter="{ 'SITE_STREET': 'text' }">
+               <!-- {{user.SITE_STREET}}-->
+				           {{user.SITE_NAME + "," + user.SITE_STREET + ","+ user.SITE_CITY}}
+                </td>
+                <td data-title="'Size'"  width="50px"  filter="{ 'SIZE': 'text' }"  ng-class="{'cont10':(user.CONTAINER_SIZE=='10'),'cont20':(user.CONTAINER_SIZE=='20'),'cont30':(user.CONTAINER_SIZE=='30'),'cont40':(user.CONTAINER_SIZE=='40')}">
+                {{user.CONTAINER_SIZE}}
+                </td>
+                <td data-title="'Service'" width="50px"   filter="{ 'SERVICE_TYPE': 'text' }">
+                {{user.SERVICE_TYPE}}
+                </td>
+                <td data-title="'Instructions'" width="300px"   filter="{ 'instruction': 'text' }">
+                {{ user.LANDFILL_CNAME == null  ? user.INSTRUCTION : user.LANDFILL_CNAME}}
+                <div class="span2 divdisp"   showonhoverparent>
+                        <span ><a class="fa fa-file-text-o fa-2x"  ng-click="getNotes(user.INSTRUCTION)"    href="#"></a></span>
+                     </div>
+                </td>
+
+
+				<td data-title="'Dispatch-Date'" >
+				{{user.driverid>0?user.dispatchDate:(user.DISPATCH_DATE==null?'Waiting for dispatch':user.DISPATCH_DATE) |  date:'MM/dd/yyyy @ h:mma'}}
+
+                </td>
+
+				<td data-title="'Action'">
+				<button  type="button"  ng-click="completeDispatch(user)"  id="completebtn{{user.ID}}"  class="btn btn-success btn-circle btn-lg cplt" ng-class="{'disabled':(((user.DRIVER_ID==null || user.DRIVER_ID=='' ) && (user.orderSts==null || user.orderSts=='PNaN' )) || (user.ORDER_STATUS=='deck' && user.auto_sts != 'onprog' )), '':(user.driverid>0 || user.DRIVER_ID>0 || user.auto_sts=='onprog')}" ><i class="fa fa-check"></i></button>
+				<button  type="button" ng-click="releaseDispatch(user);disable_release(user);" id="releasebtn{{user.ID}}" class="btn btn-warning btn-circle btn-lg bkrel dipatch_REL"    ng-class="{'':(user.ORDER_STATUS=='deck'|| user.driverid>0), 'disabled':((user.DRIVER_ID==null || user.DRIVER_ID=='') && (user.orderSts==null || user.orderSts=='PNaN') && (user.orderDeck==null || user.orderDeck=='DNaN' || user.orderDeck=='' ))}" ><i class="fa fa-times"></i></button>
+                </td>
+        <!--<td>  <button class="btn btn-default" context-menu="otherMenuOptions" model="'Red'">Right Click</button></td>-->
+            </tr>
+             </tbody>
+        </table>
+        </div>
+    </div>
+
+
+    <script type="text/ng-template" id="addDialogId">
+          <div class="ngdialog-message"><h4>Select Landfills</h4>
+          <div class="landfilldiv1">Name: </div>
+          <div class="landfilldiv2"><select   name="size"  ng-init="namecity = landfills[0]"  data-ng-model="namecity"  class="form-control input-sm" data-ng-options="landfill.name +','+ landfill.city for landfill in landfills" required ></select></div>
+            <button type="button" ng-click="confirm(namecity)" class="btn btn-primary mr">Confirm</button>
+            <button type="button" ng-click="closeThisDialog('button')" class="btn btn-default">Cancel</button>
+          </div>
+    </script>
+    <script type="text/ng-template" id="shownotes">
+          <p>{{notes}} </p>
+    </script>
+</div>
+<link rel="stylesheet" type="text/css" media="all" href="master/css/dispatch.css"/>
+<style>
+.txtbold{
+  font-weight:bold;
+  font-size:22px;
+}
+tr.odd td {
+		border-bottom: 3px solid #000;
+	}
+</style>

@@ -1,0 +1,300 @@
+<div class="panel panel-default" ng-show="true">
+	<div ng-cloak class="errmsg">
+		<div ng-show="spinnerShow" class="pull-left"> <img src="app/img/spinner.gif" style="width:25px;height:25px;" /><span style="color:#04F2FC;font-size:18px;"> Please wait...</span> </div>
+	</div>
+	<div class="panel-heading" style="color:#AA0001">
+		<h3>Export Assignment List</h3></div>
+	<div class="panel-body" style="overflow-y: scroll;">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-62">
+				<div class="demo">
+					<h4>Select Start and End date</h4>
+					<input type="text" id="config-demo" class="form-control">
+					<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+				</div>
+
+
+				<form>
+					<div class="row divspace">
+						<div class="col-md-4 hidediv">
+							<div class="form-group">
+								<label for="startDate" value="testesates">startDate</label>
+								<input type="text" class="form-control" id="startDate" value="07/01/2015">
+							</div>
+							<div class="form-group">
+								<label for="endDate">endDate</label>
+								<input type="text" class="form-control" id="endDate" value="07/15/2015">
+							</div>
+						</div>
+
+						<div class="col-md-4 hidediv">
+							<div class="checkbox">
+								<label>
+											<input type="checkbox" id="ranges" checked="checked"> ranges (with example predefined ranges)
+										</label>
+							</div>
+							<div class="checkbox">
+								<label>
+											<input type="checkbox" id="autoUpdateInput" checked="checked"> autoUpdateInput
+										</label>
+							</div>
+							<div class="checkbox">
+								<label>
+											<input type="checkbox" id="alwaysShowCalendars" checked="checked"> alwaysShowCalendars
+										</label>
+							</div>
+						</div>
+					</div>
+				</form>
+
+			</div>
+
+
+
+			<div class="col-lg-6 col-md-6 col-sm-62">
+
+
+
+				<div class="demo">
+					<h4>Select driver</h4>
+				</div>
+				<ui-select name="accountNo" ng-model="driverName" on-select="BOL_list_table($item)">
+					<ui-select-match placeholder="Filter By driver">{{$select.selected}} </ui-select-match>
+					<ui-select-choices repeat="driver in driverList ">
+						<div ng-bind-html="driver | highlight: $select.search"></div>
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+
+
+
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="table-responsive">
+               <button export-to-csv>Download</button>
+					<table show-filter="true" class="table">
+						<thead>
+							<tr>
+								<th>
+									id
+								</th>
+								<th>
+									driverName
+								</th>
+								<th>
+									customerName
+								</th>
+								<th>
+									customerNumber
+								</th>
+								<th>
+									email
+								</th>
+								<th>
+								shipAddress
+							</th>
+								<th>
+									shipCity
+								</th>
+								<th>
+									shipState
+								</th>
+								<th>
+									shipZip
+								</th>
+								<th>
+									terrId
+								</th>
+								<th>
+									monthly
+								</th>
+								<th>
+									beginWeekDate
+								</th>
+								<th>
+									endWeekDate
+								</th>
+								<th>
+									creditHold
+								</th>
+								<th>
+									bolType
+								</th>
+								<th>
+									feedDate
+								</th>
+								<th>
+									processedDate
+								</th>
+								<th>
+									processed
+								</th>
+								<th>
+									sourceFileName
+								</th>
+								<th>
+									day
+								</th>
+								<th>
+									number
+								</th>
+								<th>
+									daysOpenHours
+								</th>
+								<th>
+									command
+								</th>
+							</tr>
+
+						</thead>
+						<tr ng-repeat="bol_list in bol_list_table | orderBy:orderProperty">
+							<td>
+								{{bol_list.id}}
+							</td>
+							<td>
+								{{ bol_list.driverName }}
+							</td>
+							<td>
+								{{ bol_list.customerName }}
+							</td>
+							<td>
+								{{ bol_list.customerNumber }}
+							</td>
+							<td>
+								{{ bol_list.email }}
+							</td>
+							<td>
+								{{ bol_list.shipAddress }}
+							</td>
+							<td>
+								{{ bol_list.shipCity }}
+							</td>
+							<td>
+								{{ bol_list.shipState }}
+							</td>
+							<td>
+								{{ bol_list.shipZip }}
+							</td>
+							<td>
+								{{ bol_list.terrId }}
+							</td>
+							<td>
+								{{ bol_list.monthly }}
+							</td>
+							<td>
+								{{ bol_list.beginWeekDate | date:'MM/dd/yyyy H:m:s'}}
+							</td>
+							<td>
+								{{ bol_list.endWeekDate | date:'MM/dd/yyyy H:m:s'}}
+							</td>
+							<td>
+								{{ bol_list.creditHold }}
+							</td>
+							<td>
+									{{ bol_list.formType==1?'Document':'Medical' }}
+							</td>
+							<td>
+								{{ bol_list.feedDate | date:'MM/dd/yyyy H:m:s'}}
+							</td>
+							<td>
+								{{ bol_list.processedDate | date:'MM/dd/yyyy H:m:s'}}
+							</td>
+							<td>
+								{{ bol_list.processed }}
+							</td>
+							<td>
+								{{ bol_list.sourceFileName }}
+							</td>
+							<td>
+								{{ bol_list.day }}
+							</td>
+							<td>
+								{{ bol_list.number }}
+							</td>
+							<td>
+								{{ bol_list.daysOpenHours }}
+							</td>
+							<td>
+								{{ bol_list.command }}
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="alert alert-success" role="alert" ng-show="totalItems<1">
+					<strong>No record found</strong>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+		<style>
+			.ngdialog.ngdialog-theme-default.custom-width .ngdialog-content {
+				max-width: 100%;
+				width: 1500px;
+			}
+
+			.verticalLine {
+				border-left: 1px solid #ccc;
+				padding-right: 15px;
+			}
+
+			#wrapper {
+
+				clear: both;
+			}
+
+			#first {
+
+				width: 30%;
+				height: 100px;
+				float: left;
+				border-right: 1px solid #d3d3d3;
+			}
+
+			#second {
+
+				width: 30%;
+				height: 100px;
+				float: left;
+				border-right: 1px solid #d3d3d3;
+			}
+
+			#third {
+
+				width: 40%;
+				height: 100px;
+				float: left;
+
+
+			}
+
+			.table-bordered {
+				border: 1px solid #D6D6D6;
+				font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+				border-collapse: collapse;
+			}
+
+			.table-bordered>thead>tr>th,
+			.table-bordered>tbody>tr>th,
+			.table-bordered>tfoot>tr>th,
+			.table-bordered>thead>tr>td,
+			.table-bordered>tbody>tr>td,
+			.table-bordered>tfoot>tr>td {
+				border: 1px solid #D6D6D6;
+				border-left: none;
+				border-right: none;
+			}
+		</style>
+
+		<link rel="stylesheet" type="text/css" media="all" href="master/css/reconcile.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="master/css/daterangepicker.css" />
+		<script type="text/javascript" src="master/js/moment.js"></script>
+		<script type="text/javascript" src="master/js/daterangepicker.js"></script>

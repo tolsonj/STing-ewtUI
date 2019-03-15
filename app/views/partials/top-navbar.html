@@ -1,0 +1,125 @@
+<!-- START Top Navbar-->
+<nav role="navigation"  class="navbar topnavbar">
+
+	<div style="height:34px;border:0px solid black;background-color:#65a9d7"></div>
+
+   <!-- START navbar header-->
+   <div class="navbar-header">
+      <a href="#/" class="navbar-brand">
+         <div class="brand-logo">
+            <img src="app/img/logo.jpg" alt="App Logo" class="img-responsive"  />
+         </div>
+         <div class="brand-logo-collapsed">
+            <!--img src="app/img/logo-singlex.png" alt="App Logo" class="img-responsive" /-->
+         </div>
+      </a>
+   </div>
+   <!-- END navbar header-->
+
+   <!-- START Nav wrapper-->
+   <div class="nav-wrapper">
+      <!-- START Left navbar-->
+      <ul class="nav navbar-nav">
+         <li>
+            <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+            <a href="#" ng-click="app.layout.isCollapsed = !app.layout.isCollapsed" class="hidden-xs">
+               <em class="fa fa-navicon"></em>
+            </a>
+            <!-- Button to show/hide the sidebar on mobile. Visible on mobile only.-->
+            <a href="#" toggle-state="aside-toggled" no-persist="no-persist" class="visible-xs sidebar-toggle">
+               <em class="fa fa-navicon"></em>
+            </a>
+         </li>
+		 <!-- Show UserName -->
+		 <li>
+            <a href="#" class="visible-lg">
+              <div  id="welcome_name" > </div>
+            </a>
+         </li>
+		 <!-- End UserName -->
+      </ul>
+      <!-- END Left navbar-->
+      <!-- START Right Navbar-->
+
+      <!-- END Right Navbar-->
+   </div>
+   <!-- END Nav wrapper-->
+   <!-- START Search form-->
+   <!-- <form role="search" action="search.html" class="navbar-form" ng-if="">
+      <div class="form-group has-feedback">
+         <input type="text" placeholder="{{ 'topbar.search.PLACEHOLDER' | translate }}" class="form-control" />
+         <div search-dismiss="search-dismiss" class="fa fa-times form-control-feedback"></div>
+      </div>
+      <button type="submit" class="hidden btn btn-default">Submit</button>
+   </form> -->
+   <!-- END Search form-->
+</nav>
+
+
+<script src="app/js/js.cookie.js"></script>
+
+    <script>
+    $( document ).ready(function() {
+
+	setTimeout(function(){
+
+	  // username from cookie
+      var username	= Cookies.get('setUsername');
+
+	   // console.log('username==>'+username);
+
+	  if(username!='undefined'){
+	  var strval 	= username.split('"');
+	  username 		= strval[1];
+	  }
+	  // customername from cookie
+	  var cname		= Cookies.get('setcustomerName');
+
+	 // console.log('cname==>'+cname);
+	  if(cname!=undefined){
+	  var strval 	= cname.split('"');
+	  cname 		= strval[1];
+	  }
+	  else{
+	  cname = '';
+	  }
+
+	  // customernumber from cookie
+	  var cnumber	= Cookies.get('setcustomerNumber');
+	   // console.log('cnumber==>'+cnumber);
+	  if(cnumber!=undefined){
+	  var strval 	= cnumber.split('"');
+	  cnumber 		= strval[1];
+	  }
+	  else{
+	  cnumber = '';
+	  }
+
+
+	  document.getElementById("welcome_name").innerHTML = '';
+
+	  var welcome_string = '';
+	  welcome_string	 =  "Welcome:  " +username;
+
+	  if(cname!='')
+	  welcome_string = welcome_string+" - "+cname;
+
+
+	  if(cnumber!='')
+	  welcome_string = welcome_string+" - "+cnumber;
+
+
+	    document.getElementById("welcome_name").innerHTML = welcome_string
+	 // console.log("window loaded"+username );
+ },1000);
+    });
+
+    </script>
+	<style>
+	.navbar-nav > li > a {
+    padding-top: 4px;
+    padding-bottom: 10px;
+    line-height: 21px;
+	}
+	</style>
+<!-- END Top Navbar-->

@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "state": "GA",
+    "phone": "333-333-33333",
+    "federalTaxId": "234-222222",
+    "street": "322 Main St",
+    "secondaryStreet": "322 Main St",
+    "fax": "444-444-44444",
+    "notes": "note1",
+    "city": "Atlanta",
+    "postalCode": "33333",
+    "website": "wds.com",
+    "class": "com.wds.MCF.Customer",
+    "name": "Weems Design Studio",
+    "customerOrders": [
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 1
+      },
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 3
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "state": "GA",
+    "phone": "333-333-33333",
+    "federalTaxId": "234-222222",
+    "street": "322 Main St",
+    "secondaryStreet": "322 Main St",
+    "fax": "444-444-44444",
+    "notes": "note1",
+    "city": "Atlanta",
+    "postalCode": "33333",
+    "website": "wds.com",
+    "class": "com.wds.MCF.Customer",
+    "name": "Weems Design Studio",
+    "customerOrders": [
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 1
+      },
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 3
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "state": "GA",
+    "phone": "333-333-33333",
+    "federalTaxId": "234-222222",
+    "street": "322 Main St",
+    "secondaryStreet": "322 Main St",
+    "fax": "444-444-44444",
+    "notes": "note1",
+    "city": "Atlanta",
+    "postalCode": "33333",
+    "website": "wds.com",
+    "class": "com.wds.MCF.Customer",
+    "name": "Weems Design Studio",
+    "customerOrders": [
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 1
+      },
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 3
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "state": "GA",
+    "phone": "333-333-33333",
+    "federalTaxId": "234-222222",
+    "street": "322 Main St",
+    "secondaryStreet": "322 Main St",
+    "fax": "444-444-44444",
+    "notes": "note1",
+    "city": "Atlanta",
+    "postalCode": "33333",
+    "website": "wds.com",
+    "class": "com.wds.MCF.Customer",
+    "name": "Weems Design Studio",
+    "customerOrders": [
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 1
+      },
+      {
+        "class": "com.wds.MCF.CustomerOrder",
+        "id": 3
+      }
+    ]
+  }
+]

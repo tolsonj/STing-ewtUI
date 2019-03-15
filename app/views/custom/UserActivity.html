@@ -1,0 +1,101 @@
+<div class="panel panel-default">
+	<div class="errmsg">
+ 					<div  class="alert alert-danger errGET" ng-show="failShowGet">
+ 						<strong>Sorry! We couldn't connect with the backend server</strong>
+ 					</div>
+  </div>
+
+	<div class="panel-heading"><h2>User Activity History </h2></div>
+
+	<div class="panel-body">
+<table ng-table="tableParams" show-filter="true" class="table">
+      <tr ng-repeat="activitylog in $data" ng-show="activitylog.actionBy == '{{userdata}}'" ng-form="activitylog.userForm">
+
+		<td  header="'ng-table/headers/checkbox.html'" ng-switch="activitylog.isEditing" >
+					<span ng-switch-default class="editable-text">
+							<input type="checkbox" ng-model="checkboxes.items[activitylog.id]" ng-click="getcheckboxId(activitylog)" class="editable-input input-sm"   />
+					</span>
+					<div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+							<input type="checkbox" ng-model="checkboxes.items[activitylog.id]" ng-click="getcheckboxId(activitylog)" disabled="disabled" class="editable-input input-sm" readonly  />
+					</div>
+		</td>
+
+	  <td  data-title="'Id '" filter="{ 'id': 'text' }"  ng-switch="activitylog.isEditing">
+		 <span ng-switch-default class="editable-text">{{activitylog.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="activitylog.activitylogInfo.id" class="editable-input form-control input-sm" readonly />
+			  			<span class="text-danger" ng-show="activitylog.submitted && activitylog.userForm.id.$error.required">* This field is required</span>
+            </div>
+    </td>
+
+	  <td  data-title="'Action '" filter="{ 'action': 'text' }"  ng-switch="activitylog.isEditing">
+		 <span ng-switch-default class="editable-text">{{activitylog.action}}</span>
+            <div class="controls" ng-class="Action.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="action" ng-model="activitylog.activitylogInfo.action" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="activitylog.submitted && activitylog.userForm.action.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	  <td  data-title="'ActionBy '" filter="{ 'ActionBy': 'text' }"  ng-switch="activitylog.isEditing">
+		 <span ng-switch-default class="editable-text">{{activitylog.actionBy}}</span>
+            <div class="controls" ng-class="ActionBy.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="ActionBy" ng-model="activitylog.activitylogInfo.ActionBy" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="activitylog.submitted && activitylog.userForm.ActionBy.$error.required">* This field is required</span>
+            </div>
+    </td>
+
+   <td  data-title="'ActionOn '" filter="{ 'actionOn': 'text' }"  ng-switch="activitylog.isEditing">
+		 <span ng-switch-default class="editable-text">{{activitylog.actionOn}}</span>
+            <div class="controls" ng-class="actionOn.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="actionOn" ng-model="activitylog.activitylogInfo.actionOn" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="activitylog.submitted && activitylog.userForm.actionOn.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+			<td  data-title="'ProcessedOn '" filter="{ 'processedOn': 'text' }"  ng-switch="activitylog.isEditing">
+				<span ng-switch-default class="editable-text">{{activitylog.processedOn | date : "MM/dd/yyyy @ h:mma"}}</span>
+							 <div class="controls" ng-class="processedOn.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+								 <input type="text" name="processedOn" ng-model="activitylog.activitylogInfo.processedOn" class="editable-input form-control input-sm" required />
+					 <span class="text-danger" ng-show="activitylog.submitted && activitylog.userForm.processedOn.$error.required">* This field is required</span>
+							 </div>
+
+				 </td>
+
+  <td data-title="''">
+			<!--<p class="form-group" ng-if="activitylog.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>-->
+			<!--<p class="form-group" ng-if="!activitylog.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(activitylog.name)" ><span class="fa fa-trash"></span></a>
+			</p>-->
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(activitylog.actionOn,activitylog.id)" ><span class="fa fa-trash"></span></a>
+	  </td>
+
+
+  </tr>
+
+	<tr>
+		<td></td><td></td><td></td><td></td><td></td><td></td>
+		 <td><input type="button" class="btn btn-danger" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+	</tr>
+
+</table>
+</div>
+</div>
+    <script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the activitylog <b>{{getaction}}</b> ?</p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+      </div>
+   </script>
+
+	 <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+	          <input type="checkbox" ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+	 </script>
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/useractivity.css" />

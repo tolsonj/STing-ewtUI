@@ -1,0 +1,91 @@
+<div class="panel panel-default">
+	<!--<div class="block-center mt-xl wd-xl"><div ><div flash-message="20000" style="position:fixed;margin-top:20px;"></div></div></div>-->
+	<div class="errmsg">
+					<div  class="alert alert-danger errGET" ng-show="failShowGet">
+						<strong>Sorry! We couldn't connect with the backend server</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+						<strong>Record added successfully</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+						<strong>Record saved successfully</strong>
+					</div>
+	</div>
+<div class="panel-heading" style="text-align:center"><h2>Company Details </h2></div>
+
+<div class="panel-body">
+
+	<table   width="400px" align="center" >
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">Company ID</td>
+			<td class="tdcnt">{{company_id}}</td>
+		</tr>
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">User Name</td>
+			<td class="tdcnt">{{loggedUser}}</td>
+	  </tr>
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">Address</td>
+			<td class="tdcnt">{{company_addr}}</td>
+		</tr>
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">City</td>
+			<td class="tdcnt">{{company_city}}</td>
+		</tr>
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">State</td>
+			<td class="tdcnt">{{company_state}}</td>
+		</tr>
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">Zip</td>
+			<td class="tdcnt">{{company_zip}}</td>
+		</tr>
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">Phone Number</td>
+			<td class="tdcnt">{{company_phone}}</td>
+		</tr>
+		<tr class="border_bottom trheight" >
+			<td class="trheight tdhead">Email</td>
+			<td class="tdcnt">{{company_email}}</td>
+		</tr>
+	</table>
+
+</div>
+</div>
+
+<style>
+
+table {
+
+border-collapse: collapse;
+border-spacing: 0;
+}
+td, th { border: 1px solid #CCC; }
+.ng-table-pager {
+    display: none;
+}
+.custom-pagination .ng-table-pager {
+    display: block;
+}
+
+tr.border_bottom td {
+  
+	text-align: left;
+}
+
+.trheight {
+	height:50px;
+	vertical-align:top;
+}
+
+.tdhead{
+	padding-left:10px;
+	font-weight:bold;
+	font-size:15px
+}
+.tdcnt{
+	text-align:left;
+	padding-left:10px;
+}
+
+</style>

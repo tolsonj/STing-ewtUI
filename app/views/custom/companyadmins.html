@@ -1,0 +1,109 @@
+
+<div class="errmsg">
+					<div  class="alert alert-danger errGET" ng-show="failShowGet">
+						<strong>Sorry! We couldn't connect with the backend server</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+						<strong>Record added successfully</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+						<strong>Record saved successfully</strong>
+					</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h2>Company and Admins</h2></div>
+	<div class="panel-body">
+<table ng-table="tableParams" border="0" show-filter="true" class="table">
+    <tr ng-repeat="companyadmins in $data" ng-form="companyadmins.userForm">
+
+	  <td  data-title="'Company ID '" filter="{ 'company_id': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_id}}</span>
+            <div class="controls" ng-class="company_id.$invalid && company_id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_id" ng-model="companyadmins.companyadminsInfo.company_id" class="editable-input form-control input-sm" readonly  />
+
+            </div>
+    </td>
+
+	 <td  data-title="'Company Name '" filter="{ 'company_name': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_name}}</span>
+            <div class="controls" ng-class="company_name.$invalid && company_name.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_name" ng-model="companyadmins.companyadminsInfo.company_name" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="companyadmins.submitted && companyadmins.userForm.company_name.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Company Address '" filter="{ 'company_address': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_address}}</span>
+            <div class="controls" ng-class="company_address.$invalid && company_address.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_address" ng-model="companyadmins.companyadminsInfo.company_address" class="editable-input form-control input-sm" required  />
+			  <span class="text-danger" ng-show="companyadmins.submitted && companyadmins.userForm.company_address.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Company Phone '" filter="{ 'company_phone': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_phone}}</span>
+            <div class="controls" ng-class="company_phone.$invalid && company_phone.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_phone" ng-model="companyadmins.companyadminsInfo.company_phone" class="editable-input form-control input-sm"  required />
+			  <span class="text-danger" ng-show="companyadmins.submitted && companyadmins.userForm.company_phone.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td   data-title="'Admin Id '" filter="{ 'company_admin_id': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_admin_id}}</span>
+            <div class="controls" ng-class="company_admin_id.$invalid && company_admin_id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_admin_id"  ng-model="companyadmins.companyadminsInfo.company_admin_id" no-special-char class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="companyadmins.submitted && companyadmins.userForm.company_admin_id.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Admin UserName '" filter="{ 'company_admin_username': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_admin_username}}</span>
+            <div class="controls" ng-class="company_admin_username.$invalid && company_admin_username.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_admin_username"  ng-model="companyadmins.companyadminsInfo.company_admin_username" no-special-char class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="companyadmins.submitted && companyadmins.userForm.company_admin_username.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Admin Email '" filter="{ 'company_admin_email': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_admin_email}}</span>
+            <div class="controls" ng-class="company_admin_email.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_admin_email"  ng-model="companyadmins.companyadminsInfo.company_admin_email" no-special-char class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="companyadmins.submitted && companyadmins.userForm.company_admin_email.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Admin Mobile '" filter="{ 'company_admin_phone': 'text' }"  ng-switch="companyadmins.isEditing">
+		 <span ng-switch-default class="editable-text">{{companyadmins.company_admin_phone}}</span>
+            <div class="controls" ng-class="company_admin_phone.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="company_admin_phone" ng-model="companyadmins.companyadminsInfo.company_admin_phone" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="companyadmins.submitted && companyadmins.userForm.company_admin_phone.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+   <td width="150px" data-title="''">
+			<!--<a href="" ng-click="editDialog(user)" class="btn btn-primary" id="editdlg" value="Edit" >Edit</a>-->
+			<p class="form-group" ng-if="companyadmins.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!companyadmins.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(companyadmins.company_name, companyadmins.company_admin_username)" ><span class="fa fa-trash"></span></a>
+			</p>
+	</td>
+  </tr>
+
+</table>
+</div>
+</div>
+ <script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the company <b>{{getcompanyName}}</b> and their admin <b>{{getadminName}} </b> ? </p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+      </div>
+   </script>
+
+  <link rel="stylesheet" type="text/css" media="all" href="master/css/companyadmins.css" />

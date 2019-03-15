@@ -1,0 +1,49 @@
+  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<div class="panel-heading" ><h2>Credit Card Payment Information</h2></div>
+<div class="panel-body">
+
+  <form name="ccForm" action="newCharge.html" method="POST" id="payment-form">
+<div class="ngdialog-message">
+
+      <div class="form-group has-feedback divwidth" style="width:400px;" >
+         <label class="text-muted">Name on Card <span style="color:red"> * </span></label>
+         <input type="text"  name="checkout-cc-name" placeholder="Name" ng-model="creditCardInfo.ccname" required="" class="form-control">
+      </div>
+      <div class="form-group has-feedback divwidth">
+          <label class="text-muted">Amount <span style="color:red"> * </span></label>
+          <div ng-model="creditCardInfo.ccamt" class="form-control">{{cartamt}}</div>
+      </div>
+      <div class="form-group has-feedback divwidth">
+          <label class="text-muted">Credit Card Number <span style="color:red"> * </span></label>
+          <input type="text" name="checkout-cc-number" required="" ng-model="creditCardInfo.ccnumber" class="form-control" data-stripe="number">
+      </div>
+      <div class="form-group has-feedback divwidth">
+          <label class="text-muted">Expiration (MM/YYYY) <span style="color:red"> * </span></label>
+          <table>
+              <tr>
+                  <td> <input type="number" name="checkout-cc-exp-month" placeholder="MM" required="" ng-model="creditCardInfo.ccexpmonth" class="form-control" data-stripe="exp-month" required="" /></td>
+                  <td> <input type="number" name="checkout-cc-exp-year" placeholder="YYYY" ng-model="creditCardInfo.ccexpyear"  required="" class="form-control" data-stripe="exp-year" /></td>
+              </tr>
+         </table>
+       </div>
+      <div class="form-group has-feedback divwidth">
+          <label class="text-muted">CVC <span style="color:red"> * </span></label>
+          <input type="text" name="checkout-cc-verification" ng-model="creditCardInfo.ccverification" required="" class="form-control" data-stripe="cvc">
+      </div>
+      <div class="pt clearfix ng-scope divwidth"><p class="pull-right text-sm">
+          <i><span style="color:red"> Fields marked with (*) are required* </span></i></p><div class="pull-left"></div>
+      </div>
+      <button id="buttonConfirm" type="button" ng-click="confirm(creditCardInfo)" class="btn btn-primary mr">Confirm</button>
+      <button id="buttonCancel"  type="button" ng-click="cancel('button')" class="btn btn-default mr">Back to Cart</button>
+      <span ng-show="authmsg" class="text-success"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your purchase was Successfull</p> </span>
+</div>
+
+</form>
+
+</div>
+</div>
+<style>
+.divwidth{
+width:400px;
+}
+</style>

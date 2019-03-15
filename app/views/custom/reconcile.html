@@ -1,0 +1,381 @@
+	 <div  align="center" ng-show="spinnerShow" style="padding-bottom:5px;"> <img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#EE3E41;font-size:18px;"> Please wait...</span> </div> 
+<div class="panel panel-default" ng-show="!spinnerShow" >
+  <div ng-cloak class="errmsg">
+          <div  class="alert alert-danger errGET" ng-cloak ng-show="failShowGet">
+            <strong>Sorry! We couldn't connect with the backend server</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+            <strong>Record added successfully</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+            <strong>Record saved successfully</strong>
+          </div>
+  </div>
+	<div class="panel-heading" style="color:#AA0001"><h3>Browse</h3></div>
+	<div class="panel-body">
+		<div id="left">
+		<div class="divwidth"  >
+						<div  >
+							<div class="demo" >
+								<h4>Select Start and End date</h4>
+								<input type="text" id="config-demo"  class="form-control">
+								<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+							</div>
+						</div>
+
+							<form>
+							<div class="row divspace">
+								<div class="col-md-4 hidediv" >
+									<div class="form-group">
+										<label for="startDate" value="testesates">startDate</label>
+										<input type="text" class="form-control" id="startDate" value="07/01/2015">
+									</div>
+									<div class="form-group">
+										<label for="endDate">endDate</label>
+										<input type="text" class="form-control" id="endDate" value="07/15/2015">
+									</div>
+								</div>
+
+								<div class="col-md-4 hidediv" >
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="ranges" checked="checked"> ranges (with example predefined ranges)
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="autoUpdateInput" checked="checked"> autoUpdateInput
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="alwaysShowCalendars" checked="checked"> alwaysShowCalendars
+										</label>
+									</div>
+								</div>
+							</div>
+							</form>
+
+
+		</div>
+	</div>
+
+	<div id="right">
+    <label class="switch switch-flat">
+              <input class="switch-input" id="tgl" checked="checked" type="checkbox" />
+              <span class="switch-label" data-on="Paid" data-off="Not Paid"></span>
+              <span class="switch-handle"></span>
+              <input type="hidden" ng-model="saveToggleval"/>
+              <input type="hidden" ng-model="startDateval"/>
+              <input type="hidden" ng-model="endDateval"/>
+    </label>
+	</div>
+
+
+
+		<table   class="table table-responsive">
+			<thead>
+			<tr>
+			<td>
+			Id
+			</td>
+			<td>
+			invNum
+			</td>
+			<td>
+			Amount
+			</td>
+			<td>
+			DueDate
+			</td>
+			<td>
+			External Key
+			</td>
+			<td>
+			Invoice Date
+			</td>
+			<td>
+			Transcation Date
+			</td>
+			<td>
+			Url
+			</td>
+			<td>
+			Details
+			</td>
+			<!-- <td>
+			hasPaid
+			</td> -->
+
+			</tr>
+			</thead>
+			
+			<tr>
+			<td>					
+			
+			
+			<input type="text" ng-model="custom_filter.id" ng-change="customFilterData();" name="custom_filter_id"  class="input-filter form-control"/>
+			
+			</td>
+			
+			<td>					
+			
+			
+			<input type="text" ng-model="custom_filter.invNum" ng-change="customFilterData();" name="custom_filter_id"  class="input-filter form-control"/>
+			
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.amount" ng-change="customFilterData();" name="custom_filter_amount"  class="input-filter form-control"/>
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.dueDate" ng-change="customFilterData();" name="custom_filter_duedate"  class="input-filter form-control"/>
+			</td>
+			<td>
+			
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.invoiceDate" ng-change="customFilterData();" name="custom_filter_invdate"  class="input-filter form-control"/>
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.transDate" ng-change="customFilterData();" name="custom_filter_transdate"  class="input-filter form-control"/>
+			</td>
+
+			
+			<td>
+			<!-- <input type="text" ng-model="custom_filter.invoicePdfUrl" ng-change="customFilterData();" name="custom_filter_url"  class="input-filter form-control"/>-->
+			</td>
+			<td>
+			
+			</td>
+
+			</tr>
+		    <tr ng-repeat="invoice in reconcileData" ng-show="totalItems>0" ng-form="invoice.userForm">
+			      <td  data-title="'Id '" filter="{ 'id': 'text' }">
+				        {{invoice.id}}
+		        </td>
+				<td  data-title="'InvNum '" filter="{ 'invNum': 'text' }">
+		        {{invoice.invNum}}
+				</td>
+		        <td  data-title="'Amount '" filter="{ 'amount': 'text' }">
+		 		       ${{invoice.amount}}
+		        </td>
+		        <td  data-title="'DueDate '" filter="{ 'dueDate': 'text' }">
+		  		      {{invoice.dueDate | date:'MM/dd/yyyy @ h:mma'}}
+		        </td>
+		        <td  data-title="'External Key '" filter="{ 'externalKey': 'text' }">
+		   		      {{invoice.externalKey}}
+		        </td>
+		        <td  data-title="'Invoice Date '" filter="{ 'invoiceDate': 'text' }">
+		    		    {{invoice.invoiceDate | date:'MM/dd/yyyy @ h:mma'}}
+		        </td>
+		        <td  data-title="'Transcation Date '" filter="{ 'transDate': 'text' }">
+		            {{invoice.transDate | date:'MM/dd/yyyy @ h:mma'}}
+		        </td>
+		        <td  data-title="'Url '" filter="{ 'invoicePdfUrl': 'text' }">
+
+		        </td>
+		       <!-- <td  data-title="'hasPaid '" filter="{ 'hasPaid': 'text' }">
+		          <button type="submit" data-ng-disabled="invoice.hasPaid == true" class="btn btn-primary btn-sm"><b>Pay</b></button>
+		        </td> --->
+				
+				<td>
+				<button type="submit"   ng-click="showInvoiceDetails('theCompanyName', 'theMan',invoice)" class="btn btn-primary btn-sm"><b>Detail</b></button>
+				</td>
+		  </tr>
+		</table>
+
+		<pagination ng-show="totalItems>0" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"  max-size="10"></pagination>
+</div>
+<div  class="alert alert-success" role="alert" ng-show="totalItems<1">
+            <strong>No record found</strong>
+        </div>
+</div>
+
+<script type="text/ng-template" id="invoiceDetailId">
+  <div class="ngdialog-message ngdialog-invoicedetails">
+        <h4>Invoice {{invoiceObj.invNum}}</h4>
+        <hr/>
+
+<div class="row" style="font-size:12px;">
+  <div class="col-lg-4 col-md-4 ">
+    <div class="row">
+      <div class="col-lg-2 col-md-2">
+        <i class="fa fa-plane fa-3x" style="opacity:0.5;"> </i>
+      </div>
+      <div class="col-lg-2 col-md-2" style="font-weight:bold;">
+        {{invoiceObj.username}}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5 col-md-5 verticalLine">
+    <div class="row">
+      <div class="col-lg-2 col-md-2">
+        <i class="fa fa-truck fa-3x" style="opacity:0.5;"> </i>
+      </div>
+      <div class="col-lg-3 col-md-3" >
+        <span style="font-weight:bold;">{{invoiceObj.companyName}}</span>
+		<div style="text-align:justify;">
+		Basilisa 2145
+		Mate.Cliff.,20145
+		Moon
+		</div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-lg-3 col-md-3 verticalLine">
+    <div class="row" style="font-weight:bold;">
+	 <div class="col-lg-6 col-md-6" >
+      INVOICE NO.
+	 </div>
+	 <div class="col-lg-6 col-md-6">
+	  {{invoiceObj.invNum}}
+    </div>
+    </div>
+    <div class="row">
+	<div class="col-lg-6 col-md-6">
+      Date
+	 </div>
+	 <div class="col-lg-6 col-md-6">
+	  {{invoiceObj.invoiceDate | date:'MM/dd/yyyy'}}
+    </div>
+    </div>
+    <div class="row">
+	<div class="col-lg-6 col-md-6">
+		Due Date
+	</div>
+	<div class="col-lg-6 col-md-6">
+	  {{invoiceObj.dueDate | date:'MM/dd/yyyy'}}
+    </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+<!-- <hr/>-->
+        <table class="table table-bordered" style="font-size:12px" >
+          <thead>
+            <tr>
+              <th>
+                Item #
+              </th>
+              <th>
+                Description
+              </th>
+              <th>
+                Quantity
+              </th>
+              <th>
+                Unit Price
+              </th>
+              <th>
+                Total
+              </th>
+            </tr>
+          </thead>
+            <tr ng-repeat="invoicedetail in invoiceData" >
+
+        	      <td class="col-lg-2 col-md-2">
+        		        {{invoicedetail.itemNumber}}
+                </td>
+                <td class="col-lg-4 col-md-4">
+         		       {{invoicedetail.description}}
+                </td>
+                <td class="col-lg-2 col-md-2">
+          		      {{invoicedetail.shippingQuantity }}
+                </td>
+
+                <td class="col-lg-2 col-md-2">
+            		    {{invoicedetail.unitPrice | currency }}
+                </td>
+                <td class="col-lg-2 col-md-2 ">
+                    {{invoicedetail.shippingQuantity * invoicedetail.unitPrice | currency }}
+                </td>
+
+          </tr>          
+
+        </table>
+
+		<br/>
+		<div class="row">
+		  <div class="container">
+
+			<div class="col-md-4 col-lg-4 col-md-offset-8">
+			<div class="pull-right" style="font-weight:bold;"><span style="padding-right:136px;"> GRAND TOTAL</span>{{subtotal() |currency}}</div>
+
+			</div>
+		  </div>
+		</div>
+
+
+		<div style="padding-bottom:15px;">
+		</div>
+      </div>
+    </script>
+
+<style>
+table>thead>tr{
+font-weight:bold;
+}
+</style>
+
+<style>
+ .ngdialog.ngdialog-theme-default.custom-width .ngdialog-content {
+   max-width: 100%;
+   width: 1500px;
+ }
+
+ .verticalLine {
+     border-left: 1px solid  #ccc;
+     padding-right: 15px;
+ }
+ #wrapper {
+
+  clear:both;
+}
+#first {
+
+  width:30%;
+  height: 100px;
+  float:left;
+  border-right:1px solid #d3d3d3;
+}
+#second {
+
+  width:30%;
+  height: 100px;
+  float:left;
+  border-right:1px solid #d3d3d3;
+}
+#third {
+
+  width:40%;
+  height: 100px;
+  float:left;
+
+
+}
+.table-bordered {
+  border: 1px solid #D6D6D6;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  border-collapse:collapse;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid #D6D6D6;
+   border-left: none;
+  border-right: none;
+}
+
+
+</style>
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/reconcile.css" />
+<link rel="stylesheet" type="text/css" media="all" href="master/css/daterangepicker.css" />
+<script type="text/javascript" src="master/js/moment.js"></script>
+<script type="text/javascript" src="master/js/daterangepicker.js"></script>

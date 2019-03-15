@@ -1,0 +1,192 @@
+
+<div class="panel panel-default">
+<div class="errmsg">
+					<div  class="alert alert-danger errGET" ng-show="failShowGet">
+						<strong>Sorry! We couldn't connect with the backend server</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+						<strong>Record added successfully</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+						<strong>Record saved successfully</strong>
+					</div>
+</div>
+<div class="panel-heading headerform" ><h2>Vehicles Form</h2></div>
+<div class="panel-body">
+<form name="vehicleForm" class="form-horizontal" role="form" method="get" action="#" >
+
+<table border="0px" class="table ng-table">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Year</th>
+			<th>Make</th>
+			<th>Model</th>
+			<th>Color</th>
+			<th>Registered</th>
+			<th>tag</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><input ng-model="addvehicleInfo.name" name="name" class="form-control input-sm" required/></td>
+			<td><input  ng-model="addvehicleInfo.description"  name="desc" class="form-control input-sm" required/></td>
+			<td><input ng-model="addvehicleInfo.year" type="number"  name="year" class="form-control input-sm" required/></td>
+			<td><input ng-model="addvehicleInfo.make" name="make" no-special-char class="form-control input-sm" required/></td>
+			<td><input ng-model="addvehicleInfo.model" name="model" no-special-char class="form-control input-sm" required/></td>
+			<td><input ng-model="addvehicleInfo.color" name="color" no-special-char class="form-control input-sm" required/></td>
+			<td><input ng-model="addvehicleInfo.stateRegistered" type="number" name="stateRegistered" class="form-control input-sm" required/></td>
+			<td><input ng-model="addvehicleInfo.tag" name="tag" class="form-control input-sm" required/></td>
+			<td>
+				<span class="btn btn-primary btn-lg">
+				<i class="fa fa-plus"></i><input type="button" ng-click="addDialog()" class="addbtn"  value="Add Vehicles" /></span>
+			</td>
+
+
+		</tr>
+		<!--<tr><td colspan="7"><h3><div class="label label-success err"  ng-show="successShow" >Form added successfully</div><div class="label label-danger err" ng-show="failShow" >Form added Failed</div></h3></td></tr>
+		<tr>-->
+		<td><span ng-show="vehicleForm.name.$dirty &amp;&amp; vehicleForm.name.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="vehicleForm.desc.$dirty &amp;&amp; vehicleForm.desc.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="vehicleForm.year.$dirty &amp;&amp; vehicleForm.year.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="vehicleForm.make.$dirty &amp;&amp; vehicleForm.make.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="vehicleForm.model.$dirty &amp;&amp; vehicleForm.model.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="vehicleForm.color.$dirty &amp;&amp; vehicleForm.color.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="vehicleForm.stateRegistered.$dirty &amp;&amp; vehicleForm.stateRegistered.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="vehicleForm.tag.$dirty &amp;&amp; vehicleForm.tag.$error.required" class="text-danger">* This field is required</span></td>
+
+
+		</tr>
+	</tbody>
+</table>
+</form>
+</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h2>Vehicles History</h2></div>
+	<div class="panel-body">
+<table ng-table="tableParams" border="0" show-filter="true" class="table">
+    <tr ng-repeat="vehicle in $data" ng-form="vehicle.userForm">
+			<td  header="'ng-table/headers/checkbox.html'" ng-switch="vehicle.isEditing" >
+				<span ng-switch-default class="editable-text">
+						<input type="checkbox" ng-model="checkboxes.items[vehicle.id]" ng-click="getcheckboxId(vehicle,checkboxes.items[vehicle.id])" class="editable-input input-sm"   />
+				</span>
+				<div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+						<input type="checkbox" ng-model="checkboxes.items[vehicle.id]" ng-click="getcheckboxId(vehicle)" disabled="disabled" class="editable-input input-sm" readonly  />
+				</div>
+			</td>
+
+	  <td  data-title="'ID '" filter="{ 'id': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="vehicle.vehicleInfo.id" class="editable-input form-control input-sm" readonly  />
+
+            </div>
+    </td>
+
+	 <td  data-title="'Name '" filter="{ 'name': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.name}}</span>
+            <div class="controls" ng-class="name.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="vehicle.vehicleInfo.name" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.name.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Description '" filter="{ 'description': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.description}}</span>
+            <div class="controls" ng-class="description.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="description" ng-model="vehicle.vehicleInfo.description" class="editable-input form-control input-sm" required  />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.description.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+
+    <!--<td data-title="'Year'" filter="{'year': 'text'}">{{vehicle.year}}</td>-->
+
+	<td  data-title="'Year '" filter="{ 'year': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.year}}</span>
+            <div class="controls" ng-class="year.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="year" ng-model="vehicle.vehicleInfo.year" class="editable-input form-control input-sm"  required />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.year.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+    <!--<td data-title="'Make'" filter="{'make': 'text'}">{{vehicle.make}}</td>-->
+
+	<td  data-title="'Make '" filter="{ 'make': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.make}}</span>
+            <div class="controls" ng-class="make.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="make"  ng-model="vehicle.vehicleInfo.make" no-special-char class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.make.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+    <!--<td data-title="'Model'" filter="{'model': 'text'}">{{vehicle.model}}</td>-->
+
+	<td  data-title="'Model '" filter="{ 'model': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.model}}</span>
+            <div class="controls" ng-class="model.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="model"  ng-model="vehicle.vehicleInfo.model" no-special-char class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.model.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Color '" filter="{ 'color': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.color}}</span>
+            <div class="controls" ng-class="color.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="color"  ng-model="vehicle.vehicleInfo.color" no-special-char class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.color.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Registered '" filter="{ 'stateRegistered': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.stateRegistered}}</span>
+            <div class="controls" ng-class="stateRegistered.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="number" name="stateRegistered" ng-model="vehicle.vehicleInfo.stateRegistered" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.stateRegistered.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+	<td  data-title="'Tag '" filter="{ 'tag': 'text' }"  ng-switch="vehicle.isEditing">
+		 <span ng-switch-default class="editable-text">{{vehicle.tag}}</span>
+            <div class="controls" ng-class="tag.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="tag" ng-model="vehicle.vehicleInfo.tag" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="vehicle.submitted && vehicle.userForm.tag.$error.required">* This field is required</span>
+            </div>
+      </td>
+
+   <td data-title="''">
+			<!--<a href="" ng-click="editDialog(user)" class="btn btn-primary" id="editdlg" value="Edit" >Edit</a>-->
+			<p class="form-group" ng-if="vehicle.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!vehicle.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(vehicle.name)" ><span class="fa fa-trash"></span></a>
+			</p>
+		</td>
+  </tr>
+	<tr>
+		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		 <td><input type="button" class="btn btn-danger" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+	</tr>
+</table>
+</div>
+</div>
+ <script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the Vehicle <b>{{getvehName}}</b> ? </p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+      </div>
+   </script>
+
+	<script type="text/ng-template" id="ng-table/headers/checkbox.html">
+         <input type="checkbox" ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+  </script>
+
+  <link rel="stylesheet" type="text/css" media="all" href="master/css/vehicles.css" />

@@ -1,0 +1,103 @@
+
+<div  style="height:30px;border:0px solid black;background-color:#65a9d7"></div>
+<div ng-controller="LoginFormController" class="block-center mt-xl wd-xl">
+   <!-- START panel-->
+   <div class="alert alert-success" ng-show="reset_register_success!=null"> {{reset_register_success}}</div>
+
+   <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">
+         <a href="#">
+            <img src="app/img/WDSLogo.png" alt="Image" class="block-center img-rounded" height="80" /-->
+         </a>
+      </div>
+
+      <div class="panel-body" style="background-color:#d3d3d3;border-radius:2px">
+         <p class="text-center pv" style="color:#3e52ee"><b>SIGN IN TO CONTINUE</b></p>
+
+		  <div  align="center" ng-show="spinnerShow" style="padding-bottom:5px;"> <img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#3e52ee;font-size:18px;"> Please wait...</span> </div>
+
+
+
+         <form role="form" ng-submit="login()" name="loginForm" novalidate="" class="form-validate mb-lg">
+            <div class="form-group has-feedback">
+               <input id="exampleInputEmail1" type="text" name="account_user" placeholder="Enter email" autocomplete="off" ng-model="account.username" required="" class="form-control" />
+               <span class="fa fa-envelope form-control-feedback text-muted"></span>
+               <span ng-show="loginForm.account_user.$dirty &amp;&amp; loginForm.account_user.$error.required" class="text-danger">This field is required</span>
+               <span ng-show="loginForm.account_user.$dirty &amp;&amp; loginForm.account_user.$error.email" class="text-danger">This field must be a valid email address</span>
+            </div>
+            <div class="form-group has-feedback">
+               <input id="exampleInputPassword1" type="password" name="account_pwd" placeholder="Password" ng-model="account.password" required="" class="form-control" />
+               <span class="fa fa-lock form-control-feedback text-muted"></span>
+               <span ng-show="loginForm.account_pwd.$dirty &amp;&amp; loginForm.account_pwd.$error.required" class="text-danger">This field is required</span>
+            </div>
+            <div class="clearfix">
+               <div class="checkbox c-checkbox pull-left mt0">
+                  <label>
+                     <input type="checkbox" value="" name="remember" ng-click="rememberMe()" ng-model="remember" />Remember Me</label>
+               </div>
+               <div class="pull-right"><a ui-sref="page.recover" class="text-muted">Forgot your password?</a>
+               </div>
+            </div>
+
+          <button type="submit"  class="btn btn-primary pull-right">Login</button>
+          <div ng-show="authMsg" class="alert alert-danger text-center errmsg" >{{authMsg}}</div>
+         </form>
+
+
+        <!-- <p class="pt-lg text-center">Need to Signup Company?</p><a ui-sref="page.company_register" class="btn btn-block btn-default">Register Now</a>-->
+      </div>
+   </div>
+   <!-- END panel-->
+   <div class="p-lg text-center">
+      <!--span>&copy;</span>
+      <span ng-bind="app.year"></span>
+      <span>-</span>
+      <span ng-bind="app.name"></span>
+      <span ng-bind="EnvironmentConfig.branch"></span-->
+      <br/>
+      <!--h2 style="color: red"><span ng-bind="app.description"></span></h2-->
+   </div>
+
+
+
+	 <!-- include app version info html file -->
+ <div ng-include="'app/views/partials/app_version_info.html'" ng-if="EnvironmentConfig.show_version_info"></div>
+
+</div>
+<style>
+.errmsg{
+  width:215px;
+}
+.button {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 5px 10px;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   border-radius: 8px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 15px;
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   align:center;
+   }
+.button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+.button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
+</style>

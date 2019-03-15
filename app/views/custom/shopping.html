@@ -1,0 +1,187 @@
+
+  <!-- Header div starts -->
+
+
+
+  <div class="container-fluid panel panel-default" style="margin-top:-24px;" >
+      <div class="row-fluid">
+
+              <h1 class="well" style="color:#AA0001;border:0px" >
+                  <a href="index.htm">
+                      <img src="app/img/shopping-cart-logo.jpg" height="100" width="100" alt="logo"/>
+                  </a>
+               Happy deals
+             </h1>
+              <div ng-view></div>
+      </div>
+  </div>
+  <!-- Header div ends -->
+  <!-- Total items in cart (default) div starts -->
+    <div class="panel panel-default">
+    <div id="right" class="panel-heading" style="color:#AA0001" ><h3>Shopping by Category</h3></div>
+    <div id="left" >
+                <i class="fa fa-shopping-cart fa-3x" />
+                <a href="app/views/custom/product.html" title="go to shopping cart" ng-click="goShoppingcart()" ng-disabled="cart.getTotalCount() < 1">
+                  <b>{{totItems}}</b> items, <b>&nbsp; {{sum | currency}}</b>
+
+
+                </a>
+
+    </div>
+
+    <!-- Total items in cart (dafault) div ends -->
+
+    <div class="panel-body">
+        <!-- All Shopping items shown (First) div starts -->
+      <div ng-show="showallItem">
+        <table ng-table="tableParams"   show-filter="true" class="table table-responsive custom-pagination tab">
+        <tr ng-repeat="product in $data" ng-form="product.userForm">
+
+    		<td  data-title="'Item '" filter="{ 'size': 'text' }"  >
+    					<span  class="editable-text"><a href="app/views/custom/shopping.html" ng-click="viewProduct(product)"> <img   ng-src={{product.imageUrl}}></a></span>
+
+    		</td>
+        <td  data-title="'Description '" filter="{ 'size': 'text' }"  >
+          <span   class="editable-text">
+            <a href="app/views/custom/shopping.html"  style="font-size:18px;" ng-click="viewProduct(product)"><b>{{product.product }} </b></a></br>
+          {{product.description}}</span>
+        </td>
+        <td  data-title="'Price '" filter="{ 'size': 'text' }"  >
+              <span  class="editable-text">{{product.price | currency}}</span>
+        </td>
+        <td  data-title="'Product '" filter="{ 'size': 'text' }"  >
+              <span  class="editable-text">{{product.product }}</span>
+        </td>
+
+      <!--  <td  data-title="'Buy here '" filter="{ 'Buy here': 'text' }">
+          <button type="submit" data-ng-disabled="invoice.hasPaid == true" ng-click="callfn(product.id,product.price)" class="btn btn-primary"><b>Add to Card</b></button>
+        </td>-->
+        </tr>
+    </table>
+    </div>
+        <!-- All Shopping items shown (First) div ends -->
+  </div>
+
+
+
+
+
+
+          <!-- Selected items shown (second) div starts -->
+  <div ng-show="showselectedItem">
+
+      <p class="My-Text">
+          <img ng-src="{{showselectedImage}}" alt="{{product.name}}"/>
+        <b>  Wrist Watch : [Analog] </b><br />
+        <p style="color:red;font-size:16px;margin-left:20px"> <b>Deal Price :  {{itemPrice | currency}}</b></p>
+      </p>
+      <ul class="Ring_Descr">
+      	<li>Milgrain, pave floral or embossed designs</li>
+      	<li>Sentimental touches</li>
+      	<li>Strong use of embellishment</li>
+      	<li>The wearer would love a wedding in a romantic setting like a castle or a garden full of flowers</li>
+      </ul>
+      <div class="container-fluid">
+          <div class="row-fluid">
+            <div id="product_left">
+              <p style="width:1250px;border: 1px solid #D3D3D3;border-radius:2px;height:80px;text-align:center;">
+              <a href="index.htm#/cart" title="go to shopping cart" >
+                                  <i class="fa fa-shopping-cart fa-2x" style="color:black" />&nbsp;
+                                <b> {{productQty}}</b> items, <b>&nbsp;{{totPrice | currency}}</b>
+                                <span ><br />Selected product quantity and price</span>
+              </a>
+              </p>
+            </div>
+            <div id="product_right">
+            <div>
+
+              <select ng-model="itemQty" ng-show="qty_dropbox" ng-change="getQuantity(itemQty)"  >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10+</option>
+              </select>
+              <input type="text" ng-show="qty_txtbox"  ng-model="prdtqty"   class="form-control input-sm" />
+            </div>
+          <div style="margin-top:5px">
+                <button
+                    class="btn btn-block btn-success" data-ng-disabled="productQty == '0'"
+                    ng-click="addtoCart()">
+                    <i class="fa fa-shopping-cart fa-1x icon-white" /> &nbsp; Add to cart
+                </button>
+                <!--<button
+                    class="btn btn-block btn-warning"
+                    ng-click="buynow()"
+                    ng-disabled="">
+
+                    <i class="fa fa-youtube-play" aria-hidden="true"/> &nbsp; Buy now
+                </button>-->
+                <button
+                    class="btn btn-block"
+                    ng-click="gotoStore()">
+                    <i class="icon-chevron-left" /> Back to store
+                </button>
+          </div>
+          </div>
+        </div >
+    </div>
+    </div>
+    </div>
+    </div>
+  <!-- Selected items shown (second) div starts -->
+<style>
+
+.ng-table-pager {
+    display: none;
+}
+.custom-pagination .ng-table-pager {
+    display: block;
+}
+
+#left{
+float:left;
+width:15%;
+height: 50px;
+margin-top: 30px;
+font-weight: bold;
+
+
+}
+#right{
+float:left;
+width:85%;
+}
+
+
+#product_left{
+float:left;
+width:80%;
+height: 50px;
+padding-left:30px;
+
+
+
+
+
+}
+#product_right{
+float:left;
+width:20%;
+padding-right:30px;
+
+
+
+
+
+
+}
+
+</style>
+
+    <link href="app/css/style.css" rel="stylesheet" type="text/css"/>

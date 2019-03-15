@@ -1,0 +1,36 @@
+<div  class="block-center mt-xl wd-xl" style="width:350px">
+   <!-- START panel-->
+   <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">
+         <a href="#">
+            <img src="app/img/logo.jpg" alt="Image" class="block-center img-rounded" />
+         </a>
+      </div>
+      <div class="panel-body">
+         <p class="text-center pv">PASSWORD RESET</p>
+         <form role="form" name="recoverForm" novalidate=""  class="form-validate">
+            <p class="text-center">Fill with your mail to reset your password.</p>
+            <div class="form-group has-feedback">
+               <label class="text-muted">Username</label>
+               <input type="username" name="username" placeholder="Enter username" autocomplete="off" ng-model="recover.username" required="" class="form-control" />
+               <span class="fa fa-envelope form-control-feedback text-muted"></span>
+               <span ng-show="recoverForm.username.$dirty &amp;&amp; recoverForm.username.$error.required" class="text-danger">This field is required</span>
+               <span ng-show="recoverForm.username.$dirty &amp;&amp; recoverForm.username.$error.username" class="text-danger">This field must be a valid username</span>
+            </div>
+            <button type="button" ng-click="recover()" class="btn btn-danger btn-block">Reset</button>
+            <div style="height:10px"></div>
+            <div ng-show="authMsg" class="alert alert-danger text-center">{{authMsg}}</div>
+            <div ng-show="msgPass" class="alert alert-success text-center">{{msgPass}}</div>
+         </form>
+      </div>
+   </div>
+   <!-- END panel-->
+   <div class="p-lg text-center">
+      <span>&copy;</span>
+      <span ng-bind="app.year"></span>
+      <span>-</span>
+      <span ng-bind="app.name"></span>
+      <br/>
+      <span ng-bind="app.description"></span>
+   </div>
+</div>

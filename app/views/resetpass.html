@@ -1,0 +1,64 @@
+<div  class="block-center mt-xl wd-xl" ng-show="showresetpage">
+   <!-- START panel-->
+   <div class="panel panel-dark panel-flat">
+      <div class="panel-heading text-center">
+         <a href="#">
+              <img src="app/img/logo.jpg" alt="Image" class="block-center img-rounded" height="80" />
+         </a>
+      </div>
+      <div class="panel-body">
+         <p class="text-center pv">RESET PASSWORD</p>
+         <form role="form" name="resetForm" novalidate=""  class="form-validate">
+            <p class="text-center">Enter your new password</p>
+            <!--<div class="form-group has-feedback">
+               <label class="text-muted">Email address</label>
+               <input type="email" name="email" placeholder="Enter email" autocomplete="off" ng-model="recover.email" required="" class="form-control" />
+               <span class="fa fa-envelope form-control-feedback text-muted"></span>
+               <span ng-show="resetForm.email.$dirty &amp;&amp; resetForm.email.$error.required" class="text-danger">This field is required</span>
+               <span ng-show="resetForm.email.$dirty &amp;&amp; resetForm.email.$error.email" class="text-danger">This field must be a valid email address</span>
+            </div>-->
+            <div class="form-group has-feedback">
+               <label class="text-muted">Password</label>
+               <input id="id-password" type="password" name="password" ng-model="recover.password" ng-pattern="/^[a-zA-Z0-9]{6,10}$/" required="" class="form-control" />
+               <span class="fa fa-lock form-control-feedback text-muted"></span>
+               <span ng-show="resetForm.password.$dirty &amp;&amp; resetForm.password.$error.required" class="text-danger">This field is required</span>
+               <span ng-show="resetForm.password.$dirty &amp;&amp; resetForm.password.$error.pattern" class="text-danger">Input should match 'a-zA-Z0-9' and 6-10 length</span>
+            </div>
+            <div class="form-group has-feedback">
+               <label class="text-muted">Retype Password</label>
+               <input type="password" name="password_confirm" ng-model="recover.password_confirm" ui-validate="'$value==recover.password'" ui-validate-watch="'password'" class="form-control" />
+               <span class="fa fa-lock form-control-feedback text-muted"></span>
+               <span ng-show="resetForm.password_confirm.$dirty &amp;&amp; resetForm.password_confirm.$error.validator" class="text-danger">Password does Not match</span>
+            </div>
+            <button type="button" ng-click="resetpwd()" class="btn btn-info btn-block" style="background-color: #3079ed;">Confirm Password</button>
+            <div style="height:10px"></div>
+            <div ng-show="authMsg" class="alert alert-danger text-center">{{authMsg}}</div>
+            <div ng-show="msgPass" class="alert alert-success text-center">{{msgPass}}</div>
+         </form>
+      </div>
+   </div>
+   <!-- END panel-->
+   <div class="p-lg text-center">
+      <span>&copy;</span>
+      <span ng-bind="app.year"></span>
+      <span>-</span>
+      <span ng-bind="app.name"></span>
+      <br/>
+      <span ng-bind="app.description"></span>
+   </div>
+</div>
+<div ng-show="invalidUser" class="abs-center wd-xl">
+   <!-- START panel-->
+   <div class="text-center mb-xl">
+      <div class="text-lg mb-lg">Invalid URL</div>
+      <p class="lead m0">We couldn't find this page.</p>
+      <p>The page you are looking for does not exists.</p>
+   </div>
+</div>
+<div ng-show="showtimeout" class="abs-center wd-xl">
+   <!-- START panel-->
+   <div class="text-center mb-xl">
+      <div class="text-lg mb-lg">Registration Timeout</div>
+      <p class="lead m0">You couldn't be register.</p>
+   </div>
+</div>

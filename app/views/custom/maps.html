@@ -1,0 +1,75 @@
+
+<div class="panel-heading"><h2>Order History</h2></div>
+<div style="float:left;width:40%;overflow:hidden"  class="panel-body">
+
+<div id="scrollable-area">
+<table ng-table="tableParams"  show-filter="true" class="table">
+  <tr ng-repeat="user in $data | filter:{INTERNAL_ORDERID : null}"  ng-hide="user.SERVICE_TYPE == 'Cancel' || user.SERVICE_TYPE == 'Cancel-TripCharge' || user.SERVICE_TYPE == 'iRTR'"   ng-click="go(user)" >
+    <td width="80" data-title="'Id'" style="color:#0066CC" filter="{ 'id': 'text' }"  ng-switch="user.isEditing">
+          <span ng-switch-default class="editable-text">{{user.ID}}</span>
+          <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+            <input type="text" name="id" ng-model="user.orderinfo.ID" class="editable-input form-control input-sm" readonly  />
+          </div>
+    </td>
+
+    <td width="170" data-title="'Customer Name'" style="color:#0066CC" ng-model="custmodel"  filter="{ 'NAME': 'text' }" ng-switch="user.isEditing">
+        <span ng-switch-default class="editable-text">{{user.NAME}}</span>
+          <div class="controls" ng-class="NAME.$invalid && NAME.$dirty ? 'has-error' : ''" ng-switch-when="true">
+          <ui-select  ng-model="user.orderinfo.CUSTOMER_ID" on-select="getcustfn($item)">
+              <ui-select-match placeholder="Select Customers">{{$select.selected.name}}</ui-select-match>
+              <ui-select-choices repeat="customer.id as customer in customers | propsFilter: {name: $select.search}">
+              <div ng-bind-html="customer.name | highlight: $select.search"></div>
+              </ui-select-choices>
+          </ui-select>
+          </div>
+    </td>
+
+  <td data-title="'Site Name'"  filter="{ 'SITE_NAME': 'text' }" ng-switch="user.isEditing">
+    <span ng-switch-default class="editable-text">{{user.SITE_NAME + "," + user.SITE_STREET + ","+ user.SITE_CITY}}</span>
+          <div class="controls" ng-class="SITE_NAME.$invalid && SITE_NAME.$dirty ? 'has-error' : ''" ng-switch-when="true">
+      <ui-select ng-model="user.orderinfo.SITE_ID" on-select="getsitenameId($item)">
+      <ui-select-match placeholder="Select Sites">{{$select.selected.name}} {{$select.selected.city}} {{$select.selected.street}}</ui-select-match>
+      <ui-select-choices repeat="site.id as site in sitesEdit ">
+      <div ng-bind-html="site.name +''+ site.street +''+site.city | highlight: $select.search"></div>
+      </ui-select-choices>
+      </ui-select>
+          </div>
+      </td>
+
+   <td width="120" data-title="'Container Size'"  filter="{ 'CONTAINER_SIZE': 'text' }" ng-switch="user.isEditing">
+    <span ng-switch-default class="editable-text">{{user.CONTAINER_SIZE}}</span>
+          <div class="controls" ng-class="CONTAINER_SIZE.$invalid && CONTAINER_SIZE.$dirty ? 'has-error' : ''" ng-switch-when="true">
+      <select ng-model="user.orderinfo.CONTAINER_SIZE_ID" ng-change="getcontID(user.orderinfo.CONTAINER_SIZE_ID)" class="form-control input-sm" data-ng-options="containersize.id as containersize.size  for containersize in containersize" ></select>
+      <input type="hidden" ng-model="contId" />
+    <!--<span class="text-danger" ng-show="user.submitted && user.userForm.SIZE.$error.required">* This field is required</span>-->
+          </div>
+      </td>
+
+
+
+  </tr>
+</table>
+</div>
+<!--Get loggitude and latitude tho' location name starts-->
+<div style="visibility:hidden">
+     <h3> Enter an adress and press the button</h3>
+
+    <input id="address" type="text" placeholder="Enter address here" />
+    <button id="btn">Get LatLong</button>
+    <div>
+        <p>Latitude:
+            <input type="text" id="latitude" readonly />
+        </p>
+        <p>Longitude:
+            <input type="text" id="longitude" readonly />
+        </p>
+    </div>
+</div> <!--Get loggitude and latitude tho' location name ends-->
+</div>
+
+
+<div style="float:left;width:60%;height:500px;overflow:hidden;border:1px" ng-init="loadScript()">
+<div style="height:500px"  class="form-group col-lg-12" id="googleMap">
+      <center>Waiting for the map...</center>
+</div>
+</div>

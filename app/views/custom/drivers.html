@@ -1,0 +1,232 @@
+
+
+<div class="panel panel-default">
+
+
+	<div class="errmsg" >
+					<div  class="alert alert-danger errGET" ng-show="failShowGet">
+						<strong>Sorry! We couldn't connect with the backend server</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+						<strong>Record added successfully</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+						<strong>Record saved successfully</strong>
+					</div>
+	</div>
+
+	<div class="panel-heading"><h2>Drivers Form</h2></div>
+
+	<div class="panel-body">
+	<!--<form name="driverForm" class="form-horizontal" role="form" method="get" action="#" style="    padding-left: 9px">-->
+	<table class="table ng-table">
+	<thead>
+		<tr>
+
+			<th>Name</th>
+			<th>Phone</th>
+			<th>Driver License State</th>
+			<th>Driver License Number</th>
+			<th>Street</th>
+			<!--<th>Secondary Street</th>-->
+			<th>City</th>
+			<th>State</th>
+			<th>Zip</th>
+			<th>Choose Photo </th>
+
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<!--<td><input ng-model="driverInfo.id" name="id" class="form-control input-sm" required/></td>-->
+
+			<td><input ng-model="driverInfo.name" name="name" class="form-control input-sm" required/></td>
+			<td><input ng-model="driverInfo.phone" name="phone" class="form-control input-sm" required/></td>
+			<td><input ng-model="driverInfo.driverLicenseNumber" name="driverLicenseNumber" class="form-control input-sm" /></td>
+			<td><input ng-model="driverInfo.driverLicenseState" name="driverLicenseState" class="form-control input-sm" /></td>
+			<td><input ng-model="driverInfo.street" name="street" class="form-control input-sm" /></td>
+			<!--<td><input ng-model="driverInfo.secondaryStreet" name="secondaryStreet" class="form-control input-sm" /></td>-->
+			<td><input ng-model="driverInfo.city" name="city" class="form-control input-sm" /></td>
+			<td><input ng-model="driverInfo.state" name="state" class="form-control input-sm" /></td>
+			<td><input ng-model="driverInfo.postalCode" name="postalCode" class="form-control input-sm" /></td>
+			<td><form enctype="multipart/form-data"   class="upload" name="fileinfo">
+								<input type="file" name="uploadField" id="filename"   onchange="angular.element(this).scope().imageUpload(this)">
+								<input  type="button" ng-click='uploadImg()'  class="clickClass txthide" value="submit">
+								<input class="txthide" type="text"  name="name" value="">
+								<div id="preimg" ng-repeat="step in stepsModel"><img class="img-circle"  ng-src="{{step}}" /></div>
+					</form>
+			</td>
+
+			<td>
+				<span class="btn btn-primary btn-lg">
+				<i class="fa fa-plus"></i><input type="button" ng-click="addDialog()" class="addbtn" value="Add Drivers" />
+				</span>
+		  </td>
+		</tr>
+		<!--<tr><td colspan="9"><h3><div class="label label-success err"  ng-show="successShow" >Form added successfully</div><div class="label label-danger err" ng-show="failShow" >Form added Failed</div></h3></td></tr>
+		<tr>-->
+		<tr>
+			<td><div class="txtclr" ng-hide="titleEnabled"><span ></span>* This field is required</div></td>
+			<td><div class="txtclr" ng-hide="titleEnabled"><span ></span>* This field is required</div></td>
+		<!--	<td><span ng-show="driverForm.name.$dirty &amp;&amp; driverForm.name.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="driverForm.phone.$dirty &amp;&amp; driverForm.phone.$error.required" class="text-danger">* This field is required</span></td>-->
+
+			</tr>
+	</tbody>
+</table>
+
+
+<!--</form>-->
+</div>
+</div>
+
+<!--<label>Search: <input ng-model="searchText"></label>-->
+<div class="panel panel-default">
+	<div class="panel-heading"><h2>Drivers History</h2></div>
+	<div class="panel-body">
+<table ng-table="tableParams"  show-filter="true" class="table">
+    <tr ng-repeat="driver in $data  | filter:searchText" ng-form="driver.userForm">
+			<td  header="'ng-table/headers/checkbox.html'" ng-switch="driver.isEditing" >
+				<span ng-switch-default class="editable-text">
+						<input type="checkbox" ng-model="checkboxes.items[driver.id]" ng-click="getcheckboxId(driver,checkboxes.items[driver.id])" class="editable-input input-sm"   />
+				</span>
+				<div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+						<input type="checkbox" ng-model="checkboxes.items[driver.id]" ng-click="getcheckboxId(driver)" disabled="disabled" class="editable-input input-sm" readonly  />
+				</div>
+			</td>
+
+		<td  data-title="'ID '" filter="{ 'id': 'text' }"   ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="driver.editdriverInfo.id" class="editable-input form-control input-sm" readonly  />
+            </div>
+         </td>
+
+				 <td width="60px"  data-title="'Photo '" filter="{ 'imageUrl': 'text' }"  ng-switch="driver.isEditing">
+				 <span ng-switch-default align="center" class="editable-text">
+					 <p class="tblcircle"><img class="img-circle" ng-src={{driver.imageUrl==null?'http://localhost:8080/MCF_backend/opt/images/none.png':'http://localhost:8080/MCF_backend/opt/images/'+driver.imageUrl}}></p>
+				 </span>
+								<div  class="controls" ng-class="imageUrl.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+									<form enctype="multipart/form-data"   class="upload" name="fileinfo1">
+													 <input type="file" name="uploadField" id="editfilename" >
+													 <input  type="button" ng-click="imgupload(driver.id)" style="float: left;width:92px;margin-top:2px"   class="clickClass " value="Upload">
+													 <input  class="txthide" type="text"  name="name" value="">
+									</form>
+								</div>
+				</td>
+		 <td  data-title="'Name '" filter="{ 'name': 'text' }"  ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.name}}</span>
+            <div class="controls" ng-class="name.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="driver.editdriverInfo.name" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="driver.submitted && driver.userForm.name.$error.required">* This field is required</span>
+            </div>
+         </td>
+
+		 <td  data-title="'Street '" filter="{ 'street': 'text' }"  ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.street}}</span>
+            <div class="controls" ng-class="street.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="street" ng-model="driver.editdriverInfo.street" class="editable-input form-control input-sm"  />
+			  <!--<span class="text-danger" ng-show="driver.submitted && driver.userForm.street.$error.required">* This field is required</span>-->
+            </div>
+         </td>
+
+	<!--	 <td  data-title="'Street '" filter="{ 'secondaryStreet': 'text' }"  ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.secondaryStreet}}</span>
+            <div class="controls" ng-class="secondaryStreet.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="secondaryStreet" ng-model="driver.editdriverInfo.secondaryStreet" class="editable-input form-control input-sm"  />
+            </div>
+         </td>-->
+
+		 <td  data-title="'City '" filter="{ 'city': 'text' }"  ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.city}}</span>
+            <div class="controls" ng-class="city.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="city" ng-model="driver.editdriverInfo.city" class="editable-input form-control input-sm"  />
+			  <!--<span class="text-danger" ng-show="driver.submitted && driver.userForm.city.$error.required">* This field is required</span>-->
+            </div>
+         </td>
+
+		 <td  data-title="'State '" filter="{ 'state': 'text' }"  ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.state}}</span>
+            <div class="controls" ng-class="state.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="state" ng-model="driver.editdriverInfo.state" class="editable-input form-control input-sm"  />
+			  <!--<span class="text-danger" ng-show="driver.submitted && driver.userForm.state.$error.required">* This field is required</span>-->
+            </div>
+         </td>
+
+		 <td  data-title="'Zip '" filter="{ 'postalCode': 'text' }"  ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.postalCode}}</span>
+            <div class="controls" ng-class="postalCode.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="postalCode" ng-model="driver.editdriverInfo.postalCode" class="editable-input form-control input-sm" />
+			  <!--<span class="text-danger" ng-show="driver.submitted && driver.userForm.postalCode.$error.required">* This field is required</span>-->
+            </div>
+         </td>
+
+		 <td  data-title="'Phone '" filter="{ 'phone': 'text' }"  ng-switch="driver.isEditing">
+		 <span ng-switch-default class="editable-text">{{driver.phone}}</span>
+            <div class="controls" ng-class="phone.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="phone" ng-model="driver.editdriverInfo.phone" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="driver.submitted && driver.userForm.phone.$error.required">* This field is required</span>
+            </div>
+         </td>
+
+        <td data-title="''">
+			<!--<a href="" ng-click="editDialog(user)" class="btn btn-primary" id="editdlg" value="Edit" >Edit</a>-->
+			<p class="form-group" ng-if="driver.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!driver.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(driver.name,driver.id)" ><span class="fa fa-trash"></span></a>
+			</p>
+		</td>
+    </tr>
+		<tr>
+			<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+			 <td><input type="button" class="btn btn-danger" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+		</tr>
+</table>
+</div>
+</div>
+  <script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the Driver <b>{{getdvrName}}</b> ?</p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+      </div>
+  </script>
+
+	<script type="text/ng-template" id="ng-table/headers/checkbox.html">
+	 			 <input type="checkbox" ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+	</script>
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/drivers.css" />
+
+<script type="text/javascript">
+//$( document ).ready(function() {
+
+	//$('.clickClass').click(function(){
+	/*function uploadImgEdit(driverIdval){
+		//var driverIdval = document.getElementById('getdvrId1').value;
+		alert("hello world Edit " + driverIdval );
+		 var oData = new FormData(document.forms.namedItem("fileinfo1"));
+		    //var url="${createLink(controller:'myfile1',action:'uploading')}";
+		  var url='http://localhost:8080/MCF_backend/driverImage/uploading'+'?driverImgId='+driverIdval;
+		     $.ajax({
+		         url:url,
+		         type:'POST',
+		         data:oData,
+						 beforeSend: function(xhr, settings) { xhr.setRequestHeader('Authorization', JSON.parse(localStorage.getItem('token'))); } ,
+		         processData: false,  // tell jQuery not to process the data
+		         contentType: false ,
+		         success:function (req) {
+		               alert(req);
+		            }
+		         });
+//	});
+//});
+
+}*/
+</script>

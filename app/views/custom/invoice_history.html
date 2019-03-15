@@ -1,0 +1,355 @@
+ <div  align="center" ng-show="onLoadspinnerShow" style="padding-bottom:5px;"> <img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#EE3E41;font-size:18px;"> Please wait...</span> </div>
+
+<div class="panel panel-default" ng-show="!onLoadspinnerShow">
+  <div class="errmsg">
+          <div  class="alert alert-danger errGET" ng-show="failShowGet">
+            <strong>Error with Credit Card Charge.</strong>
+            <strong>{{message}}</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+            <strong>{{message}}</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+            <strong>{{message}}</strong>
+          </div>
+
+		   <div ng-show="spinnerShow" class="pull-left"> <img src="app/img/spinner.gif" style="width:25px;height:25px;"   /><span style="color:#04F2FC;font-size:18px;"> Please wait...</span> </div>
+
+  </div>
+<div class="panel-heading" style="color:#AA0001"><h3>Invoice History</h3></div>
+<div class="panel-body">
+<table ng-table="tableParams" show-filter="true" class="table table-responsive">
+    <tr ng-repeat="invoice in $data" ng-form="invoice.userForm">
+	      <td  data-title="'InvNum '" filter="{ 'invNum': 'text' }">
+		        {{invoice.invNum}}
+        </td>
+        <td  data-title="'Customer Num'" filter="{ 'custNum': 'text' }">
+                {{invoice.custNum}}
+        </td>
+        <td  data-title="'Amount '" filter="{ 'amount': 'text' }">
+ 		       {{invoice.amount}}
+        </td>
+        <td  data-title="'Invoice Date '" filter="{ 'invoiceDate': 'text' }">
+    		    {{invoice.invoiceDate | date:'MM/dd/yyyy @ h:mma'}}
+        </td>
+        <td  data-title="''">
+          <div ng-if="invoice.hasPaid">
+          <button type="submit" ng-disabled="invoice.hasPaid"  ng-click="paymentDialog('theCompanyName', 'theMan',invoice,$index )" class="btn btn-sm"><b>Processing</b></button>
+        </div>
+        <div ng-if="!invoice.hasPaid">
+        <button type="submit" ng-disabled="invoice.hasPaid"  ng-click="paymentDialog('theCompanyName', 'theMan',invoice,$index )" class="btn btn-primary btn-sm"><b>Pay</b></button>
+      </div>
+
+        </td>
+        <td  data-title="''" >
+          <button type="submit"   ng-click="showInvoiceDetails('theCompanyName', 'theMan',invoice)" class="btn btn-primary btn-sm"><b>Description</b></button>
+        </td>
+  </tr>
+</table>
+</div>
+</div>
+
+<script type="text/ng-template" id="paymentDialogId">
+
+	<form name="ccForm"  id="payment-form" ng-submit="confirm(creditCardInfo);" novalidate >
+		<div>
+		<div style="padding-top:10px;">
+		</div>
+		<div class="row">
+		<div class="col-lg-6">
+		<h3>Payment Details</h3>
+		</div>
+
+		<div class="col-lg-6" style="padding-top:10px;">
+		<img  src="app/img/accepted_card.png">
+		</div>
+		</div>
+
+
+
+        <div class="form-group has-feedback">
+           <input type="text" name="fname" placeholder="First Name *" ng-model="creditCardInfo.fname"  class="form-control" required />
+
+		   <span ng-show="ccForm.fname.$invalid && !ccForm.fname.$pristine" class="text-danger fname">* This field is required</span>
+
+        </div>
+        <div class="form-group has-feedback">
+           <input type="text" name="lname" placeholder="Last Name *" ng-model="creditCardInfo.lname"  class="form-control" required />
+
+       <span ng-show="ccForm.lname.$invalid && !ccForm.lname.$pristine" class="text-danger lname">* This field is required</span>
+
+        </div>
+        <div class="form-group has-feedback divwidth">
+			 <input type="number" name="ccamt" required ng-model="creditCardInfo.ccamt" placeholder="Amount *"  class="form-control" />
+			 	<span ng-show="ccForm.ccamt.$invalid && !ccForm.ccamt.$pristine" class="text-danger ccamt">* This field is required</span>
+
+				<span ng-show="ccForm.checkout-cc-amt.$error.number" class="text-danger ccamt">* Amount Should be number</span>
+        </div>
+        <div class="form-group has-feedback">
+            <input type="number"   placeholder="Credit Card Number *"  name="ccnumber" required ng-model="creditCardInfo.ccnumber" class="form-control" />
+			 <span ng-show="ccForm.ccnumber.$error.required && !ccForm.ccnumber.$pristine" class="text-danger ccnumber">* This field is required</span>
+
+        </div>
+        <div class="form-group  has-feedback">
+					<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-6">
+					<input type="number" ng-minlength="2" ng-maxlength="2" name="expmonth" placeholder="Exp MM *"  ng-model="creditCardInfo.ccexpmonth" class="form-control "  required />
+
+					<span ng-show="ccForm.expmonth.$error.required && !ccForm.expmonth.$pristine" class="text-danger expmonth">* This field is required</span>
+					<span ng-show="ccForm.expmonth.$error.minlength" class="text-danger expmonth">month should be 2 digits.</span>
+					<span ng-show="ccForm.expmonth.$error.maxlength" class="text-danger expmonth">month should be 2 digits.</span>
+
+
+					</div>
+
+         <div class="col-lg-6 col-md-6 col-sm-6"> <input type="number" ng-minlength="2" ng-maxlength="2" name="expyear" placeholder="Exp YY *" ng-model="creditCardInfo.ccexpyear"  required class="form-control"  />
+					<span ng-show="ccForm.expyear.$error.required && !ccForm.expyear.$pristine" class="text-danger expyear">* This field is required</span>
+					<span ng-show="ccForm.expyear.$error.minlength" class="text-danger expyear">Year should be 2 digits.</span>
+					<span ng-show="ccForm.expyear.$error.maxlength" class="text-danger expyear">Year should be 2 digits.</span>
+					</div>
+					</div>
+
+
+         </div>
+        <div class="form-group has-feedback">
+            <input type="number" placeholder="CVC *" ng-minlength="3" ng-maxlength="3" name="cvc" ng-model="creditCardInfo.ccverification" required="" class="form-control" >
+				<span ng-show="ccForm.cvc.$error.required && !ccForm.cvc.$pristine" class="text-danger cvc"> This field is required</span>
+				<span ng-show="ccForm.cvc.$error.minlength" class="text-danger cvc">CVC should be 3 digits.</span>
+				<span ng-show="ccForm.cvc.$error.maxlength" class="text-danger cvc">CVC should be 3 digits.</span>
+
+        </div>
+
+        <div class="form-group has-feedback">
+
+            <input type="text" name="billStreet" ng-model="creditCardInfo.billStreet" placeholder="Street *" required class="form-control"/>
+			<span ng-show="ccForm.street.$invalid && !ccForm.street.$pristine" class="text-danger street">* Enter a valid street.</span>
+
+        </div>
+
+        <div class="form-group has-feedback">
+            <input type="text" name="billCity" ng-model="creditCardInfo.billCity" placeholder="City *" required class="form-control"/>
+			<span ng-show="ccForm.billCity.$invalid && !ccForm.billCity.$pristine" class="text-danger city">* Enter a valid city.</span>
+
+        </div>
+
+        <div class="form-group has-feedback">
+            <input type="text" name="billState" placeholder="State *" ng-model="creditCardInfo.billState" required class="form-control"/>
+			      <span ng-show="ccForm.billState.$invalid && !ccForm.billState.$pristine" class="text-danger city">* Enter a valid State.</span>
+        </div>
+
+        <div class="form-group has-feedback">
+          <input type="number" ng-minlength="5" ng-maxlength="5" placeholder="Zip *" name="billZip" ng-model="creditCardInfo.billZip" required="" class="form-control" >
+
+      <span ng-show="ccForm.billZip.$error.required && !ccForm.billZip.$pristine" class="text-danger zip"> This field is required</span>
+      <span ng-show="ccForm.billZip.$error.minlength" class="text-danger zip">Zip should be 5 digits.</span>
+      <span ng-show="ccForm.billZip.$error.maxlength" class="text-danger zip">Zip should be 5 digits.</span>
+
+        </div>
+
+
+
+
+        <div class="form-group has-feedback">
+          <textarea  rows="5" cols="10" placeholder="Comment" name="billComment" ng-model="creditCardInfo.billComment"  class="form-control"> </textarea>
+        </div>
+        <div class="pt clearfix ng-scope"><p class="pull-right text-sm">
+            <i><span style="color:red"> Fields marked with (*) are required* </span></i></p><div class="pull-left"></div>
+        </div>
+        <button id="buttonConfirm" type="submit"   ng-disabled="ccForm.$invalid" class="btn btn-primary btn-sm mr">Confirm</button>
+        <button id="buttonCancel"  type="button" ng-click="closeThisDialog('button')" class="btn btn-default btn-sm mr">Cancel</button>
+  </div>
+</form>
+</script>
+
+<script type="text/ng-template" id="confirmPayment">
+   <div class="ngdialog-message">
+     <h3>Confirm</h3>
+     <h4>Invoice Number: {{invNumConfirm}}</h4>
+     <p> Are you sure want to charge the amount of <b>${{payAmount}}</b> on your <b>Credit Card</b> that ends with <b>XXXXXX{{last4digit}}</b> </p>
+     <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr" ng-model="delYes">Yes</button>
+     <button type="button" ng-click="closeThisDialog('closeThisDialog')"  class="btn btn-default" ng-model="delNo">No</button>
+   </div>
+</script>
+
+
+
+
+
+<script type="text/ng-template" id="invoiceDetailId">
+  <div class="ngdialog-message ngdialog-invoicedetails">
+        <h4>Invoice {{invoiceObj.invNum}}</h4>
+        <hr/>
+
+<div class="row" style="font-size:12px;">
+  <div class="col-lg-4 col-md-4 ">
+    <div class="row">
+      <div class="col-lg-2 col-md-2">
+        <i class="fa fa-plane fa-3x" style="opacity:0.5;"> </i>
+      </div>
+      <div class="col-lg-2 col-md-2" style="font-weight:bold;">
+        {{invoiceObj.username}}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5 col-md-5 verticalLine">
+    <div class="row">
+      <div class="col-lg-2 col-md-2">
+        <i class="fa fa-truck fa-3x" style="opacity:0.5;"> </i>
+      </div>
+      <div class="col-lg-3 col-md-3" >
+        <span style="font-weight:bold;">{{invoiceObj.companyName}}</span>
+		<div style="text-align:justify;">
+		Basilisa 2145
+		Mate.Cliff.,20145
+		Moon
+		</div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-lg-3 col-md-3 verticalLine">
+    <div class="row" style="font-weight:bold;">
+	 <div class="col-lg-6 col-md-6" >
+      INVOICE NO.
+	 </div>
+	 <div class="col-lg-6 col-md-6">
+	  {{invoiceObj.invNum}}
+    </div>
+    </div>
+    <div class="row">
+	<div class="col-lg-6 col-md-6">
+      Date
+	 </div>
+	 <div class="col-lg-6 col-md-6">
+	  {{invoiceObj.invoiceDate | date:'MM/dd/yyyy'}}
+    </div>
+    </div>
+    <div class="row">
+	<div class="col-lg-6 col-md-6">
+		Due Date
+	</div>
+	<div class="col-lg-6 col-md-6">
+	  {{invoiceObj.dueDate | date:'MM/dd/yyyy'}}
+    </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+<!-- <hr/>-->
+        <table class="table table-bordered" style="font-size:12px" >
+          <thead>
+            <tr>
+              <th>
+                Item #
+              </th>
+              <th>
+                Description
+              </th>
+              <th>
+                Quantity
+              </th>
+              <th>
+                Unit Price
+              </th>
+              <th>
+                Total
+              </th>
+            </tr>
+          </thead>
+            <tr ng-repeat="invoicedetail in invoiceData" >
+
+        	      <td class="col-lg-2 col-md-2">
+        		        {{invoicedetail.itemNumber}}
+                </td>
+                <td class="col-lg-4 col-md-4">
+         		       {{invoicedetail.description}}
+                </td>
+                <td class="col-lg-2 col-md-2">
+          		      {{invoicedetail.shippingQuantity }}
+                </td>
+
+                <td class="col-lg-2 col-md-2">
+            		    {{invoicedetail.unitPrice | currency }}
+                </td>
+                <td class="col-lg-2 col-md-2 ">
+                    {{invoicedetail.shippingQuantity * invoicedetail.unitPrice | currency }}
+                </td>
+
+          </tr>
+
+        </table>
+
+		<br/>
+		<div class="row">
+		  <div class="container">
+
+			<div class="col-md-4 col-lg-4 col-md-offset-8">
+			<div class="pull-right" style="font-weight:bold;"><span style="padding-right:136px;"> GRAND TOTAL</span>{{subtotal() |currency}}</div>
+
+			</div>
+		  </div>
+		</div>
+
+
+		<div style="padding-bottom:15px;">
+		</div>
+      </div>
+    </script>
+
+<link rel="stylesheet" type="text/css" media="all"  href="master/css/invoice_history.css" />
+<style>
+ .ngdialog.ngdialog-theme-default.custom-width .ngdialog-content {
+   max-width: 100%;
+   width: 1500px;
+ }
+
+ .verticalLine {
+     border-left: 1px solid  #ccc;
+     padding-right: 15px;
+ }
+ #wrapper {
+
+  clear:both;
+}
+#first {
+
+  width:30%;
+  height: 100px;
+  float:left;
+  border-right:1px solid #d3d3d3;
+}
+#second {
+
+  width:30%;
+  height: 100px;
+  float:left;
+  border-right:1px solid #d3d3d3;
+}
+#third {
+
+  width:40%;
+  height: 100px;
+  float:left;
+
+
+}
+.table-bordered {
+  border: 1px solid #D6D6D6;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  border-collapse:collapse;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid #D6D6D6;
+   border-left: none;
+  border-right: none;
+}
+
+
+</style>

@@ -1,0 +1,135 @@
+
+  <!-- jQuery, Angular -->
+  <div class="container-fluid panel panel-default" style="margin-top:-24px;" >
+      <div class="row-fluid" >
+
+              <h3 class="well" style="color:#AA0001;border:0px" >
+                  <a href="index.htm">
+                      <img src="app/img/shopping-cart-logo.jpg" height="100" width="100" alt="logo"/>
+                  </a>
+               Happy deals
+              </h3>
+              <div ng-view></div>
+      </div>
+
+  </div>
+    <div class="panel panel-default">
+
+    <div id="right" class="panel-heading" style="color:#AA0001" ><h3>Shopping Cart</h3></div>
+    <div id="left" >
+                <i class="fa fa-shopping-cart fa-3x" />
+                <a href="app/views/custom/product.html" title="go to shopping cart" ng-click="goShoppingcart()" ng-disabled="cart.getTotalCount() < 1">
+                    <b>{{totItems}}</b> items, <b>{{sum | currency}}</b>
+
+
+                </a>
+
+    </div>
+    <div class="panel-body">
+    <table ng-table="tableParams" style="width:1200px;"  show-filter="false" class="table table-responsive custom-pagination tab">
+        <tr ng-repeat="cartItem in $data"  ng-form="user.userForm" >
+
+    		<td style="width:150px;" data-title="'Item '" filter="{ 'size': 'text' }" ng-switch="cartItem.isEditing"  >
+    					<span ng-switch-default class="editable-text"><a href="app/views/custom/shopping.html" ng-click="viewProduct()"> <img   ng-src={{cartItem.imageUrl}}></a></span>
+    		</td>
+        <td  style="width:350px;" data-title="'Description '" filter="{ 'size': 'text' }" ng-switch="cartItem.isEditing"  >
+              <span  ng-switch-default class="editable-text"><a href="app/views/custom/shopping.html"  style="font-size:18px;" ng-click="viewProduct()"><b>{{cartItem.product }} </b></a>
+              </br><a href="app/views/custom/shopping.html"  style="font-size:18px;" ng-click="delIteminCart(cartItem.id)">Delete</span>
+
+        </td>
+        <td style="width:150px" data-title="'Price '" filter="{ 'size': 'text' }" ng-switch="cartItem.isEditing"  >
+              <span ng-switch-default class="editable-text" style="color:red;font-size:18px"><b>{{cartItem.price | currency}}</b></span>
+        </td>
+
+        <td style="width:150px;" data-title="'Quantity '" filter="{ 'size': 'text' }"  ng-switch="cartItem.isEditing" >
+              <span ng-switch-default  class="editable-text"><!--{{cartItem.quantity}}-->
+              <!--  <select ng-model="itemQty"  ng-change="getQuantity(itemQty)" data-ng-init="itemQty = cartItem.quantity "  ng-show="qty_dropbox">
+                                                  <option value="1">1</option>
+                                                  <option value="2">2</option>
+                                                  <option value="3">3</option>
+                                                  <option value="4">4</option>
+                                                  <option value="5">5</option>
+                                                  <option value="6">6</option>
+                                                  <option value="7">7</option>
+                                                  <option value="8">8</option>
+                                                  <option value="9">9</option>
+                                                  <option value="10">10+</option>
+                                                </select>-->
+
+               <input   type="number"  ng-model="itemQty" ng-click="getQuantity(itemQty,$index)"  data-ng-init="itemQty = cartItem.quantity "   class="form-control input-sm" />
+               <button  class="btn btn-block btn-warning" style="width:70px" ng-show="showacceptation[$index]" ng-click="updateCart(itemQty,cartItem,$index)"> Update </button>
+
+
+
+
+
+              </span>
+        </td>
+
+
+
+
+        <!--<td data-title="''">
+    			<p class="form-group" ng-if="!cartItem.isEditing">
+    				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(cartItem.id)" id="deleteDlg" ><span class="fa fa-trash"></span></a>
+    			</p>
+    		</td>-->
+
+
+        </tr>
+        <tr>
+
+          <td></td><td></td>
+          <td  style="font-size:18px;text-align:right"><b>Sub total ( {{totItems}} items )</b></td>
+          <td style="color:red; font-size:18px;"><b>{{sum | currency}}</b></td>
+          <td style="width:150px;"><button class="btn btn-block btn-warning" ng-click="buynow()" ng-disabled="">
+                <i class="fa fa-youtube-play" aria-hidden="true"/> &nbsp; Proceed to Checkout
+              </button>
+          </td>
+        </tr>
+    </table>
+    </div>
+
+
+
+    </div>
+
+
+<script type="text/ng-template" id="deleteDialogId">
+   <div class="ngdialog-message">
+     <h3>Delete</h3>
+     <p> Are you sure want to delete the order <b>{{getorderName}}</b> ?</p>
+     <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr" ng-model="delYes">Yes</button>
+     <button type="button" ng-click="closeThisDialog('closeThisDialog')"  class="btn btn-default" ng-model="delNo">No</button>
+   </div>
+</script>
+<style>
+
+.ng-table-pager {
+    display: none;
+}
+.custom-pagination .ng-table-pager {
+    display: block;
+}
+
+#left{
+float:left;
+width:15%;
+height: 50px;
+margin-top: 30px;
+font-weight: bold;
+
+
+}
+#right{
+float:left;
+width:85%;
+
+
+
+
+
+}
+</style>
+
+    <link href="app/css/style.css" rel="stylesheet" type="text/css"/>

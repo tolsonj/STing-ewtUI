@@ -1,0 +1,601 @@
+<!-- top header  company address  details start -->
+
+<div  align="center" ng-show="onLoadspinnerShow" style="padding-bottom:5px;"> <img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#EE3E41;font-size:18px;"> Please wait...</span> </div>
+
+<div class="panel panel-default" ng-show="!onLoadspinnerShow">
+  <div class="errmsg">
+          <!-- <div  class="alert alert-danger errGET" ng-show="failShowGet">
+            <strong>{{message}}</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+            <strong>{{message}}</strong>
+          </div>
+          <div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+            <strong>{{message}}</strong>
+          </div> -->
+
+		   <div ng-show="spinnerShow" class="pull-left"> <img src="app/img/spinner.gif" style="width:25px;height:25px;"   /><span style="color:#04F2FC;font-size:18px;"> Please wait...</span> </div>
+
+  </div>
+<div class="panel-heading" style="color:#AA0001"><h3>BOL History</h3></div>
+<div class="panel-body">
+
+<div class="row">
+<div class="col-lg-6 col-md-6 col-sm-6">
+
+<!-- <div id="left">
+		<div class="divwidth"  >-->
+
+							<div class="demo" >
+								<h4>Select Start and End date</h4>
+								<input type="text" id="config-demo"  class="form-control">
+								<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+
+							</div>
+
+
+
+
+							<form>
+							<div class="row divspace">
+								<div class="col-md-4 hidediv" >
+									<div class="form-group">
+										<label for="startDate" value="testesates">startDate</label>
+										<input type="text" class="form-control" id="startDate" value="07/01/2015">
+									</div>
+									<div class="form-group">
+										<label for="endDate">endDate</label>
+										<input type="text" class="form-control" id="endDate" value="07/15/2015">
+									</div>
+								</div>
+
+								<div class="col-md-4 hidediv" >
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="ranges" checked="checked"> ranges (with example predefined ranges)
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="autoUpdateInput" checked="checked"> autoUpdateInput
+										</label>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" id="alwaysShowCalendars" checked="checked"> alwaysShowCalendars
+										</label>
+									</div>
+								</div>
+							</div>
+							</form>
+
+<!--
+		</div>
+	 </div>-->
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6">
+	<!-- <div id="right">-->
+
+						<div class="demo" >
+								<h4>Select driver to filter bol</h4>
+
+							</div>
+
+<ui-select name="accountNo"  ng-model="driverName"  on-select="BOL_list_table($item,$index)" >
+      				<ui-select-match placeholder="Filter By driver">{{$select.selected}} </ui-select-match>
+      				<ui-select-choices repeat="driver in driverList ">
+      				<div ng-bind-html="driver | highlight: $select.search"></div>
+      				</ui-select-choices>
+		</ui-select>
+
+
+
+<div > </div>
+<div ng-show="selectedIds.length>0" class="col-lg-4 col-md-4 col-sm-4">
+<span style="color:green;" ng-hide="showPdfPrintSpinner">Total : {{selectedIds.length}}</span>
+<span ng-show="showPdfPrintSpinner" style="color:red;"><img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#EE3E41;font-size:18px;"> Please wait , we are getting pdf data..</span></span>
+ <!-- <button type="button"   class="btn btn-info btn-sm"  ng-click="sendBOLPdf()" >send pdf </button>
+
+<button type="button"   class="btn btn-danger btn-sm"  ng-click="confirmApprovalBol()" >Approve</button>
+
+<button type="button"   class="btn btn-info btn-sm"  ng-click="bolPdfPreview(null,'print')" >Print</button> -->
+</div>
+<!-- </div>-->
+</div>
+</div><br/>
+
+
+
+
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12" style="overflow-y: scroll;>
+
+		 <div class="table-responsive">
+<table  show-filter="true" class="table">
+
+
+	<thead>
+			<tr>
+
+			<td>
+			<!-- <input type="checkbox" name="selectAll" id="selectAll" ng-click="selectAllBol();" ng-model="selectAllMaster" />-->
+
+			<div class = "btn-group">
+
+   <button type = "button" class = "btn btn-primary dropdown-toggle" data-toggle = "dropdown">
+      <span class = "caret"></span>
+      <span class = "sr-only">Toggle Dropdown</span>
+   </button>
+
+   <ul class = "dropdown-menu" role = "menu">
+
+      <li><a href = "#" target="_blank" ng-click="selectAllBol('approve');">Approve {{selectAllMaster?' All' : ' Selected'}}</a></li>
+      <li><a  href = "#" ng-click="selectAllBol('sendpdf');">Send pdf{{selectAllMaster?' All' : ' Selected'}}</a></li>
+	  <li><a  href = "#" ng-click="selectAllBol('print');">Print {{selectAllMaster?' All' : ' Selected'}}</a></li>
+
+   </ul>
+</div>
+
+
+			</td>
+			<td>
+			BolType
+			</td>
+			<td>
+			Driver&nbsp;<span ng-click="setOrderProperty('driverName')">
+			<i class="fa" ng-class="{ 'fa-arrow-down': orderProperty=='driverName', 'fa-arrow-up':orderProperty=='-driverName','fa-arrow-up':(orderProperty!='-driverName' || orderProperty!='driverName') }"></i></span>
+			</td>
+			<td>
+			Customer Name&nbsp;<span ng-click="setOrderProperty('customerName')">
+			<i class="fa" ng-class="{ 'fa-arrow-down': orderProperty=='customerName', 'fa-arrow-up':orderProperty=='-customerName','fa-arrow-up':(orderProperty!='-customerName' || orderProperty!='customerName')}"></i></span>
+			</td>
+			<td>
+			Account No&nbsp;<span ng-click="setOrderProperty('customerNumber')"><i class="fa" ng-class="{ 'fa-arrow-down': orderProperty=='customerNumber', 'fa-arrow-up':orderProperty=='-customerNumber','fa-arrow-up':(orderProperty!='-customerNumber' || orderProperty!='customerNumber') }"></i></span>
+			</td>
+			<td>
+			Email&nbsp;<span ng-click="setOrderProperty('customerEmail')">
+			<i class="fa" ng-class="{ 'fa-arrow-down': orderProperty=='customerEmail', 'fa-arrow-up':orderProperty=='-customerEmail','fa-arrow-up':(orderProperty!='-customerEmail' || orderProperty!='customerEmail') }"></i></span>
+			</td>
+			<td>
+			Comment&nbsp;<span ng-click="setOrderProperty('comment')">
+			<i class="fa" ng-class="{ 'fa-arrow-down': orderProperty=='comment', 'fa-arrow-up':orderProperty=='-comment','fa-arrow-up':(orderProperty!='-comment' || orderProperty!='comment') }"></i></span>
+			</td>
+			<td>
+			Service on&nbsp;<span ng-click="setOrderProperty('shipperSignDate')">
+			<i class="fa" ng-class="{ 'fa-arrow-down': orderProperty=='shipperSignDate', 'fa-arrow-up':orderProperty=='-shipperSignDate','fa-arrow-up':(orderProperty!='-shipperSignDate' || orderProperty!='shipperSignDate') }"></i></span>
+			</td>
+			<td>
+			PDF sent on&nbsp;<span ng-click="setOrderProperty('mailSentDate')"><i class="fa" ng-class="{ 'fa-arrow-down': orderProperty=='mailSentDate', 'fa-arrow-up':orderProperty=='-mailSentDate','fa-arrow-up':(orderProperty!='-mailSentDate' || orderProperty!='mailSentDate') }"></i></span>
+			</td>
+			<td>
+			Action
+			</td>
+			<!-- <td>
+			hasPaid
+			</td> -->
+
+			</tr>
+
+			<tr>
+			<td>
+			</td>
+			<td>
+
+
+			<!-- <input type="text" ng-model="custom_filter.boltype" ng-change="customFilterData();" name="custom_filter_boltype"  class="input-filter form-control"/>-->
+
+			</td>
+
+			<td>
+
+
+			<input type="text" ng-model="custom_filter.driverName" ng-change="customFilterData();" name="custom_filter_driverName"  class="input-filter form-control"/>
+
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.customerName" ng-change="customFilterData();" name="custom_filter_customerName"  class="input-filter form-control"/>
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.customerNumber" ng-change="customFilterData();" name="custom_filter_customerNumber"  class="input-filter form-control"/>
+			</td>
+
+			<td>
+			<input type="text" ng-model="custom_filter.customerEmail" ng-change="customFilterData();" name="custom_filter_email"  class="input-filter form-control"/>
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.comment" ng-change="customFilterData();" name="custom_filter_comment"  class="input-filter form-control"/>
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.shipperSignDate" ng-change="customFilterData();" name="custom_filter_shipperSignDate"  class="input-filter form-control"/>
+			</td>
+			<td>
+			<input type="text" ng-model="custom_filter.mailSentDate" ng-change="customFilterData();" name="custom_filter_mailSentDate"  class="input-filter form-control"/>
+			</td>
+
+
+			<td>
+			<!-- <input type="text" ng-model="custom_filter.invoicePdfUrl" ng-change="customFilterData();" name="custom_filter_url"  class="input-filter form-control"/>-->
+			</td>
+			<td>
+
+			</td>
+
+			</tr>
+			</thead>
+
+
+
+    <tr ng-repeat="bol_list in bol_list_table | orderBy:orderProperty" ng-class="{ 'approveBOL': bol_list.approved==true, 'nonapproveBOL': bol_list.approved==false }">
+
+		<td   class="col-lg-1 col-md-1 col-sm-1" >
+		     <input type="checkbox" name="selectedIds[]"  value="{{bol_list.id}}" ng-checked="isRowSelected(bol_list.id)" ng-click="toggleSelection(bol_list)" />
+        </td>
+
+
+		<td  data-title="'Bol Type '" sortable="'formType'" class="col-lg-1 col-md-1 col-sm-1" >
+		        {{bol_list.formType==1?'Medical':'Document'}}
+        </td>
+
+		<td  data-title="'Driver'" sortable="'driverName'" class="col-lg-1 col-md-1 col-sm-1" >
+		        {{bol_list.driverName}}
+        </td>
+	      <td  data-title="'Customer Name '" sortable="'customerName'" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'customer.name': 'text' }">
+		        {{bol_list.customerName}}
+        </td>
+        <td  data-title="'Account No. '" sortable="'customerNumber'" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'customerNumber': 'text' }">
+            {{bol_list.customerNumber}}
+        </td>
+		<td  data-title="'Email '" sortable="'customerEmail'" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'customerNumber': 'text' }">
+            {{bol_list.customerEmail}}
+        </td>
+		<td  data-title="'Comment '" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'comment': 'text' }" style="text-align:justify;">
+           {{bol_list.comment}}
+        </td>
+       <!-- <td  data-title="'BOL No. '" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'bolNo': 'text' }">
+ 		       {{bol_list.bolNo}}
+        </td>
+
+		 <td  data-title="'Route. '" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'route': 'text' }">
+ 		       {{bol_list.route}}
+        </td> -->
+
+		<td  data-title="'Service Date '" sortable="'shipperSignDate'" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'shipperSignDate': 'text' }">
+            {{bol_list.shipperSignDate | date:'MM/dd/yyyy H:m:s'}}
+        </td>
+		<td  data-title="'PDF sent on'" sortable="'mailSentDate'" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'mailSentDate': 'text' }">
+            {{bol_list.mailSentDate | date:'MM/dd/yyyy H:m:s'}}
+        </td>
+
+
+        <!-- <td  data-title="'transporterSignDate'" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'transporterSignDate': 'text' }">
+    		    {{bol_list.transporterSignDate | date:'MM/dd/yyyy @ h:mma'}}
+        </td>
+
+        <td  data-title="'receivFaciSignDate'" class="col-lg-1 col-md-1 col-sm-1" filter="{ 'receivFaciSignDate': 'text' }">
+                {{bol_list.receivFaciSignDate | date:'MM/dd/yyyy @ h:mma'}}
+        </td> -->
+
+		 <td  data-title="'Action'" class="col-lg-3 col-md-3 col-sm-3">
+
+		  <!-- <button type="button"  ng-click="viewBOLform(bol_list)" class="btn btn-info btn-sm">send pdf <i class="fa fa-eye"></i></button> -->
+
+
+
+ <!-- <button type="button"   ng-click="approveBOL(bol_list)" class="btn btn-warning btn-sm">Approve <i class="fa fa-edit"></i></button>-->
+
+<div class = "btn-group">
+   <button type = "button" ng-disabled="isRowSelected(bol_list.id)"  class = "btn btn-danger">BOL Actions</button>
+
+   <button type = "button" ng-disabled="isRowSelected(bol_list.id)"  class = "btn btn-danger dropdown-toggle" data-toggle = "dropdown">
+      <span class = "caret"></span>
+      <span class = "sr-only">Toggle Dropdown</span>
+   </button>
+
+   <ul class = "dropdown-menu" role = "menu">
+      <li ng-if="bol_list.approved==false"><a href = "#" ng-click="confirmApprovalBol(bol_list);">Approve BOL</a></li>
+      <li ng-if="bol_list.approved==false || (bol_list.approved==true && userRole==true)"><a href = "#" ng-click="editBOL(bol_list)">Edit BOL</a></li>
+      <li ng-if="bol_list.approved==false || (bol_list.approved==true && userRole==true)"><a href = "#" ng-click="deleteBOL(bol_list);">Delete BOL</a></li>
+      <li class = "divider"></li>
+       <li ><a href = "#" ng-click="editBolEmail(bol_list,$index);">Edit Email</a></li>
+   </ul>
+</div>
+
+<div class = "btn-group">
+   <button type = "button" class = "btn btn-primary">PDF Actions</button>
+
+   <button type = "button" class = "btn btn-primary dropdown-toggle" data-toggle = "dropdown">
+      <span class = "caret"></span>
+      <span class = "sr-only">Toggle Dropdown</span>
+   </button>
+
+   <ul class = "dropdown-menu" role = "menu">
+      <li><a href = "#" ng-click="bolPdfPreview(bol_list)">Preview</a></li>
+      <li><a href = "#" target="_blank" ng-click="bolPdfPreview(bol_list,'print')">Print</a></li>
+      <li ng-if="bol_list.customerEmail!=null && bol_list.approved==true"><a  href = "#" ng-click="sendBOLPdf(bol_list)">Send</a></li>
+     <!-- <li class = "divider"></li>
+      <li><a href = "#">Separated link</a></li> -->
+   </ul>
+</div>
+
+
+        </td>
+
+
+
+
+
+
+  </tr>
+</table>
+
+<pagination ng-show="totalItems>0" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="20"  max-size="10"></pagination>
+</div>
+<div  class="alert alert-success" role="alert" ng-show="totalItems<1">
+            <strong>No record found</strong>
+        </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<script type="text/ng-template" id="EditEmailDialog">
+	<div class="ngdialog-message">
+        <h4>Edit Email Address</h4>
+        <hr/>
+
+
+
+		 	 <input type="text"  class="form-control"
+			 ng-model="bolCustomerEmail" id="bolCustomerEmail" placeholder="customer Email"/> <br/>
+
+
+
+
+
+
+			<div class="row pull-right">
+			<div class="col-lg-12 col-md-12 col-sm-12 ">
+			 <button type="button" ng-click="closeThisDialog()"  class="btn btn-default mr">Cancel</button>
+			 <button type="button"   ng-click="confirm('confirm')"  class="btn btn-primary">Update</button>
+			</div>
+		</div>
+		</div>
+</script>
+
+
+<script type="text/ng-template" id="bolApprovalDialog">
+	<div class="ngdialog-message">
+        <h4>BOL preview</h4>
+        <hr/>
+
+		<div class="panel panel-default">
+
+<div class="panel-heading" style="color:#AA0001"><h3>BOL preview</h3></div>
+	<div class="panel-body">
+
+	  <iframe src=""  width="100%" height="100%" style="overflow: auto;">
+    </iframe>
+
+
+
+
+
+
+	</div>
+
+</div> <!-- panel body end -->
+
+
+		</div>
+</script>
+
+
+
+
+
+<script type="text/ng-template" id="confirmApprovalDialog">
+	<div class="ngdialog-message">
+        <h4>Approve BOL</h4>
+        <hr/>
+
+		  <div  class="text text-info" role="alert">
+
+		  <div ng-show="approvedBOLIds.length>0 && selectedIds.length>0">{{'These BOL '+approvedBOLIds+' are already approved.  Are you sure you want to approve remaining the services ?'}} </div>
+
+		  <div ng-show="approvedBOLIds.length>0 && selectedIds.length==0">{{'Your selected BOL'+approvedBOLIds+' all are already approved.' }} </div>
+
+
+		   <div ng-show="approvedBOLIds.length==0 && selectedIds.length>0">Are you sure you want to approve the selected services ?</div>
+
+
+
+
+		 </div>
+
+			<div class="row pull-right">
+			<div class="col-lg-12 col-md-12 col-sm-12 " ng-hide=" selectedIds.length==0">
+			 <button type="button" ng-click="closeThisDialog()"  class="btn btn-default mr">Cancel</button>
+			 <button type="button"   ng-click="confirm('confirm')"  class="btn btn-primary">Approve</button>
+			</div>
+
+			<div class="col-lg-12 col-md-12 col-sm-12 " ng-show="approvedBOLIds.length>0 && selectedIds.length==0">
+			 <button type="button" ng-click="closeThisDialog()"  class="btn btn-default mr">Close</button>
+
+			</div>
+		</div>
+		</div>
+</script>
+
+<script type="text/ng-template" id="deleteMsgDialog">
+	<div class="ngdialog-message">
+        <h4>Delete confirm</h4>
+        <hr/>
+
+          <div  class="text text-info" role="alert">
+
+
+             Are you sure to delete entry dated <strong>{{deleteBol.shipperSignDate |  date:'MM/dd/yyyy @ h:mma'}}</strong> For Account No <span class="cmpText">{{deleteBol.customerNumber}} company {{deleteBol.customerName}} </span>?
+
+
+          </div>
+
+
+			<div class="row pull-right">
+			<div class="col-lg-12 col-md-12 col-sm-12 ">
+			 <button type="button" ng-click="closeThisDialog()"  class="btn btn-default mr">Cancel</button>
+			 <button type="button"  ng-click="confirm('confirm')" class="btn btn-primary">Ok</button>
+			</div>
+		</div>
+		</div>
+</script>
+
+
+<script type="text/ng-template" id="responseMsgDialog">
+	<div class="ngdialog-message">
+			<h4>Response</h4><br/>
+			<div  class="text text-danger errGET" ng-cloak ng-show="failShowGet">
+            <strong>Sorry! something went wrong , please try again after some time</strong>
+          </div>
+          <div  class="text text-success" role="alert" ng-show="successShow" >
+            <strong> Entry Dated {{deleteBol.shipperSignDate | date:'MM/dd/yyyy @ h:mma'}} For Account No <span class="cmpText">{{deleteBol.customerNumber}} company {{deleteBol.customerName}} </span> has been deleted successfully </strong>
+          </div>
+          <div  class="text text-success" role="alert" ng-show="uptsuccessShow">
+            <strong>For Account No {{msgAccountNo}}. Record updated successfully</strong>
+          </div>
+
+		   <div  class="text text-success" role="alert" ng-show="emailsuccessShow">
+            <strong>For Account No {{msgAccountNo}}. Email address updated successfully</strong>
+          </div>
+
+			<div  class="text text-success" role="alert" ng-show="pdfsuccessShow">
+            <strong>PDF sent successfully bol numbers <span ng-repeat="bolno in pdfSendIds">{{bolno.customerNumber}}&nbsp;&nbsp;&nbsp;</span> </strong>
+           </div>
+
+
+		   <div  class="text text-danger" role="alert" ng-show="approvespinnerShow">
+            <strong><img src="app/img/spinner.gif" style="width:20px;height:20px;"   /> Please wait approving BOL in progress </strong>
+           </div>
+
+
+
+		   <div  class="text text-success" role="alert" ng-show="approvesuccessShow">
+            <strong>BOL successfully approved to customer(s) <span ng-repeat="bolno in approveSendIds">{{bolno.customerNumber}}&nbsp;&nbsp;&nbsp;</span> </strong>
+           </div>
+
+
+		   <div  class="text text-danger" role="alert" ng-show="pdfspinnerShow">
+            <strong><img src="app/img/spinner.gif" style="width:20px;height:20px;"   /> Please wait sending pdf is in progress </strong>
+           </div>
+
+
+
+        </div>
+
+	</script>
+
+<style>
+
+.aboutText{
+color:#5D9CEC;
+font-weight:bold;
+font-size:11px;
+
+}
+.cmpText{
+color:#EE3E41;
+font-weight:bold;
+font-size:12px;
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-300 .ngdialog-content {
+	height:200px;
+	overflow-y:hidden;
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-800 .ngdialog-content {
+	width:800px;
+	height:auto;
+	overflow-y:scroll;
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-1000 .ngdialog-content {
+	width:1000px;
+	height:600px;
+	overflow-y:scroll;
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-600 .ngdialog-content {
+	width:800px;
+	height:600px;
+	overflow-y:scroll;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+    -webkit-animation: ngdialog-flyin .5s;
+    animation: ngdialog-flyin .5s;
+    background: #fff;
+    border-radius: 5px;
+    color: #444;
+    font-family: Helvetica,sans-serif;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 1em;
+    position: relative;
+    width: 450px;
+}
+
+@media only screen and (max-width : 767px) {
+
+
+.topnavbar .navbar-header {
+display:none;
+}
+.layout-fixed .wrapper > section {
+    margin-top: 55px;
+}
+}
+
+table>thead>tr{
+font-weight:bold;
+}
+
+.table-bordered {
+  border: 1px solid #D6D6D6;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  border-collapse:collapse;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid #D6D6D6;
+   border-left: none;
+  border-right: none;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 8px;
+    line-height: 1.52857143;
+    vertical-align: top;
+    border-top: 1px solid #eeeeee;
+}
+
+
+
+</style>
+<link rel="stylesheet" type="text/css" media="all" href="master/css/bol_history.css" />
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/daterangepicker.css" />
+<script type="text/javascript" src="master/js/moment.js"></script>
+<script type="text/javascript" src="master/js/daterangepicker.js"></script>
+<script type="text/javascript" src="master/js/bootstrap.js"></script>
+
+<!-- top header  company address  details start -->

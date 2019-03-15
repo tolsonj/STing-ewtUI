@@ -1,0 +1,233 @@
+
+<div class="panel panel-default">
+
+	<div class="errmsg">
+						<div  class="alert alert-danger errGET" ng-show="failShowGet">
+							<strong>Sorry! We couldn't connect with the backend server</strong>
+						</div>
+						<div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+							<strong>Record added successfully</strong>
+						</div>
+						<div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+							<strong>Record saved successfully</strong>
+						</div>
+	</div>
+	<div class="panel-heading"><h2>Sites Form</h2></div>
+
+	<div class="panel-body">
+	<form name="siteForm" class="form-horizontal" role="form" method="get" action="#" style="    padding-left: 9px">
+
+<table class="table ng-table">
+	<thead>
+		<tr>
+			<th>Customer Name</th>
+			<th>Site Name</th>
+			<th>Street</th>
+			<th>Secondary Street</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Zip</th>
+			<th>Phone</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				<!-- <p>Selected: {{cust.selected}}</p> -->
+            <ui-select ng-model="cust.selected" theme="bootstrap" ng-disabled="disabled" on-select="callCust($item)">
+               <ui-select-match placeholder="Select or search a customer...">{{$select.selected.name}}</ui-select-match>
+               <ui-select-choices repeat="cust in customers | propsFilter: {name: $select.search}">
+                  <div ng-bind-html="cust.name |  highlight: name: $select.search"></div>
+               </ui-select-choices>
+						 </ui-select>
+      </div>
+			<td><input ng-model="addsiteInfo.name" name="sitename" class="form-control input-sm" required/></td>
+			<td><input ng-model="addsiteInfo.street" name="street" class="form-control input-sm"  /></td>
+			<td><input ng-model="addsiteInfo.secondaryStreet" name="secondaryStreet" class="form-control input-sm" /></td>
+			<td><input ng-model="addsiteInfo.city" name="city" class="form-control input-sm" /></td>
+			<td><input ng-model="addsiteInfo.state" name="state" class="form-control input-sm" /></td>
+			<td><input ng-model="addsiteInfo.postalCode" name="postalCode" class="form-control input-sm" /></td>
+			<td><input ng-model="addsiteInfo.phone" name="phone" class="form-control input-sm" required/></td>
+			<tr>
+			<td><span ng-show="custname" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="siteForm.sitename.$dirty &amp;&amp; siteForm.sitename.$error.required" class="text-danger">* This field is required</span></td>
+			<td><span ng-show="siteForm.street.$dirty &amp;&amp; siteForm.street.$error.required" class="text-danger">* This field is required</span></td>
+			<td></td>
+				<td></td>
+					<td></td>
+					<td></td>
+			<td><span ng-show="siteForm.phone.$dirty &amp;&amp; siteForm.phone.$error.required" class="text-danger">* This field is required</span></td>
+
+			</tr>
+			<tr>
+			<td>
+				<span class="btn btn-primary btn-lg">
+				<i class="fa fa-plus"></i><input type="button" ng-click="addDialog()" class="addbtn" value="Add Sites" /></td>
+				<!--<td colspan="5"><h3><div class="label label-success err"  ng-show="successShow" >Form added successfully</div><div class="label label-danger err" ng-show="failShow" >Form added Failed</div></h3></td>-->
+				</span>
+		  </td>
+		  </tr>
+		</tr>
+	</tbody>
+</table>
+</form>
+</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h2>Sites History</h2></div>
+	<div class="panel-body">
+<table ng-table="tableParams" show-filter="true" class="table">
+      <tr ng-repeat="site in $data" ng-form="site.userForm">
+	   <!--<td data-title="'id'" filter="{'id': 'text'}">{{site.id}}</td>-->
+		 <td  header="'ng-table/headers/checkbox.html'" ng-switch="site.isEditing" >
+		 	<span ng-switch-default class="editable-text">
+		 			<input type="checkbox" data-ng-disabled="site.id == '{{findorders(site.id).SITE_ID}}'"  ng-model="checkboxes.items[site.id]" ng-click="getcheckboxId(site,checkboxes.items[site.id])" class="editable-input input-sm"   />
+		 	</span>
+		 	<div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+		 			<input type="checkbox" ng-model="checkboxes.items[site.id]" ng-click="getcheckboxId(site)" disabled="disabled" class="editable-input input-sm" readonly  />
+		 	</div>
+		 </td>
+
+	  <td  data-title="'ID '" filter="{ 'id': 'text' }"  ng-switch="site.isEditing">
+		 <span ng-switch-default class="editable-text">{{site.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="site.siteInfo.id" class="editable-input form-control input-sm" readonly  />
+
+            </div>
+    </td>
+
+		<!--<td data-title="'Name'" filter="{'name': 'text'}">{{site.name}}</td>-->
+	<td  data-title="'Customer Name '" filter="{ 'customerName': 'text' }"  ng-switch="site.isEditing">
+		 <!--<span ng-switch-default class="editable-text">{{customers[site.customer.id].name}}</span>-->
+
+		 <span ng-switch-default class="editable-text">{{findCustomer(site.customer.id).name}}</span>
+            <div class="controls" ng-class="name.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+							<ui-select  ng-model="site.siteInfo.selectedCustomer">
+							<ui-select-match placeholder="Select Customers">{{$select.selected.name}}</ui-select-match>
+							<ui-select-choices repeat="customer in customers | propsFilter: {name: $select.search}">
+							<div ng-bind-html="customer.name | highlight: $select.search"></div>
+							</ui-select-choices>
+							</ui-select>
+			  			<span class="text-danger" ng-show="site.submitted && site.siteInfo.customer.$error.required">* This field is required</span>
+            </div>
+    </td>
+
+
+    <!--<td data-title="'Name'" filter="{'name': 'text'}">{{site.name}}</td>-->
+	<td  data-title="'Site Name '" filter="{ 'name': 'text' }"  ng-switch="site.isEditing">
+		 <span ng-switch-default class="editable-text">{{site.name}}</span>
+            <div class="controls" ng-class="name.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="name" ng-model="site.siteInfo.name" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="site.submitted && site.userForm.name.$error.required">* This field is required</span>
+            </div>
+    </td>
+
+
+			<td  data-title="'Street '" filter="{ 'street': 'text' }"  ng-switch="site.isEditing">
+				 <span ng-switch-default class="editable-text">{{site.street}}</span>
+								<div class="controls" ng-class="street.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+									<input type="text" name="street" ng-model="site.siteInfo.street" class="editable-input form-control input-sm"  />
+						<span class="text-danger" ng-show="site.submitted && site.userForm.street.$error.required">* This field is required</span>
+								</div>
+				</td>
+
+
+			<td  data-title="'secondaryStreet '" filter="{ 'secondaryStreet': 'text' }"  ng-switch="site.isEditing">
+				 <span ng-switch-default class="editable-text">{{site.secondaryStreet}}</span>
+				 <div class="controls" ng-class="city.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+				 			<input type="text" name="secondaryStreet" ng-model="site.siteInfo.secondaryStreet" class="editable-input form-control input-sm"   />
+		    </td>
+
+				<!--<td data-title="'City'" filter="{'city': 'text'}">{{site.city}}</td>-->
+			<td  data-title="'City '" filter="{ 'city': 'text' }"  ng-switch="site.isEditing">
+				 <span ng-switch-default class="editable-text">{{site.city}}</span>
+		            <div class="controls" ng-class="city.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+		              <input type="text" name="city" ng-model="site.siteInfo.city" class="editable-input form-control input-sm"  />
+		    </td>
+
+			<td  data-title="'State '" filter="{ 'state': 'text' }"  ng-switch="site.isEditing">
+				 <span ng-switch-default class="editable-text">{{site.state}}</span>
+								<div class="controls" ng-class="state.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+									<input type="text" name="city" ng-model="site.siteInfo.state" class="editable-input form-control input-sm"  />
+								</div>
+				</td>
+
+
+				<!--<td data-title="'City'" filter="{'city': 'text'}">{{site.city}}</td>-->
+			<td  data-title="'Zip '" filter="{ 'postalCode': 'text' }"  ng-switch="site.isEditing">
+				 <span ng-switch-default class="editable-text">{{site.postalCode}}</span>
+								<div class="controls" ng-class="postalCode.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+									<input type="text" name="postalCode" ng-model="site.siteInfo.postalCode" class="editable-input form-control input-sm"  />
+								</div>
+				</td>
+
+
+
+
+    <!--<td data-title="'Phone'" filter="{'phone': 'text'}">{{site.phone}}</td>-->
+	<td  data-title="'Phone '" filter="{ 'phone': 'text' }"  ng-switch="site.isEditing">
+		 <span ng-switch-default class="editable-text">{{site.phone}}</span>
+            <div class="controls" ng-class="phone.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="phone" ng-model="site.siteInfo.phone" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="site.submitted && site.userForm.phone.$error.required">* This field is required</span>
+            </div>
+    </td>
+
+    <!--<td data-title="'Street'" filter="{'street': 'text'}">{{site.street}}</td>-->
+
+
+   <td data-title="''">
+			<!--<a href="" ng-click="editDialog(user)" class="btn btn-primary" id="editdlg" value="Edit" >Edit</a>-->
+			<p class="form-group" ng-if="site.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!site.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(site.name)" ><span class="fa fa-trash"></span></a>
+			</p>
+		</td>
+  </tr>
+	<tr>
+		<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+		 <td><input type="button" class="btn btn-danger" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+	</tr>
+</table>
+</div>
+</div>
+ <script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the Site <b>{{getsiteName}}</b> ?</p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default">No</button>
+      </div>
+</script>
+
+<script type="text/ng-template" id="ng-table/headers/checkbox.html">
+			 <input type="checkbox"  ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+</script>
+
+<link rel="stylesheet" type="text/css" media="all" href="master/css/sites.css" />
+<!--Get loggitude and latitude tho' location name starts-->
+<div style="visibility:hidden">
+     <h3> Enter an adress and press the button</h3>
+
+    <input id="address" type="text" placeholder="Enter address here" />
+    <button id="btn">Get LatLong</button>
+    <div>
+        <p>Latitude:
+            <input type="text" id="latitude" readonly />
+        </p>
+        <p>Longitude:
+            <input type="text" id="longitude" readonly />
+        </p>
+    </div>
+</div> <!--Get loggitude and latitude tho' location name ends-->
+
+<div style="visibility:hidden" ng-init="loadScript()">
+<div style="height:900px"  class="form-group col-lg-12" id="googleMap">
+      <center>Waiting for the map...</center>
+</div>
+</div>

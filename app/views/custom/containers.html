@@ -1,0 +1,139 @@
+
+<div class="panel panel-default">
+	<!--<div class="block-center mt-xl wd-xl"><div ><div flash-message="20000" style="position:fixed;margin-top:20px;"></div></div></div>-->
+	<div class="errmsg">
+					<div  class="alert alert-danger errGET" ng-show="failShowGet">
+						<strong>Sorry! We couldn't connect with the backend server</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="successShow">
+						<strong>Record added successfully</strong>
+					</div>
+					<div  class="alert alert-success errGET" role="alert" ng-show="uptsuccessShow">
+						<strong>Record saved successfully</strong>
+					</div>
+	</div>
+<div class="panel-heading"><h2>Containers Form </h2></div>
+
+<div class="panel-body">
+<form name="containerForm" class="form-horizontal" role="form" method="get" action="#" style="    padding-left: 9px">
+<table class="table ng-table" border="0" style="width:500px">
+	<thead>
+		<tr>
+			<th>Size</th>
+			<th>Identifier</th>
+			<th>Status</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><input name="size" type="number" ng-model="addcontainerInfo.size" class="form-control input-sm" required/></td>
+
+			<td><input name="identifier" type="text" ng-model="addcontainerInfo.identifier" class="form-control input-sm" required/></td>
+			<td><input name="desc" type="text" ng-model="addcontainerInfo.status.description" class="form-control input-sm" required/></td>
+			<td><input name="statusid" type="text" ng-model="addcontainerInfo.status.id" style="visibility:hidden;width:0px" class="form-control input-sm" /></td>
+
+			<td>
+				<span class="btn btn-primary btn-lg">
+				<i class="fa fa-plus"></i><input type="button" ng-click="addDialog()" class="addctn" value="Add Containers" />
+			</span>
+		</td>
+		</tr>
+		<!--<tr><td colspan="1"><h3><div class="label label-success err"  ng-show="successShow" >Form added successfully</div><div class="label label-danger err" ng-show="failShow" >Form added Failed</div></h3></td></tr>
+		<tr>-->
+		<td><span ng-show="containerForm.size.$dirty &amp;&amp; containerForm.size.$error.required" class="text-danger">* This field is required</span></td>
+		<td><span ng-show="containerForm.desc.$dirty &amp;&amp; containerForm.desc.$error.required" class="text-danger">* This field is required</span></td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</div>
+</div>
+
+
+<div class="panel panel-default">
+<div class="panel-heading"><h2>Containers History</h2></div>
+<div class="panel-body">
+<table ng-table="tableParams" show-filter="true" class="table table-responsive">
+    <tr ng-repeat="container in $data" ng-form="container.userForm">
+			<td  header="'ng-table/headers/checkbox.html'" ng-switch="container.isEditing" >
+				<span ng-switch-default class="editable-text">
+						<input type="checkbox" ng-model="checkboxes.items[container.id]" ng-click="getcheckboxId(container,checkboxes.items[container.id])" class="editable-input input-sm"   />
+				</span>
+				<div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+						<input type="checkbox" ng-model="checkboxes.items[container.id]" ng-click="getcheckboxId(container)" disabled="disabled" class="editable-input input-sm" readonly  />
+				</div>
+			</td>
+
+	   <td  data-title="'Id '" filter="{ 'id': 'text' }"  ng-switch="container.isEditing">
+		 <span ng-switch-default class="editable-text">{{container.id}}</span>
+            <div class="controls" ng-class="id.$invalid && id.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="id" ng-model="container.containerInfo.id" class="editable-input form-control input-sm" readonly />
+
+            </div>
+
+      </td>
+
+						<td  data-title="'Size '" filter="{ 'size': 'text' }"  ng-switch="container.isEditing">
+						 <span ng-switch-default class="editable-text">{{container.size}}</span>
+										<div class="controls" ng-class="size.$invalid && size.$dirty ? 'has-error' : ''" ng-switch-when="true">
+											<input type="text" name="number" ng-model="container.containerInfo.size" class="editable-input form-control input-sm" required />
+								<span class="text-danger" ng-show="container.submitted && container.userForm.size.$error.required">* This field is required</span>
+										</div>
+
+							</td>
+
+	  <td  data-title="'User Identifier '" filter="{ 'identifier': 'text' }"  ng-switch="container.isEditing">
+		 <span ng-switch-default class="editable-text">{{container.identifier}}</span>
+            <div class="controls" ng-class="identifier.$invalid && identifier.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="text" ng-model="container.containerInfo.identifier" class="editable-input form-control input-sm" required />
+			  <span class="text-danger" ng-show="container.submitted && container.userForm.identifier.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+
+	  <td data-title="'Status '"  filter="{ 'status.description': 'text' }"  ng-switch="container.isEditing">
+		 <span ng-switch-default class="editable-text">{{container.status.description}}</span>
+            <div class="controls" ng-class="status.description.$invalid && status.description.$dirty ? 'has-error' : ''" ng-switch-when="true">
+              <input type="text" name="status" ng-model="container.containerInfo.status.description" class="editable-input form-control input-sm"  required />
+			  <span class="text-danger" ng-show="container.submitted && container.userForm.status.$error.required">* This field is required</span>
+            </div>
+
+      </td>
+
+	 <td data-title="''">
+			<!--<a href="" ng-click="editDialog(user)" class="btn btn-primary" id="editdlg" value="Edit" >Edit</a>-->
+			<p class="form-group" ng-if="container.isEditing" >
+				<a class="btn btn-primary btn-sm" ng-click="saveDialog()" ><span class="fa fa-check"></span></a>
+				<a class="btn btn-default btn-sm" ng-click="editDialog(false)" ><span class="fa fa-remove"></span></a>
+			</p>
+			<p class="form-group" ng-if="!container.isEditing">
+				<a class="btn btn-default btn-sm" ng-click="editDialog(true)" ><span class="fa fa-pencil"></span></a>
+				<a class="btn btn-danger btn-sm" ng-click="deleteDialog(container.size)" ><span class="fa fa-trash"></span></a>
+			</p>
+		</td>
+
+  </tr>
+
+	<tr>
+		<td></td><td></td><td></td><td></td><td></td>
+		 <td><input type="button" class="btn btn-danger" ng-click="deleteSelectedRows()" value="Delete Selected Rows"/></td>
+	</tr>
+
+</table>
+</div>
+</div>
+
+<script type="text/ng-template" id="deleteDialogId">
+      <div class="ngdialog-message">
+        <h3>Delete</h3>
+        <p> Are you sure want to delete the Container <b>{{getcontSize}}</b> ?</p>
+        <button type="button" ng-click="confirm('confirm')" class="btn btn-primary mr"  ng-model="deleteYes">Yes</button>
+        <button type="button" ng-click="closeThisDialog('closeThisDialog')" class="btn btn-default" ng-model="deleteNo" >No</button>
+      </div>
+</script>
+<script type="text/ng-template" id="ng-table/headers/checkbox.html">
+			 <input type="checkbox" ng-model="checkboxes.checked" id="select_all" name="filter-checkbox" value="" />
+</script>
+<link rel="stylesheet" type="text/css" media="all"  href="master/css/containers.css" />

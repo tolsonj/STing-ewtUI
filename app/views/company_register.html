@@ -1,0 +1,94 @@
+
+<div class="block-center mt-xl wd-xl">
+   <!-- START panel-->
+   <div class="panel panel-dark panel-flat">
+
+      <div class="panel-body">
+         <p class="text-center pv" style="font-weight:bold;font-size:15px">COMPANY REGISTRATION </p>
+         <form role="form" name="registerForm" novalidate=""  class="form-validate mb-lg">
+
+
+		        <div class="form-group has-feedback">
+               <label class="text-muted">Company Name</label>
+               <input type="text" name="company_name"  ng-model="company.name"  class="form-control" required="" />
+               <span ng-show="registerForm.company_name.$dirty &amp;&amp; registerForm.company_name.$error.required" class="text-danger">This field is required</span>
+            </div>
+
+            <div class="form-group has-feedback">
+               <label class="text-muted">Company Address</label>
+               <textarea  style="height:100px;" name="company_address"  ng-model="company.address"  class="form-control" required="" />
+               <span ng-show="registerForm.company_address.$dirty &amp;&amp; registerForm.company_address.$error.required" class="text-danger">This field is required</span>
+
+            </div>
+
+
+            <div class="form-group has-feedback">
+                     <label class="text-muted">Company Phone</label>
+                     <input type="text" name="company_phone" ng-model="company.phone"  class="form-control" required="" />
+                     <span ng-show="registerForm.company_phone.$dirty &amp;&amp; registerForm.company_phone.$error.required" class="text-danger">This field is required</span>
+            </div>
+
+
+            <div class="form-group has-feedback">
+               <label class="text-muted">Company Admin Name</label>
+               <input type="text" name="company_adminame" ng-model="company.adminame"  class="form-control" required="" />
+               <span ng-show="registerForm.company_adminame.$dirty &amp;&amp; registerForm.company_adminame.$error.required" class="text-danger">This field is required</span>
+
+            </div>
+            <div class="form-group has-feedback">
+               <label class="text-muted">Password</label>
+               <input id="id-password" type="password" name="company_admin_password" ng-model="company.admin_password" ng-pattern="/^[a-zA-Z0-9]{6,10}$/" required="" class="form-control" />
+               <span class="fa fa-lock form-control-feedback text-muted"></span>
+               <span ng-show="registerForm.company_admin_password.$dirty &amp;&amp; registerForm.company_admin_password.$error.required" class="text-danger">This field is required</span>
+               <span ng-show="registerForm.company_admin_password.$dirty &amp;&amp; registerForm.company_admin_password.$error.pattern" class="text-danger">Input should match 'a-zA-Z0-9' and 6-10 length</span>
+            </div>
+            <div class="form-group has-feedback">
+               <label class="text-muted">Retype Password</label>
+               <input type="password" name="company_admin_password_confirm" ng-model="company.admin_password_confirm" ui-validate="'$value==company.admin_password'" ui-validate-watch="'password'" class="form-control" />
+               <span class="fa fa-lock form-control-feedback text-muted"></span>
+               <span ng-show="registerForm.company_admin_password_confirm.$dirty &amp;&amp; registerForm.company_admin_password_confirm.$error.validator" class="text-danger">Password does Not match</span>
+            </div>
+
+            <div class="form-group has-feedback">
+               <label class="text-muted">Company Admin Email address</label>
+               <input type="email" name="company_adminemail"  autocomplete="off" ng-model="company.adminemail" required="" class="form-control" />
+               <span class="fa fa-envelope form-control-feedback text-muted"></span>
+               <span ng-show="registerForm.company_adminemail.$dirty &amp;&amp; registerForm.company_adminemail.$error.required" class="text-danger">This field is required</span>
+               <span ng-show="registerForm.company_adminemail.$dirty &amp;&amp; registerForm.company_adminemail.$error.email" class="text-danger">This field must be a valid email address</span>
+			            <span ng-show="showmail" class="text-danger">* Please Use Invited E-mail ID</span>
+
+            </div>
+
+			      <div class="form-group has-feedback">
+               <label class="text-muted">Company Admin Mobile</label>
+               <input type="text" name="company_adminmobile" ng-model="company.adminmobile"  class="form-control" required=""/>
+               <span ng-show="registerForm.company_adminmobile.$dirty &amp;&amp; registerForm.company_adminmobile.$error.required" class="text-danger">This field is required</span>
+            </div>
+
+            <div class="clearfix">
+               <div class="checkbox c-checkbox pull-left mt0">
+                  <label>
+                     <input type="checkbox" required="" name="company_agreed" ng-model="company.agreed" />
+                     <span class="fa fa-check"></span>I agree with the <a href="#" ng-click="viewterms()">terms</a>
+                  </label>
+               </div>
+            </div>
+            <div ng-show="registerForm.company_agreed.$dirty &amp;&amp; registerForm.company_agreed.$error.required" class="text-danger">You must agree the terms</div>
+
+            <button type="button" ng-Click="registerCompany()" class="btn btn-block btn-primary mt-lg">Create Company account</button>
+         </form>
+         <div ng-show="authMsg" class="alert alert-danger text-center">{{authMsg}}</div>
+         <div ng-show="msgReg" class="alert alert-success text-center">{{msgReg}}</div>
+         <p class="pt-lg text-center">Have an account?</p><a ui-sref="page.login"  class="btn btn-block btn-default">Login</a>
+      </div>
+   </div>
+   <!-- END panel-->
+   <div class="p-lg text-center">
+      <span>&copy;</span>
+      <span ng-bind="app.year"></span>
+      <span>-</span>
+      <span ng-bind="app.name"></span>
+      <br/>
+      <span ng-bind="app.description"></span>
+   </div>
+</div>

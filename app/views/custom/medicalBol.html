@@ -1,0 +1,971 @@
+<div  >
+<!--<div class="panel-heading" style="color:#AA0001">
+
+</div> -->
+<div >
+
+		<div class="row" align="center" style="padding-top:5px;">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+
+		<!-- <div class="cmpText" style="font-size:16px;">App is in {{online_status_string}} mode</div> -->
+		<div>
+		<img src="app/img/pdf_logo.jpg" class="pdf_logo">
+		<img src="app/img/medical_waste.png" class="pull-right" style="width:60px;height:50px;">
+		</div>
+		<span class="log_subtitle">Your Waste Management Expert</span><br>
+		<span class="bld20">Bill of Ladding - Medical</span><br>
+		</div>
+		</div>
+
+		<div class="row">
+
+		<div class="col-lg-12 col-md-12 col-sm-12">
+
+		<h4 align="center" class="text-info">{{modal.step+1}} of {{modal.steps.length}}</h4>
+		<div id="wizard-tab">
+		<ul class='nav nav-wizard' >
+        <li   ng-click="modal.setCurrentStep(0)" ng-class="{'active':modal.isCurrentStep(0)}"><a href="#" data-toggle="tab" >Information</a></li>
+        <li  ng-click="modal.setCurrentStep(1)" ng-class="{'active':modal.isCurrentStep(1)}"><div class="nav-wedge"  ></div><a href="#" data-toggle="tab">Service</a></li>
+
+
+        <li   ng-class="{'active':modal.isCurrentStep(2)}"><div class="nav-wedge"></div><a href="#" data-toggle="tab" >Sign</a></li>
+
+		</ul>
+		</div>
+
+		</div>
+		</div>
+
+		 <div  align="center" ng-show="showSpinner" style="padding-top:5px;"> <img src="app/img/spinner.gif" style="width:20px;height:20px;"   /><span style="color:#EE3E41;font-size:18px;"> Please wait...</span> </div>
+
+		<!-- <span ng-show="!online_store_data" class="cmpText"> your offline data has been in under progress Account # : {{offlinedata.accountNo}}</span> -->
+
+
+	<div class="row">
+
+	<div class="col-lg-12 col-md-12 col-sm-12">
+
+
+
+		<div ng-switch="modal.getCurrentStep()" style="padding:20px 0px 0px 10px;">
+
+			<div ng-switch-when="one" class="row setup-content">
+
+
+
+			<div class="col-lg-12 col-md-12 col-sm-12" >
+
+
+               <br/>
+                <div class="form-group" style="width: 90%;margin: 0 auto; ">
+                    <label class="control-label">{{BolDet.customerName}}</label><br/>
+                    <span>{{BolDet.customerAddress}}</span><br/>
+                    <span>{{BolDet.customerCity}},{{BolDet.customerState}} {{BolDet.customerZip}}</span><br/>
+                    <span>{{BolDet.number}}</span><br/>
+
+                </div>
+
+				 <br/><div class="form-group" style="width: 50%;margin: 0 auto; ">
+                    <label class="control-label">Account # : {{BolDet.customerNumber}}</label><br/>
+                    <span>EPA ID # : GAR0000061564</span>
+
+                </div>
+
+				<br/><div class="form-group box-shadow-transport" style="width: 90%;margin: 0 auto; ">
+                    <label class="control-label">Transporter & Receiver</label><br/>
+				 <span>MCF ENVIRONMENTAL SERVICES, INC.</span><br/>
+				 <span>4319 Tanners Church Road</span> <br/>
+				 <span>Ellenwood, GA 30294</span>
+
+                </div>
+
+
+        </div>
+
+
+
+
+			</div>
+			<div ng-switch-when="two" >
+
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+					<h4 style="text-align:center;">Medical Wastages</h4>
+
+					 <div class="table-responsive">
+					 <table class="table">
+					 <thead>
+					 <td>
+					  <label class="text text-info">Description</label>
+					 </td>
+					 <td>
+					  <label class="text text-info">Qty</label>
+					 </td>
+					 <td>
+					 <label class="text text-info">Wgt</label>
+					 </td>
+					 </thead>
+					 <tbody class="companyinfo">
+					 <tr>
+					 <td >
+					 <label> Bio-Medical Waste</label>
+
+					</td>
+
+					<td  >
+					 <input type="number"  class="form-control input-sm" ng-model="MedicalBolDet.bioMediContainerQty" placeholder="Qty"/>
+
+					</td>
+
+					<td  >
+					 <input type="number"  class="form-control" ng-model="MedicalBolDet.bioMediWtInPounds" placeholder="Wgt"/>
+
+					</td>
+					</tr>
+					<tr>
+
+					 <td  >
+					<label>Trace chemotherapy</label>
+
+					</td>
+
+					<td >
+					 <input type="number"  class="form-control input-sm" ng-model="MedicalBolDet.traceChemoContainerQty" placeholder="Qty"/>
+
+					<td >
+					 <input type="number"  class="form-control input-sm" ng-model="MedicalBolDet.traceChemoWtInPounds" placeholder="Wgt"/>
+
+					</td>
+					</tr>
+					<tr>
+
+					 <td>
+					<label>Pathological Waste</label>
+
+					</td>
+
+					<td >
+					 <input type="number"  class="form-control input-sm" ng-model="MedicalBolDet.pathoWasteContainerQty" placeholder="Qty"/>
+
+					<td >
+					 <input type="number"  class="form-control input-sm" ng-model="MedicalBolDet.pathoWasteWtInPounds" placeholder="Wgt"/>
+
+					</td>
+
+
+					 </tr>
+					 </tbody>
+					 </table>
+					 </div>
+					 </div>
+					</div>
+
+
+			</div>
+
+
+			<div ng-switch-when="three" >
+
+				<div class="row">
+
+					<br/><div class="col-lg-12 col-md-12 col-sm-12">
+
+						<div   id="canvasDiv">
+					<canvas id='shipper_sign'></canvas>
+					</div>
+					</div>
+					</div>
+
+			</div>
+
+
+
+
+
+
+
+		</div>
+		</div>
+	</div>
+
+
+		<div class="row" style="padding:20px 0px 15px 0px;">
+			<div class="col-lg-6 col-md-6 com-sm-6" style="padding-left:50px;">
+            <a class="btn btn-primary pull-left"  ng-disabled="modal.isCurrentStep(0) || showSpinner" ng-click="modal.handlePrevious()"><i class="fa fa-angle-left"></i>&nbsp;&nbsp;&nbsp;Prev</a>
+			</div>
+
+			<div class="col-lg-6 col-md-6 com-sm-6" style="padding-right:50px;">
+			 <a class="btn btn-primary pull-right"  ng-show="modal.isCurrentStep(1)"  ng-click="finalStepSubmitMedicalbol();">Next &nbsp;&nbsp;&nbsp;<i class="fa fa-angle-right"  ></i></a>
+
+			 <a class="btn btn-primary pull-right"  ng-hide="modal.isCurrentStep(1) || modal.getNextLabel()=='Submit'"  ng-click="modal.handleNext()">{{modal.getNextLabel()}}&nbsp;&nbsp;&nbsp; <i class="fa fa-angle-right"  ></i></a>
+
+			 <a class="btn btn-primary pull-right" ng-disabled="showSpinner" ng-show="modal.getNextLabel()=='Submit'" ng-click="saveMedicalBol()">{{modal.getNextLabel()}} </a>
+
+			</div>
+
+
+
+		</div>
+
+
+		<script type="text/ng-template" id="responseMsgDialog">
+	<div class="ngdialog-message">
+
+		<div  class="text text-danger errGET" ng-cloak ng-show="failShowGet">
+            <strong>Sorry! something went wrong , please try again after some time</strong>
+          </div>
+          <div  class="text" role="alert" ng-show="successShow">
+             <h4><i class="fa fa-thumbs-up text-info" style="font-size:26px;"></i>&nbsp;&nbsp;successfully processed BOL</h4>
+          </div>
+
+		   <div  class="text text-success errGET" role="alert" ng-show="offlinedataMessage">
+            <strong> For Account No {{msgAccountNo}}. BOL added successfully in offline mode, when you will come online it will be strored to online server</strong>
+          </div>
+
+          <div  class="text text-success errGET" role="alert" ng-show="uptsuccessShow">
+            <strong>For Account No {{msgAccountNo}}. Record updated successfully</strong>
+          </div>
+          </div>
+	</script>
+
+		<script type="text/ng-template" id="AllDetailsDialog">
+	<div class="ngdialog-message ngdialog-signCanvas">
+
+
+
+		<div class="row" align="center"  style="padding-top:15px;">
+		<div class="col-lg-12 col-md-12 col-sm-12">
+		<div>
+		<img src="app/img/pdf_logo.jpg" class="pdf_logo">
+		<img src="app/img/medical_waste.png" class="pull-right" style="width:60px;height:50px;">
+		</div>
+		<span class="log_subtitle">Your Waste Management Expert</span><br/>
+
+		</div>
+		</div>
+
+		<div class="row" align="center"  style="padding-top:15px;">
+				<div class="col-lg-12 col-md-12 col-sm-12">
+
+				<span class="aboutText">You are about to submit for</span><span class="cmpText"> {{BolDet.customerName}} </span><br/>
+				 <label> Account # : {{BolDet.accountNo}}</label>
+				</div>
+		</div>
+
+
+
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12">
+					<h4>Medical Wastages</h4>
+					 <div class="table-responsive">
+					 <table class="table">
+					 <thead>
+					 <td>
+					<label class="text text-info">Description</label>
+					 </td>
+					 <td>
+					<label class="text text-info"> Qty</label>
+					 </td>
+					 <td>
+					<label class="text text-info"> Wgt</label>
+					 </td>
+					 </thead>
+					 <tbody class="companyinfo">
+					 <tr>
+					 <td  class="col-lg-4 col-md-4 col-sm-4">
+					 <label>Bio-Medical</label>
+
+					</td>
+
+						<td data-title="Service" class="col-lg-4 col-md-4 col-sm-4">
+					<label>{{MedicalBolDet.bioMediContainerQty}}</label>	</td>
+
+					<td data-title="Service" class="col-lg-4 col-md-4 col-sm-4">
+					 <label>{{MedicalBolDet.bioMediWtInPounds}}</label>
+
+					</td>
+
+
+					</tr>
+					<tr>
+
+					 <td  class="col-lg-4 col-md-4 col-sm-4">
+					<label>Trace chemotherapy</label>
+
+					</td>
+
+					<td  class="col-lg-4 col-md-4 col-sm-4">
+					 <label>{{MedicalBolDet.traceChemoContainerQty}}</label>
+
+					</td>
+
+					<td  class="col-lg-4 col-md-4 col-sm-4">
+					 <label>{{MedicalBolDet.traceChemoWtInPounds}}	</label>
+
+					</td>
+
+
+					</tr>
+					<tr>
+
+					 <td  class="col-lg-3 col-md-3 col-sm-3">
+					<label>Pathological</label>
+
+					</td>
+
+					<td data-title="Service" class="col-lg-4 col-md-4 col-sm-4">
+					 <label>{{MedicalBolDet.pathoWasteContainerQty}}</label>
+
+					<td data-title="Service" class="col-lg-4 col-md-4 col-sm-4">
+					<label>{{MedicalBolDet.pathoWasteWtInPounds}}	</label>
+
+					</td>
+
+					 </tr>
+					 </tbody>
+					 </table>
+					 </div>
+					 </div>
+					</div>
+
+
+
+<div class="row pull-right">
+<div class="col-lg-12 col-md-12 col-sm-12 ">
+ <button type="button" ng-click="closeThisDialog('closeThisDialog')"  class="btn btn-default mr">Cancel</button>
+ <button type="button"  ng-click="confirm()" class="btn btn-primary">Ok</button>
+</div>
+</div>
+</div>
+
+
+	</script>
+
+
+
+</div>
+
+</div>
+
+<style>
+
+
+
+#canvasDiv {
+     width: 94%;
+     margin: 0px auto;
+     border: 1px solid black;
+	  right:0px;
+	  }
+
+.aboutText{
+color:#5D9CEC;
+font-weight:bold;
+font-size:20px;
+
+}
+.cmpText{
+color:#EE3E41;
+font-weight:bold;
+font-size:22px;
+}
+
+.ngdialog.ngdialog-theme-plain .ngdialog-content {
+    width: initial;
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-600 .ngdialog-content {
+    width: 600px;
+	height:auto;
+	overflow-y:scroll;
+}
+.ngdialog.ngdialog-theme-default.custom-width-900 .ngdialog-content {
+    width: 900px;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+   -webkit-animation: ngdialog-flyin .5s;
+    animation: ngdialog-flyin .5s;
+    background: #fff;
+    border-radius: 5px;
+    color: #444;
+    font-family: Helvetica,sans-serif;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 1em;
+    position: relative;
+    width: 450px;
+}
+
+.table-borderless > tbody > tr > td {
+    border: none;
+	border-top-style: none;
+border-left-style: none;
+border-right-style: none;
+border-bottom-style: none;
+}
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+thead>tr{
+	color:#333;
+	font-weight:bold;
+}
+
+.log_subtitle{
+font: italic bold 10px Georgia, serif;
+color:#4B91EA;
+}
+.bld20{
+font-weight:bold;
+font-size:20px;
+}
+.bld15{
+font-weight:bold;
+font-size:18px;
+color:#333;
+}
+.bld12{
+font-weight:bold;
+font-size:12px;
+}
+.bld_italic10{
+font-weight:bold;
+font-size:10px;
+}
+
+.modal {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.alert {
+  margin-top: 10px;
+  white-space: nowrap;
+}
+.alert-container {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.form-signin {
+  max-width: 360px;
+  padding: 19px 29px 29px;
+  margin: 0 auto 20px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+          box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+
+.form-signin .thumbnail {
+  margin-bottom: 10px;
+}
+
+.modal-body .btn-group {
+  margin-bottom: 10px;
+}
+
+.slide-frame {
+  position:relative;
+  height:450px;
+  overflow:hidden;
+  padding:100px 0px 0px 500px;
+}
+
+.slide-frame > div {
+  width:100%;
+}
+
+input[type=text], select {
+  width: 50% !important;
+}
+
+/* alert animations */
+
+.alert.ng-enter, .alert.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+.alert.ng-enter {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  padding: 0;
+  border-width: 0;
+  margin: 0;
+}
+
+.alert.ng-enter-active {
+  opacity: 1;
+  max-width: 100%;
+  max-height: 100px;
+  padding: 15px 35px 15px 15px;
+  border-width: 1px;
+  margin: 10px 0 20px;
+}
+
+.alert.ng-leave {
+  opacity: 1;
+  max-width: 100%;
+  max-height: 100px;
+  padding: 15px 35px 15px 15px;
+  border-width: 1px;
+  margin: 10px 0 20px;
+}
+
+.alert.ng-leave-active {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  padding: 0;
+  border-width: 0;
+  margin:0;
+}
+
+/* modal and step animations */
+.wave.ng-enter, .wave.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.wave.ng-enter {
+  position: absolute;
+  left:-100%;
+}
+
+.wave.ng-enter-active {
+  left:0;
+}
+
+.wave.ng-leave {
+  position: absolute;
+  left:0;
+}
+
+.wave.ng-leave-active {
+  left:100%;
+}
+
+
+/*********** Tab Menu css start ************/
+#wizard-tab{
+    float:right;
+    position:relative;
+    left:-50%;
+    text-align:left;
+}
+#wizard-tab ul{
+    list-style:none;
+    position:relative;
+    left:50%;
+}
+
+
+ul.nav-wizard {
+  background-color: #fff;
+  border: 1px solid #333;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  width:330px;
+}
+ul.nav-wizard:before {
+  display: block;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 46px;
+  height: 47px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  z-index: 11;
+}
+ul.nav-wizard:after {
+  display: block;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 138px;
+  height: 47px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  z-index: 11;
+  content: " ";
+}
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 20px 0 36px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 46px;
+}
+ul.nav-wizard li a {
+  color: #5cb85c;
+  padding: 0;
+  font-size:medium;
+
+}
+ul.nav-wizard li a:hover {
+  background-color: transparent;
+}
+ul.nav-wizard li:before {
+  position: absolute;
+  display: block;
+  border: 24px solid transparent;
+  border-left: 16px solid #d4d4d4;
+  border-right: 0;
+  top: -1px;
+  z-index: 10;
+  content: '';
+  right: -16px;
+}
+ul.nav-wizard li:after {
+  position: absolute;
+  display: block;
+  border: 24px solid transparent;
+  border-left: 16px solid #f9f9f9;
+  border-right: 0;
+  top: -1px;
+  z-index: 10;
+  content: '';
+  right: -15px;
+}
+ul.nav-wizard li.active {
+  color: #3a87ad;
+  background: #d9edf7;
+}
+ul.nav-wizard li.active:after {
+  border-left: 16px solid #d9edf7;
+}
+ul.nav-wizard li.active a,
+ul.nav-wizard li.active a:active,
+ul.nav-wizard li.active a:visited,
+ul.nav-wizard li.active a:focus {
+  color: #3a87ad;
+  background: #d9edf7;
+  font-size:medium;
+}
+ul.nav-wizard .active ~ li {
+  color: #999999;
+  background: #fff;
+}
+ul.nav-wizard .active ~ li:after {
+  border-left: 16px solid #fff;
+}
+ul.nav-wizard .active ~ li a,
+ul.nav-wizard .active ~ li a:active,
+ul.nav-wizard .active ~ li a:visited,
+ul.nav-wizard .active ~ li a:focus {
+  color: #333;
+  background: #fff;
+  font-size:medium;
+}
+ul.nav-wizard.nav-wizard-backnav li:hover {
+  color: #468847;
+  background: #fff;
+}
+ul.nav-wizard.nav-wizard-backnav li:hover:after {
+  border-left: 16px solid #fff;
+}
+ul.nav-wizard.nav-wizard-backnav li:hover a,
+ul.nav-wizard.nav-wizard-backnav li:hover a:active,
+ul.nav-wizard.nav-wizard-backnav li:hover a:visited,
+ul.nav-wizard.nav-wizard-backnav li:hover a:focus {
+  color: #468847;
+  background: #f6fbfd;
+}
+ul.nav-wizard.nav-wizard-backnav .active ~ li {
+  color: #EC4344;
+  background: #fff;
+}
+ul.nav-wizard.nav-wizard-backnav .active ~ li:after {
+  border-left: 16px solid #fff;
+}
+ul.nav-wizard.nav-wizard-backnav .active ~ li a,
+ul.nav-wizard.nav-wizard-backnav .active ~ li a:active,
+ul.nav-wizard.nav-wizard-backnav .active ~ li a:visited,
+ul.nav-wizard.nav-wizard-backnav .active ~ li a:focus {
+  color: #333;
+  background: #fff;
+}
+
+
+/*********** Tab Menu css end ************/
+
+.box-shadow-transport{
+-webkit-box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+padding-left:15px;
+
+  width: 50%;
+
+  height: auto;
+  z-index:-1;
+}
+
+
+@media only screen and (max-width : 768px) {
+
+.aboutText{
+color:#5D9CEC;
+font-weight:bold;
+font-size:22px;
+
+}
+.cmpText{
+color:#EE3E41;
+font-weight:bold;
+font-size:24px;
+}
+
+
+
+ul.nav-wizard {
+  background-color: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  width:400px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 10px 0 69px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 46px;
+}
+
+}
+
+@media only screen and (max-width : 767px) {
+
+
+.topnavbar .navbar-header {
+display:none;
+}
+
+.layout-fixed .wrapper > section {
+    margin-top: 55px;
+}
+
+ul.nav-wizard {
+  background-color: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  width:470px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 10px 0 92px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 46px;
+}
+
+.slide-frame {
+  position:relative;
+  height:auto;
+  overflow:hidden;
+  padding:40px 0px 0px 222px;
+}
+
+.box-shadow-transport{
+-webkit-box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+padding-left:15px;
+
+  width: 90%;
+
+  height: auto;
+  z-index:-1;
+}
+
+
+}
+
+
+
+/** iphone 6 plus ***/
+
+@media screen and (max-width: 414px) , screen and (max-height: 736px) {
+
+ul.nav-wizard {
+  background-color: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  width:356px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 10px 0 54px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 46px;
+}
+
+}
+
+/** iphone 6 ***/
+
+@media screen and (max-width: 375px) , screen and (max-height: 667px) {
+.slide-frame {
+  position:relative;
+  //height:345px;
+  height:auto;
+  overflow:hidden;
+  padding:40px 0px 0px 74px;
+}
+
+ul.nav-wizard {
+    background-color: #f9f9f9;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    width: 310px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 5px 0 44px;
+  margin: 0;
+  font-size: 10px;
+  line-height: 46px;
+}
+
+}
+
+/** iphone 4,5***/
+@media only screen and (max-width : 320px), screen and (max-height: 568px) {
+
+
+.aboutText{
+color:#5D9CEC;
+font-weight:bold;
+font-size:14px;
+}
+.cmpText{
+color:#EE3E41;
+font-weight:bold;
+font-size:16px;
+}
+
+ul.nav-wizard {
+    background-color: #f9f9f9;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    width: 278x;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 5px 0 31px;
+  margin: 0;
+  font-size: 10px;
+  line-height: 46px;
+}
+
+}
+
+
+
+@media screen and (orientation: portrait) {
+  #canvasDiv {
+     width: 90%;
+     margin: 0px auto;
+     border: 1px solid black;
+	 right:5px;
+
+	 }
+}
+
+@media screen and (orientation: landscape) {
+ #canvasDiv {
+     width: 95%;
+     margin: 0px auto;
+     border: 1px solid black;
+	 right:5px;
+
+	 }
+}
+
+
+
+@media screen and (min-width: 1000px)  {
+ #canvasDiv {
+     margin: 0px auto;
+     border: 1px solid black;
+	  right:5px;
+	 }
+}
+
+
+
+
+
+
+
+
+</style>

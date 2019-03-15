@@ -1,0 +1,1126 @@
+<h4>Medical Destruction BOL</h4>
+<hr/>
+<div class="panel panel-default">
+
+<div class="panel-heading" style="color:#AA0001"><h3>Shipper details</h3></div>
+<div class="panel-body">
+
+<form class="form-horizontal" name="acForm"  id="account-form" >
+
+<div class="row">
+<div class="col-lg-12 col-md-12 col-sm-12">
+		 
+		 <div class="table-responsive">
+		 <table class="table">
+		 <tbody class="companyinfo">
+		 <tr>
+	
+	<!-- company Adderss -->
+	<td class="col-lg-5 col-md-5 col-sm-5">
+		
+            <img src="app/img/pdf_logo.jpg" class="img-responsive pdf_logo"  />
+			<span class="log_subtitle">Your Waste Management Expert</span>        
+		 <div>
+		 <span class="bld20">MCF ENVIRONMENTAL SERVICES, INC.</span><br/>
+		 <span class="bld12">4319 Tanners Church Road</span><br/>
+		 <span class="bld12">Ellenwood, GA 30294</span>
+		 </div>
+	</td>
+	
+	<!-- company contact no -->
+	
+	<td class="col-lg-3 col-md-3 col-sm-3">
+	<span class="bld15">Emergency Contact Phone : </span>        <span class="number_cls">888-645-6654</span><br/>
+	<span class="bld15">ER Contract No : </span>                 <span class="number_cls">450-0001</span>
+	</td>
+	
+	<!-- RHS logo -->
+	
+	<td class="col-lg-2 col-md-2 col-sm-2">
+	 <img src="app/img/rhs_logo.png"  class="rhs_logo img-responsive"  />
+	
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	
+</div>
+</div>
+</div>
+
+<!-- shipper address info start -->
+
+
+<div class="row" style="padding-top:10px">
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+		 
+		 <div class="table-responsive">
+		 <table class="table">
+		 <tbody class="companyinfo">
+		 <tr>
+
+	<td class="col-lg-2 col-md-2 col-sm-2">
+	<p class="shipper_icon">
+	<span>S</span><br/>
+	<span>H</span><br/>
+	<span>I</span><br/>
+	<span>P</span><br/>
+	<span>P</span><br/>
+	<span>E</span><br/>
+	<span>R</span><br/>	
+	</p>
+	</td>
+	
+	
+	<td class="col-lg-6 col-md-6 col-sm-6">
+	<p class="shipaddress">
+	<span>absolute FOOT & ANKLE CENTER</span><br/>
+	<span>2575 SNAPFINGER ROAD SUITE D<span><br/>
+	<span>DECATUR GA 30034<span><br/>
+	<span>(770)981-6940<span>
+	</p>
+	
+	</td>
+	
+	<td class="col-lg-4 col-md-4 col-sm-4">
+	<div class="account_bill_box">
+	 
+	
+	 <div class="form-group" >
+        <label class="col-sm-4 col-md-4 col-lg-4 bld15">Account Number :</label>
+        <div class="col-sm-4 col-md-4 col-lg-4">	
+		<span class="bld15">{{user.customer.customerNumber}}</span>	   
+
+        </div>
+      </div>
+	  
+	
+	  
+	   <div class="form-group" >
+        <label class="col-sm-4 col-md-4 col-lg-4 bld15">B/L Number :</label>
+        <div class="col-sm-4 col-md-4 col-lg-4">        		
+		
+		<span class="number_cls">{{user.bolNo}}</span>
+        </div>
+      </div>
+	  
+	   <div class="form-group" >
+        <label class="col-sm-4 col-md-4 col-lg-4 bld15">Route :</label>
+        <div class="col-sm-4 col-md-4 col-lg-4">		 
+		 <span class="route">{{user.route}}</span>
+        </div>
+      </div>
+	  
+	
+	  
+	   <div class="form-group" >
+        <label class="col-sm-4 col-md-4 col-lg-4 bld15">Monthly Bill :</label>
+        <div class="col-sm-4 col-md-4 col-lg-4">		
+		
+		<span class="route">{{user.monthlyBill}}</span>
+
+        </div>
+      </div>
+	
+
+
+	  
+
+	</div>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+
+</div>
+</div>
+</div>
+
+<!-- shipper address info end -->
+
+<!-- description & signature start -->
+
+	<div class="row" style="padding-top:15px">
+		
+		<div class="col-lg-12 col-md-12 col-sm-12">
+		 
+		 <div class="table-responsive">
+		 <table class="table table-bordered bolinfo">
+		 <thead>
+		 <tr>
+		  <th>item#</th>				 			  	
+		  <th>Description(Proper Shipping Name)</th>		  							  
+		  <th>Container quantity</th>
+		  <th>Type</th>
+		  <th>Weight in Pounds</th>
+		 </tr>
+		 </thead>
+		 		 <tfoot>
+<tr>
+<td colspan="6"> <span class="bld15">GENERATOR'S CERTIFICATION:</span> <span class="termscond">"I hereby declare that the contents of this consignment are fully and accurately described above by the proper shipping name, and are classified,packaged,marked and labeled/placaded,and are in all respects in proper conditionfor transport according to applicable international and national goverment regulations."</span></td>
+</tr>
+<tr>
+<td colspan="6"> <span class="bld15">GENERATOR'S CERTIFICATION to MCF: </span><span class="termscond">Generator (customer) represents and warrants to MCF that only Regulated Medical Waste and no other materials have been placed in the proper Shipping containers. Customer further warrants that the Regulated Medical Waste presented to MCF for disposal does not contain any hazardous,toxic,or radioactive wastes as defined by any applicabe laws or regulations. Sharps have been packaged in a puncture-resistan inner packaging with the lid securely closed so that it does not open under normal conditions,prio to placement in the inner line of Shipping Container</span></td>
+</tr>
+
+<tr>
+<td colspan="2"> 
+<span class="bld15">Generator / Shipper Signature</span><br/>
+
+<img  ng-src="{{user.shipperSignatureImage}}"/>
+</td>
+<td colspan="6"> 
+<span class="bld12">Date</span><br/> 	 
+<span >{{user.shipperSignDate | date:'MM/dd/yyyy @ h:mma'}}</span><br/> 
+		 
+		</td>
+</tr>
+
+<tr>
+
+
+<td colspan="2"> 
+<span class="bld15">Transporter Signature</span><br/>
+
+
+<img  ng-src="{{user.transporterSignatureImage}}"/>
+
+
+
+</td>
+<td colspan="6"> 
+<span class="bld12">Date</span><br/> 		 
+<span >{{user.transporterSignDate | date:'MM/dd/yyyy @ h:mma'}}</span>
+		 
+</td>
+</tr>
+</tfoot>
+		 
+		 <tbody>
+		 <tr>
+		 <td>
+		 1
+		 </td>
+		 <td>
+		 UN3291,Regulated Medical Waste,n.o.s.,6.2,ll(Bio-Medical Waste)
+		 </td>
+		 <td>
+	
+		  
+		  <span class="route">{{user.bioMediContainerQty}}</span>
+		  
+		  
+		 </td>
+		 <td>
+		 CF
+		 </td>
+		 <td>		
+		 
+		  <span class="route">{{user.bioMediWtInPounds}}</span>
+		 
+		 </td>
+		 </tr>
+		 
+		  <tr>
+		 <td>
+		 2
+		 </td>
+		 <td>
+		 UN3291,Regulated Medical Waste,n.o.s.,6.2,ll(Trace chemotherapy)
+		 </td>
+		 <td>
+		 <span class="route">{{user.traceChemoContainerQty}}</span>
+		 
+		 </td>
+		 <td>
+		 CF
+		 </td>
+		 <td>
+		
+		  
+		   <span class="route">{{user.traceChemoWtInPounds}}</span>
+		 </td>
+		 </tr>
+		 
+		  <tr>
+		 <td>
+		 3
+		 </td>
+		 <td>
+		 UN3291,Regulated Medical Waste,n.o.s.,6.2,ll(Pathological Waste)
+		 </td>
+		 <td>		 
+			  <span class="route">{{user.pathoWasteContainerQty}}</span>
+		 </td>
+		 <td>
+		 CF
+		 </td>
+		 <td>
+		 				 
+			  <span class="route">{{user.pathoWasteWtInPounds}}</span>
+		 </td>
+		 </tr>
+		 
+
+		 
+		  <tr>
+		 </tr>
+		 
+		  <tr>
+		 </tr>
+		 
+		 </tbody>
+		 
+		 </table>
+		 </div>
+		 
+		 <div class="table-responsive">
+		 <table class="table table-bordered bolinfo">
+		 <thead>
+		 <tr>
+		  <th colspan="3">Receiving Facility</th>				 			  	
+		  <th colspan="3">Transporter company Name</th>		 
+		 </tr>
+		 </thead>
+		 <tfoot>
+		 <tr>
+<td colspan="4"> <span class="bld12">Receiving Facility Signature</span><br>
+<img  ng-src="{{user.receivingFacilitySignatureImage}}" ng-show="user.receivingFacilitySignatureImage!='null'"/>
+
+</td>
+<td colspan="3"> 
+<span class="bld12">Date</span><br/> 
+
+<span >{{user.receivingFacilitySignDate | date:'MM/dd/yyyy @ h:mma'}}</span>
+
+
+</td>
+</tr>
+
+		 </tfoot>
+		 <tbody>
+		 <tr>
+		 <td colspan="3">
+		  <span class="bld15">MCF ENVIRONMENTAL SERVICES, INC.</span><br/>
+		 <span class="bld12">4319 Tanners Church Road</span><br/>
+		 <span class="bld12">Ellenwood, GA 30294</span>
+		 </td>
+		 <td colspan="3" >
+		  <span class="bld15">MCF ENVIRONMENTAL SERVICES, INC.</span>
+		 </td>
+		 </tr>
+		 
+		 </tbody>
+		 </table>
+		 </div>
+		 
+		</div>
+
+	</div>
+	
+	
+	</form>
+	
+	</div>
+	
+	</div> <!-- panel body end -->	
+<style>
+
+.aboutText{
+color:#5D9CEC;
+font-weight:bold;
+font-size:11px;
+
+}
+.cmpText{
+color:#EE3E41;
+font-weight:bold;
+font-size:12px;
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-300 .ngdialog-content {   
+	height:200px;
+	overflow-y:hidden;
+}
+
+.ngdialog.ngdialog-theme-default.custom-width-800 .ngdialog-content {   
+	width:800px;
+	height:auto;
+	overflow-y:scrol;
+}
+
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+    -webkit-animation: ngdialog-flyin .5s;
+    animation: ngdialog-flyin .5s;
+    background: #fff;
+    border-radius: 5px;
+    color: #444;
+    font-family: Helvetica,sans-serif;
+    font-size: 1.1em;
+    line-height: 1.5em;
+    margin: 0 auto;
+    max-width: 100%;
+    padding: 1em;
+    position: relative;
+    width: 450px;
+}
+
+
+.termscond{
+font-size:14px;
+text-align:justify;
+}
+.companyinfo{
+color:#EE3E41;
+}
+.shipperinfo{
+color:#EE3E41;
+}
+table.bolinfo>thead>tr{
+	background-color:#0D96B4;
+	color:#fff;
+}
+tbody>tr,tfoot>tr{
+color:#000;
+font-size:14px;
+}
+tbody.companyinfo>tr,tfoot>tr{
+color:#EE3E41;
+}
+
+.log_subtitle{
+font: italic bold 11px Georgia, serif;
+}
+.bld20{
+font-weight:bold;
+font-size:20px;
+}
+.bld15{
+font-weight:bold;
+font-size:15px;
+}
+.bld12{
+font-weight:bold;
+font-size:12px;
+}
+.bld_italic10{
+font-weight:bold;
+font-size:10px;
+}
+.pdf_logo{
+width:181px;
+height:50px;
+}
+.rhs_logo{
+width:110px;
+height:110px;
+}
+
+/********* shipper info css start *********/
+.shipper_icon{
+font-weight:bold;
+color:#fff;
+font-size:14px;
+background:#EE3E41;
+width:30px;
+padding:20px 0 0 10px;
+height:200px;
+
+
+}
+.shipaddress{
+text-align:left;padding-top:20px;text-transform:uppercase;
+font-size:14px;
+color:#000;
+line-height:40px;
+}
+.account_bill_box {
+    width: 500px;
+    height: auto;  
+    border: 1px solid #000;
+	text-align:justify;
+	padding:10px 10px 10px 20px;
+	position:relative; 
+	z-index:10;
+}
+
+.account_bill_box:before {
+   content:""; display:block; position:absolute; z-index:-1; top:2px; left:2px; right:2px; 
+bottom:2px; border:1px solid #000;
+}
+
+
+
+
+/********* shipper info css end *********/
+
+
+
+/********* Media queries start **************/
+/*==========  Mobile First Method  ==========*/
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+	
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+	
+	
+	
+    }
+
+    /* Small Devices, Tablets ipad, ipad mini */
+    @media only screen and (max-width : 768px) {
+	
+	.ui-select-bootstrap>.ui-select-choices {
+	width:60%;
+	}
+	.form-control{
+	width:100%;
+	}
+	
+	tbody>tr,tfoot>tr{
+	color:#000;
+	font-size:12px;
+	}
+	
+	tfoot>tr {
+    color: #EE3E41;
+	font-size:12px;
+	}
+	
+	.pdf_logo{
+	width:120px;
+	height:30px;
+	}
+	.rhs_logo{
+	width:50px;
+	height:60px;
+	}
+	
+	.log_subtitle{
+	font: italic bold 7px Georgia, serif;
+	}
+	.bld20{
+	font-weight:bold;
+	font-size:8px;
+	}
+	.bld15{
+	font-weight:bold;
+	font-size:7px;
+	}
+	.bld12{
+	font-weight:bold;
+	font-size:6px;
+	}
+	.bld_italic10{
+	font-weight:bold;
+	font-size:5px;
+	}
+	.number_cls{
+	font-size:10px;
+	}
+	
+	/********* shipper info css start *********/
+	.shipper_icon{
+	font-weight:bold;
+	color:#fff;
+	font-size:11px;
+	background:#EE3E41;
+	width:14px;
+	padding-left:4px;
+	line-height:25px;
+	}
+	.shipaddress{
+	text-align:left;padding-top:15px;text-transform:uppercase;
+	font-size:6px;	
+	color:#000;
+	line-height:25px;
+	}
+	
+	.account_bill_box {
+    width: 300px;
+    height: auto;  
+    border: 1px solid #000;
+	text-align:justify;
+	padding:5px 5px 5px 10px;
+	position:relative; 
+	z-index:10;
+	}
+
+	.account_bill_box:before {
+	   content:""; display:block; position:absolute; z-index:-1; top:2px; left:2px; right:2px; 
+	bottom:2px; border:1px solid #000;
+	}
+	
+	.termscond{
+	font-size:6px;
+	text-align:justify;
+	}
+/********* shipper info css end *********/
+	
+	
+	
+	
+    }
+	
+	
+	/* iphone6,iphone6 plus */
+	@media only screen and (max-width : 767px) {
+	
+	.form-control {
+    width: 80%;
+	}
+	
+	.btn-block {
+    display: block;
+    width: 80%;
+	}
+	
+	tbody>tr{
+	color:#000;
+	font-size:10px;
+	}
+	
+	tfoot>tr{
+	color:#EE3E41;
+	font-size:12px;
+	}
+	
+	.pdf_logo{
+	width:80px;
+	height:20px;
+	}
+	.rhs_logo{
+	width:30px;
+	height:30px;
+	}
+	
+	.log_subtitle{
+	font: italic bold 4px Georgia, serif;
+	}
+	.bld20{
+	font-weight:bold;
+	font-size:4px;
+	}
+	.bld15{
+	font-weight:bold;
+	font-size:5px;
+	}
+	.bld12{
+	font-weight:bold;
+	font-size:7px;
+	}
+	.bld_italic10{
+	font-weight:bold;
+	font-size:3px;
+	}
+	.number_cls{
+	font-size:6px;
+	}
+	
+	/********* shipper info css start *********/
+	.shipper_icon{
+	font-weight:bold;
+	color:#fff;
+	font-size:10px;
+	background:#EE3E41;
+	width:12px;
+	padding-left:3px;
+	}
+	.shipaddress{
+	text-align:left;padding-top:8px;text-transform:uppercase;
+	font-size:7px;
+	color:#000;
+	line-height:25px;
+	}
+	
+	.account_bill_box {
+    width: 215px;
+    height: auto;  
+    border: 1px solid #000;
+	text-align:justify;
+	padding:3px 3px 3px 6px;
+	position:relative; 
+	z-index:10;
+	}
+
+	.account_bill_box:before {
+	   content:""; display:block; position:absolute; z-index:-1; top:2px; left:2px; right:2px; 
+	bottom:2px; border:1px solid #000;
+	}
+	
+	.termscond{
+	font-size:3px;
+	text-align:justify;
+	}
+/********* shipper info css end *********/
+	
+	
+	
+	
+    }
+
+
+    /* Extra Small Devices, Phones  */ 
+    @media only screen and (max-width : 480px) {
+
+	
+    }
+
+    /* Custom, iPhone Retina iphone5 */ 
+    @media only screen and (max-width : 320px) {
+	.pdf_logo{
+	width:60px;
+	height:15px;
+	}
+	.rhs_logo{
+	width:25px;
+	height:25px;
+	}
+	
+	.log_subtitle{
+	font: italic bold 3px Georgia, serif;
+	}
+	.bld20{
+	font-weight:bold;
+	font-size:4px;
+	}
+	.bld15{
+	font-weight:bold;
+	font-size:3px;
+	}
+	.bld12{
+	font-weight:bold;
+	font-size:2px;
+	}
+	.bld_italic10{
+	font-weight:bold;
+	font-size:3px;
+	}
+	.number_cls{
+	font-size:5px;
+	}
+	
+	/********* shipper info css start *********/
+	.shipper_icon{
+	font-weight:bold;
+	color:#fff;
+	font-size:7px;
+	background:#EE3E41;
+	width:8px;
+	padding-left:2px;
+	}
+	.shipaddress{
+	text-align:left;padding-top:10px;text-transform:uppercase;
+	font-size:5px;
+	}
+	
+	.account_bill_box {
+    width: 140px;
+    height: auto;  
+    border: 1px solid #000;
+	text-align:justify;
+	padding:3px 3px 3px 5px;
+	position:relative; 
+	z-index:10;
+	}
+
+	.account_bill_box:before {
+	   content:""; display:block; position:absolute; z-index:-1; top:2px; left:2px; right:2px; 
+	bottom:2px; border:1px solid #000;
+	}
+	
+	.termscond{
+	font-size:3px;
+	text-align:justify;
+	}
+/********* shipper info css end *********/
+	
+	
+	
+	
+    }
+
+/********* Media queries end **************/
+
+
+.slide-frame {
+  position:relative;
+  height:auto;
+  overflow:hidden; 
+  padding:100px 0px 0px 500px;
+}
+
+.slide-frame > div {
+  width:100%;
+}
+
+input[type=text], select {
+  width: 50% !important;
+}
+
+/* alert animations */
+
+.alert.ng-enter, .alert.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+.alert.ng-enter {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  padding: 0;
+  border-width: 0;
+  margin: 0;
+}
+
+.alert.ng-enter-active {
+  opacity: 1;
+  max-width: 100%;
+  max-height: 100px;
+  padding: 15px 35px 15px 15px;
+  border-width: 1px;
+  margin: 10px 0 20px;
+}
+
+.alert.ng-leave {
+  opacity: 1;
+  max-width: 100%;
+  max-height: 100px;
+  padding: 15px 35px 15px 15px;
+  border-width: 1px;
+  margin: 10px 0 20px;
+}
+
+.alert.ng-leave-active {
+  opacity: 0;
+  max-width: 0;
+  max-height: 0;
+  padding: 0;
+  border-width: 0;
+  margin:0;
+}
+
+/* modal and step animations */
+.wave.ng-enter, .wave.ng-leave {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+}
+
+.wave.ng-enter {
+  position: absolute;
+  left:-100%;
+}
+
+.wave.ng-enter-active {
+  left:0;
+}
+
+.wave.ng-leave {
+  position: absolute;
+  left:0;
+}
+
+.wave.ng-leave-active {
+  left:100%;
+}
+
+
+/*********** Tab Menu css start ************/
+#wizard-tab{
+    float:right;
+    position:relative;
+    left:-50%;
+    text-align:left;
+}
+#wizard-tab ul{
+    list-style:none;
+    position:relative;
+    left:50%;
+}
+
+
+ul.nav-wizard {
+  background-color: #fff;
+  border: 1px solid #333;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  width:362px;
+}
+ul.nav-wizard:before {
+  display: block;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 46px;
+  height: 47px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  z-index: 11; 
+}
+ul.nav-wizard:after {
+  display: block;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 138px;
+  height: 47px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
+  z-index: 11;
+  content: " ";
+}
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 20px 0 33px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 46px;
+}
+ul.nav-wizard li a {
+  color: #468847;
+  padding: 0;
+}
+ul.nav-wizard li a:hover {
+  background-color: transparent;
+}
+ul.nav-wizard li:before {
+  position: absolute;
+  display: block;
+  border: 24px solid transparent;
+  border-left: 16px solid #d4d4d4;
+  border-right: 0;
+  top: -1px;
+  z-index: 10;
+  content: '';
+  right: -16px;
+}
+ul.nav-wizard li:after {
+  position: absolute;
+  display: block;
+  border: 24px solid transparent;
+  border-left: 16px solid #f9f9f9;
+  border-right: 0;
+  top: -1px;
+  z-index: 10;
+  content: '';
+  right: -15px;
+}
+ul.nav-wizard li.active {
+  color: #3a87ad;
+  background: #d9edf7;
+}
+ul.nav-wizard li.active:after {
+  border-left: 16px solid #d9edf7;
+}
+ul.nav-wizard li.active a,
+ul.nav-wizard li.active a:active,
+ul.nav-wizard li.active a:visited,
+ul.nav-wizard li.active a:focus {
+  color: #3a87ad;
+  background: #d9edf7;
+}
+ul.nav-wizard .active ~ li {
+  color: #999999;
+  background: #fff;
+}
+ul.nav-wizard .active ~ li:after {
+  border-left: 16px solid #fff;
+}
+ul.nav-wizard .active ~ li a,
+ul.nav-wizard .active ~ li a:active,
+ul.nav-wizard .active ~ li a:visited,
+ul.nav-wizard .active ~ li a:focus {
+  color: #333;
+  background: #fff;
+}
+ul.nav-wizard.nav-wizard-backnav li:hover {
+  color: #468847;
+  background: #fff;
+}
+ul.nav-wizard.nav-wizard-backnav li:hover:after {
+  border-left: 16px solid #fff;
+}
+ul.nav-wizard.nav-wizard-backnav li:hover a,
+ul.nav-wizard.nav-wizard-backnav li:hover a:active,
+ul.nav-wizard.nav-wizard-backnav li:hover a:visited,
+ul.nav-wizard.nav-wizard-backnav li:hover a:focus {
+  color: #468847;
+  background: #f6fbfd;
+}
+ul.nav-wizard.nav-wizard-backnav .active ~ li {
+  color: #EC4344;
+  background: #fff;
+}
+ul.nav-wizard.nav-wizard-backnav .active ~ li:after {
+  border-left: 16px solid #fff;
+}
+ul.nav-wizard.nav-wizard-backnav .active ~ li a,
+ul.nav-wizard.nav-wizard-backnav .active ~ li a:active,
+ul.nav-wizard.nav-wizard-backnav .active ~ li a:visited,
+ul.nav-wizard.nav-wizard-backnav .active ~ li a:focus {
+  color: #333;
+  background: #fff;
+}
+
+
+/*********** Tab Menu css end ************/
+
+.box-shadow-transport{
+-webkit-box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+box-shadow: 0px 2px 8px 4px rgba(0,0,0,0.75);
+padding-left:15px;
+  
+  width: 50%;
+ 
+  height: auto;
+  z-index:-1;
+}
+
+@media only screen and (max-width : 767px) {
+
+ul.nav-wizard {
+  background-color: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  width:352px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 10px 0 22px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 46px;
+}
+
+
+} 
+
+
+
+
+/** iphone 6 plus ***/
+
+@media screen and (max-width: 414px) , screen and (max-height: 736px) {
+
+
+ul.nav-wizard {
+  background-color: #f9f9f9;
+  border: 1px solid #d4d4d4;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  *zoom: 1;
+  position: relative;
+  overflow: hidden;
+  width:300px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 10px 0 28px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 46px;
+}
+
+}
+
+/** iphone 6 ***/
+
+@media screen and (max-width: 375px) , screen and (max-height: 667px) {
+
+
+ul.nav-wizard {
+    background-color: #f9f9f9;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    width: 255px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 5px 0 35px;
+  margin: 0;
+  font-size: 10px;
+  line-height: 46px;
+}
+
+}
+
+/** iphone 4,5***/
+@media only screen and (max-width : 320px), screen and (max-height: 568px) {
+
+.bld15 {
+    font-weight: bold;
+    font-size: 12px;
+    color: #333;
+}
+
+ul.nav-wizard {
+    background-color: #f9f9f9;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    width: 225px;
+}
+
+ul.nav-wizard li {
+  position: relative;
+  float: left;
+  height: 46px;
+  display: inline-block;
+  text-align: middle;
+  padding: 0 5px 0 25px;
+  margin: 0;
+  font-size: 10px;
+  line-height: 46px;
+}
+
+}
+
+
+
+
+
+</style>	
+	

@@ -1,0 +1,89 @@
+
+.err
+{position:fixed;
+   align:center;
+}
+.errmsg{
+					position: absolute; left: 50%;width:50%;text-align:center;margin-top:10px;
+}
+.errGET{
+					position: relative; left: -50%;font-size:18px;
+}
+.ordbtn{
+					background-color: Transparent; background-repeat:no-repeat;border: none; cursor:pointer;overflow: hidden;outline:none;
+}
+// Date Range Picker
+.demo { position: relative; }
+.demo i {
+        /*  position: absolute;*/ bottom: 30px; right: -270px; top: auto; cursor: pointer;
+}
+.hidediv {
+          visibility:hidden;height:0px;
+}
+.divspace {
+          visibility:hidden;height:30px;
+}
+.leftmargin {
+          margin-left:-500px;
+}
+.divwidth{
+							width:300px;
+}
+#scrollable-area {
+  margin: auto;
+  height: 850px;
+  overflow-y: scroll;
+}
+
+// flash message
+
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -21px;
+    color: inherit;
+}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert-success hr {
+    border-top-color: #c9e2b3;
+}
+.alert-success .alert-link {
+    color: #2b542c;
+}
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.alert-info hr {
+    border-top-color: #a6e1ec;
+}
+.alert-info .alert-link {
+    color: #245269;
+}
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+.alert-warning hr {
+    border-top-color: #f7e1b5;
+}
+.alert-warning .alert-link {
+    color: #66512c;
+}
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.alert-danger hr {
+    border-top-color: #e4b9c0;
+}
+.alert-danger .alert-link {
+    color: #EB3131;
+}

@@ -1,0 +1,61 @@
+[
+	{	"id": 1,
+		"email": "raga1@gmail.com",
+		"password": "1234567"
+	},
+	{	"id": 2,
+		"email": "raga2@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id": 3,
+		"email": "raga3@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":4,
+		"email": "raga4@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":5,
+		"email": "raga5@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":6,
+		"email": "jack1@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":7,
+		"email": "jack2@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":8,
+		"email": "jack3@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":9,
+		"email": "jack4@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":10,
+		"email": "jack5@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":11,
+		"email": "glen1@gmail.com",
+		"password": "1234567"
+	},
+	{
+		"id":12,
+		"email": "glen2@gmail.com",
+		"password": "1234567"
+	}
+
+]
