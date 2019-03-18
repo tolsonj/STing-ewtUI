@@ -155,7 +155,7 @@ gulp.task('scripts:app', function() {
       .pipe(ngAnnotate())
       .on("error", handleError)
       .pipe(!isTest && !isProduction ? replace('localhost', 'localhost') : gutil.noop())
-      .pipe(isTest ? replace('localhost', '10.1.2.95') : gutil.noop())
+      .pipe(isTest ? replace('localhost', '10.1.1.64') : gutil.noop())
       .pipe(isProduction ? replace('localhost', 'mcfcustomerlink.mcfsystems.com') : gutil.noop())
       .pipe(isProduction ? uglify({
          preserveComments: 'some'
@@ -463,7 +463,7 @@ gulp.task('EnvironmentConfig', function() {
 
    } else if (isTest == true) {
       file.EnvironmentConfig.environment = 'Test Mode';
-      file.EnvironmentConfig.serverUrl = 'http://10.1.2.95:8080/';
+      file.EnvironmentConfig.serverUrl = 'http://10.1.1.64:8080/';
    }
 
    file.EnvironmentConfig.branch = git_branch;

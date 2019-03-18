@@ -51,6 +51,8 @@ App.run(["$rootScope", "$state", "$stateParams", '$window', '$templateCache',
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
       $rootScope.$storage = $window.localStorage;
+
+      /*
       $rootScope.$on("$stateChangeError", function(event, toState, toParams,
          fromState, fromParams, error) {
          if (error == AuthService.UNAUTHORIZED) {
@@ -59,6 +61,7 @@ App.run(["$rootScope", "$state", "$stateParams", '$window', '$templateCache',
             $state.go("page.forbidden");
          }
       });
+      */
 
       Date.prototype.addDays = function(days) {
          var dat = new Date(this.valueOf())
