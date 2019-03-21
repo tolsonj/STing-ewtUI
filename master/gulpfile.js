@@ -459,11 +459,11 @@ gulp.task('EnvironmentConfig', function() {
 
    if (isProduction == true) {
       file.EnvironmentConfig.environment = 'Production Mode';
-      file.EnvironmentConfig.serverUrl = 'http://mcfcustomerlink.mcfsystems.com:8080/';
+      file.EnvironmentConfig.serverUrl = 'http://sting.weemsdesignstudio.com:8080/';
 
    } else if (isTest == true) {
       file.EnvironmentConfig.environment = 'Test Mode';
-      file.EnvironmentConfig.serverUrl = 'http://10.1.1.64:8080/';
+      file.EnvironmentConfig.serverUrl = 'http://sting.weemsdesignstudio.com:8080/';
    }
 
    file.EnvironmentConfig.branch = git_branch;

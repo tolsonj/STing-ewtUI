@@ -21,7 +21,7 @@ App.factory('UploadLargeFiles', function($resource, $rootScope) {
             'Content-Type': 'undefined',
             'Authorization': JSON.parse(localStorage.getItem('token'))
          },
-         url: $rootScope.serverUrl + 'MCF_backend/mcfApi/uploadData',
+         url: $rootScope.serverUrl + 'mcfApi/uploadData',
          params: {}
       }
 
@@ -110,7 +110,9 @@ App.controller('uploadLargeFilesController', function($scope, $timeout, $cookieS
 
             var uploadFile = new UploadLargeFiles();
             uploadFile.testing = "Hello - onloaded";
-            uploadFile.blockId = blockId;
+
+            var numBlockIdIndex = blockIdIndex.toString();
+            uploadFile.blockId = $scope.selectedFile.name + "-BLOCK-" + numBlockIdIndex.padStart(7, '0');
             uploadFile.filename = $scope.selectedFile.name;
             uploadFile.data = base64String;
             uploadFile.$uploadData(function(resp, headers) {
@@ -133,7 +135,9 @@ App.controller('uploadLargeFilesController', function($scope, $timeout, $cookieS
       if (totalBytesRemaining > 0) {
 
          var fileContent = $scope.selectedFile.slice(currentFilePointer, currentFilePointer + maxBlockSize);
-         blockId = $scope.selectedFile.name + "-BLOCK-" + blockIdIndex;
+
+         var numBlockIdIndex = blockIdIndex.toString();
+         blockId = $scope.selectedFile.name + "-BLOCK-" + numBlockIdIndex.padStart(7, '0');
 
          $scope.reader.readAsArrayBuffer(fileContent);
 
@@ -155,15 +159,18 @@ App.controller('uploadLargeFilesController', function($scope, $timeout, $cookieS
 
       var uploadFile = new UploadLargeFiles();
       // uploadFile.testing = "Hello commitBlockList";
-      uploadFile.blockId = blockId;
+
+      var numBlockIdIndex = blockIdIndex.toString()
+      uploadFile.blockId = $scope.selectedFile.name + "-BLOCK-" + numBlockIdIndex.padStart(7, '0');
       uploadFile.filename = $scope.selectedFile.name;
       uploadFile.data = base64String;
       uploadFile.$uploadData(function(resp, headers) {
          $scope.percentComplete = ((parseFloat($scope.selectedFile.size - totalBytesRemaining) / parseFloat($scope.selectedFile.size)) * 100).toFixed(2);
       }).then(function(resp, headers) {
-         uploadFile.blockId = 0
-         uploadFile.data = "COMPLETE"
-         uploadFile.filename = scope.selectedFile.name + ".complete";
+         uploadFile.blockId = $scope.selectedFile.name + ".complete";
+         blockIdIndex = 0
+         uploadFile.data = btoa("COMPLETE");
+         uploadFile.filename = $scope.selectedFile.name + ".complete";
          uploadFile.$uploadData();
       });
 
