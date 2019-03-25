@@ -3,4 +3,4 @@ app/js
 bower_components
 master/node_modules
 vendor
-
+environment.*

@@ -1,2 +1,2 @@
 angular.module("myApp.config", [])
-.constant("EnvironmentConfig", {"environment":"Test Mode","serverUrl":"http://10.1.1.64:8080/","branch":"master","version":"a548ec8f8f659b66bde547beabd8834deea420e5","commit_date":"2019-03-15T18:35:42.000Z","show_version_info":true});
+.constant("EnvironmentConfig", {"environment":"Production Mode","serverUrl":"http://sting.weemsdesignstudio.com:8080/","branch":"master","version":"7165375d39a3661976856f65b8152ec7909ebc69","commit_date":"2019-03-21T02:44:20.000Z","show_version_info":false});

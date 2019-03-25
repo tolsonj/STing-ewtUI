@@ -414,26 +414,33 @@ App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
       })
 
       .state('app.uploadLargeFiles', {
-         url: '/uploadLargeFiles',
-         title: "Upload Large Files",
-         templateUrl: helper.basepath('custom/uploadLargeFiles.html'),
-         resolve: angular.extend(helper.resolveFor('ngDialog', 'ngTable',
-            'ui.select')),
-         controller: 'uploadLargeFilesController'
-      })
-
-      .state('app.bolhistory', {
-         url: '/bolHistory',
-         title: 'BOL History',
-         templateUrl: helper.basepath('custom/bolHistory.html'),
-         resolve: angular.extend(helper.resolveFor('ngDialog', 'ngTable',
-            'ui.select'), {
-            access: ["AuthService", function(AuthService) {
-               return AuthService.isAuthorized("ADMIN");
-            }],
-         }),
-         controller: 'bolController'
-      })
+            url: '/uploadLargeFiles',
+            title: "Upload Large Files",
+            templateUrl: helper.basepath('custom/uploadLargeFiles.html'),
+            resolve: angular.extend(helper.resolveFor('ngDialog', 'ngTable',
+               'ui.select')),
+            controller: 'uploadLargeFilesController'
+         })
+         .state('app.dashboard', {
+            url: '/dashboard',
+            title: "Dashboard",
+            templateUrl: helper.basepath('custom/dashboard.html'),
+            resolve: angular.extend(helper.resolveFor('ngDialog', 'ngTable',
+               'ui.select')),
+            controller: 'dashboardController'
+         })
+         .state('app.bolhistory', {
+            url: '/bolHistory',
+            title: 'BOL History',
+            templateUrl: helper.basepath('custom/bolHistory.html'),
+            resolve: angular.extend(helper.resolveFor('ngDialog', 'ngTable',
+               'ui.select'), {
+               access: ["AuthService", function(AuthService) {
+                  return AuthService.isAuthorized("ADMIN");
+               }],
+            }),
+            controller: 'bolController'
+         })
 
       /* .state('app.destbol_list', {
         url: '/destbol_list',
@@ -488,7 +495,7 @@ App.config(['$stateProvider', '$locationProvider', '$urlRouterProvider',
                });
 
 
-               $state.go('app.uploadLargeFile');
+               $state.go('app.dashboard');
                localStorage.removeItem('assigned_customer_data');
                localStorage.removeItem('customer_data');
                localStorage.removeItem('token');

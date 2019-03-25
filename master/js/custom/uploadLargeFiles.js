@@ -13,7 +13,9 @@ App.factory('UploadLargeFiles', function($resource, $rootScope) {
          headers: {
             'Content-Type': 'undefined',
             'Authorization': JSON.parse(localStorage.getItem('token'))
-         }
+         },
+         url: 'http://10.1.1.63:8080/STingWebService/service/stingResult/getAll',
+         params: {}
       },
       uploadData: {
          method: 'POST',
@@ -33,20 +35,9 @@ App.controller('uploadLargeFilesController', function($scope, $timeout, $cookieS
    UserAdmin, Invite, Company, Customer, Flash, UploadLargeFiles) {
 
    $scope.options = [];
-   /*
-   $scope.options = [
-      "France",
-      "United Kingdom",
-      "Germany",
-      "Belgium",
-      "Netherlands",
-      "Spain",
-      "Italy",
-      "Poland",
-      "Austria"
-   ]
 
-*/
+
+
    var maxBlockSize = 100 * 1024;
    var currentFilePointer = 0;
    var totalBytesRemaining = 0;

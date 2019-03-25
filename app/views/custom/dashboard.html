@@ -1,0 +1,97 @@
+
+<table show-filter="true" class="table">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>startTime</td>
+			<td>endTime</td>
+			<td>status</td>
+			<td>lineType</td>
+			<td>st</td>
+			<td>abcZ</td>
+			<td>adk</td>
+			<td>aroE</td>
+			<td>fumC</td>
+			<td>gdh</td>
+			<td>pdhC</td>
+			<td>pgm</td>
+         <td>totalKmers</td>
+			<td>totalReads</td>
+		</tr>
+	</thead>
+	<tr ng-repeat="bol_list in bol_list_table.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage)" ng-class="">
+		<td data-title="'id'" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.id}}
+		</td>
+		<td data-title="'Name '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.name}}
+		</td>
+		<td data-title="'startTime '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.startTime }}
+		</td>
+		<td data-title="'endTime '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.endTime }}
+		</td>
+		<td data-title="'status '" class="col-lg-1 col-md-1 col-sm-1" }">
+			{{bol_list.status}}
+		</td>
+      <td data-title="'lineType '" class="col-lg-1 col-md-1 col-sm-1" }">
+         {{bol_list.lineType}}
+      </td>
+		<td data-title="'st '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.st}}
+		</td>
+		<td data-title="'abcZ '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.abcZ}}
+		</td>
+		<td data-title="'adk '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.adk}}
+		</td>
+		<td data-title="'aroE '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.aroE}}
+		</td>
+		<td data-title="'fumC '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.fumC}}
+		</td>
+		<td data-title="'gdh '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.gdh}}
+		</td>
+		<td data-title="'pdhC '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.pdhC}}
+		</td>
+		<td data-title="'pgm '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.pgm}}
+		</td>
+      <td data-title="'totalKmers '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.totalKmers}}
+		</td>
+      <td data-title="'totalReads '" class="col-lg-1 col-md-1 col-sm-1">
+			{{bol_list.totalReads}}
+		</td>
+			</tr>
+</table>
+<pagination class="pagination-sm" ng-show="totalItems>0" total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="10" max-size="4"></pagination>
+</div>
+
+<div class="alert alert-success" role="alert" ng-show="totalItems<1">
+	<strong>No record found</strong>
+</div>
+
+
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table thead tr:nth-child(odd) {
+  background-color: #5DADE2;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>

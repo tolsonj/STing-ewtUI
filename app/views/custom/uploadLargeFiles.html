@@ -1,31 +1,54 @@
 <form>
-        <div style="margin-left: 20px;">
-            <h1>File Uploader</h1>
-          <p>
-            <br/>
-            <span class="input-control text">
-            <input type="file" id="file1" name='file1' onchange="angular.element(this).scope().fileNameChanged(this)" />
-          </span>
-        </p>
-            <div id="output">
+	<div style="margin-left: 20px;">
+		<h1>File Uploader</h1>
+		<p>
+			<br />
+			<span class="input-control text">
+				<input type="file" id="file1" name='file1' onchange="angular.element(this).scope().fileNameChanged(this)" />
+			</span>
+		</p>
+		<div id="output">
 
-                <strong>File Properties:</strong>
-                <br/>
-                <p>
-                    Name: <span id="fileName"> {{selectedFile.name}}</span>
-                </p>
-                <p>
-                    File Size: <span id="fileSize">{{selectedFile.size}}</span> bytes.
-                </p>
-                <p>
-                    File Type: <span id="fileType">{{selectedFile.type}}</span>
-                </p>
-            
-                <p>
-                    <strong>Progress</strong>: <span id="fileUploadProgress">{{percentComplete}}%</span>
-                </p>
-            </div>
-        </div>
-        <div>
-        </div>
+			<strong>File Properties:</strong>
+			<br />
+			<p>
+				Name: <span id="fileName"> {{selectedFile.name}}</span>
+			</p>
+			<p>
+				File Size: <span id="fileSize">{{selectedFile.size}}</span> bytes.
+			</p>
+			<p>
+				File Type: <span id="fileType">{{selectedFile.type}}</span>
+			</p>
+
+			<p>
+				<strong>Progress</strong>: <span id="fileUploadProgress">{{percentComplete}}%</span>
+			</p>
+		</div>
+	</div>
+	<div>
+	</div>
 </form>
+</div>
+
+<div class="alert alert-success" role="alert" ng-show="totalItems<1">
+	<strong>No record found</strong>
+</div>
+
+
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table thead tr:nth-child(odd) {
+  background-color: #5DADE2;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>

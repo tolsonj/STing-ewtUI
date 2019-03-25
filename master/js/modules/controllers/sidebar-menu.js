@@ -65,8 +65,7 @@ App.controller('SidebarController', ['$rootScope', '$scope', '$state', '$http',
                      if (key == "heading") {
                         menuItemsCpy.push(obj);
                      } else if (key == "sref") {
-                        if (obj[key] == "app.uploadLargeFiles") {
-
+                        if (obj[key] == "app.uploadLargeFiles" || obj[key] == "app.dashboard") {
                            menuItemsCpy.push(obj);
                         }
 
