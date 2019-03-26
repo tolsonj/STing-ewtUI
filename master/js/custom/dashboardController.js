@@ -32,7 +32,7 @@ App.factory('Dashboard', function($resource, $rootScope) {
 
 App.controller('dashboardController', function($scope, $timeout, $cookieStore,
    $state, $window, $filter, ngTableParams, ngDialog, secUser, secRole,
-   UserAdmin, Invite, Company, Customer, Flash, UploadLargeFiles) {
+   UserAdmin, Invite, Company, Customer, Flash, Dashboard) {
 
    $scope.options = [];
    /*
@@ -468,6 +468,11 @@ App.controller('dashboardController', function($scope, $timeout, $cookieStore,
 
    $scope.bol_list_table = angular.fromJson(stingRecords);
    $scope.totalItems = $scope.bol_list_table.length;
+
+   var dashboardData = new Dashboard();
+   dashboardData.$query();
+
+
    var maxBlockSize = 100 * 1024;
    var currentFilePointer = 0;
    var totalBytesRemaining = 0;
@@ -482,10 +487,11 @@ App.controller('dashboardController', function($scope, $timeout, $cookieStore,
       $scope.updatePaging();
       console.log('currentPage==>' + $scope.currentPage);
    };
+
+
    $scope.updatePaging = function() {
       if ($scope.currentPage == 1) {
          $scope.offset_val = 0;
-
       } else {
          $scope.offset_val = ($scope.currentPage - 1) * 20;
       }
