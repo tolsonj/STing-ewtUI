@@ -14,7 +14,7 @@ App.factory('Dashboard', function($resource, $rootScope) {
             'Content-Type': 'undefined',
             'Authorization': JSON.parse(localStorage.getItem('token'))
          },
-         url: 'http://10.1.1.63:8080/STingWebService/service/stingResult/getAll',
+         url: $rootScope.serverUrl + 'mcfApi/getAll',
          params: {}
       },
       uploadData: {
@@ -49,14 +49,10 @@ App.controller('dashboardController', function($scope, $timeout, $cookieStore,
    ]
 
 */
-   /*
-      var dashboard = new Dashboard();
-      var stingRecord1 = dashboard.$query().then(function() {
-         alert("ASDFASDF");
-      })
-   */
 
-   var stingRecords = [{
+
+
+   stingRecords = [{
       "id": 855,
       "name": "archymedes.sql",
       "startTime": 1553477773000,
@@ -466,13 +462,25 @@ App.controller('dashboardController', function($scope, $timeout, $cookieStore,
       "totalReads": 0
    }];
 
-   $scope.bol_list_table = angular.fromJson(stingRecords);
+
+   // var stingRecords;
+
+
+
+   $scope.tableList = Dashboard.query()
+   $scope.tableList.$promise.then(function(result) {
+      $scope.tableList = result;
+      $scope.bol_list_table = angular.fromJson($scope.tableList);
+      $scope.totalItems = $scope.bol_list_table.length;
+   });
+
+   //.then(function(data) {
+   //   stingRecords = data
+   //})
+
+
+   $scope.bol_list_table = angular.fromJson($scope.tableList);
    $scope.totalItems = $scope.bol_list_table.length;
-
-   var dashboardData = new Dashboard();
-   dashboardData.$query();
-
-
    var maxBlockSize = 100 * 1024;
    var currentFilePointer = 0;
    var totalBytesRemaining = 0;
