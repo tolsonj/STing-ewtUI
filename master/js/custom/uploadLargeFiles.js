@@ -36,7 +36,21 @@ App.controller('uploadLargeFilesController', function($scope, $timeout, $cookieS
 
    $scope.options = [];
 
+   $scope.theMan = "Who is the man";
+   $scope.someHandlerMethod1 = function($file, $event, $flow) {
+      $file.upload();
+   }
+   $scope.someHandlerMethod2 = function($file, $event, $flow) {
+      alert("2");
+   }
+   $scope.someHandlerMethod3 = function($file, $event, $flow) {
+      alert("3");
+   }
 
+   $scope.$on('flow::fileAdded', function(event, $flow, flowFile) {
+      // event.preventDefault(); //prevent file from uploading
+      alert("4");
+   });
 
    var maxBlockSize = 100 * 1024;
    var currentFilePointer = 0;
@@ -96,14 +110,14 @@ App.controller('uploadLargeFilesController', function($scope, $timeout, $cookieS
          if (evt.target.readyState === FileReader.DONE && !$scope.selectedFile.cancelled) { // DONE === 2
             var base64String = btoa(String.fromCharCode.apply(null, new Uint8Array(evt.target.result)));
 
-            console.log(base64String);
-
-
             var uploadFile = new UploadLargeFiles();
             uploadFile.testing = "Hello - onloaded";
 
             var numBlockIdIndex = blockIdIndex.toString();
             uploadFile.blockId = $scope.selectedFile.name + "-BLOCK-" + numBlockIdIndex.padStart(7, '0');
+
+            console.log(uploadFile.blockId);
+
             uploadFile.filename = $scope.selectedFile.name;
             uploadFile.data = base64String;
             uploadFile.$uploadData(function(resp, headers) {
@@ -159,6 +173,7 @@ App.controller('uploadLargeFilesController', function($scope, $timeout, $cookieS
          $scope.percentComplete = ((parseFloat($scope.selectedFile.size - totalBytesRemaining) / parseFloat($scope.selectedFile.size)) * 100).toFixed(2);
       }).then(function(resp, headers) {
          uploadFile.blockId = $scope.selectedFile.name + ".complete";
+         console.log(uploadFile.blockId);
          blockIdIndex = 0
          uploadFile.data = btoa("COMPLETE");
          uploadFile.filename = $scope.selectedFile.name + ".complete";

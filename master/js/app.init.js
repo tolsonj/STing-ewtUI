@@ -33,7 +33,6 @@ var App = angular.module('angle', [
    'flash',
    'btorfs.multiselect',
    'myApp.config'
-
 ]);
 
 App.constant('config', {

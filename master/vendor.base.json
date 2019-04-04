@@ -24,5 +24,7 @@
    "bower_components/signature_pad/example/js/signature_pad.js",
    "bower_components/html2canvas/build/html2canvas.min.js",
    "bower_components/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.js",
-   "bower_components/moment/moment.js"
+   "bower_components/moment/moment.js",
+   "bower_components/flow.js/dist/flow.js",
+   "bower_components/ng-flow/dist/ng-flow-standalone.js"
 ]
