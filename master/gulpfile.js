@@ -155,8 +155,8 @@ gulp.task('scripts:app', function() {
       .pipe(ngAnnotate())
       .on("error", handleError)
       .pipe(!isTest && !isProduction ? replace('localhost', 'localhost') : gutil.noop())
-      .pipe(isTest ? replace('localhost', '10.1.1.64') : gutil.noop())
-      .pipe(isProduction ? replace('localhost', 'mcfcustomerlink.mcfsystems.com') : gutil.noop())
+      .pipe(isTest ? replace('localhost', 'sting.weemsdesignstudio.com') : gutil.noop())
+      .pipe(isProduction ? replace('localhost', 'sting.weemsdesignstudio.com') : gutil.noop())
       .pipe(isProduction ? uglify({
          preserveComments: 'some'
       }) : gutil.noop())
