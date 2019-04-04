@@ -1,6 +1,7 @@
-<div flow-init="{target:'http://localhost:8080/mcfApi/index', allowDuplicateUploads: true, testChunks:false, chunkSize: 123000, forceChunkSize: true}"
+<div flow-init="{target:'http://localhost:8080/mcfApi/index', allowDuplicateUploads: true, testChunks:false, chunkSize: 4194304, forceChunkSize: true}"
      flow-file-added="someHandlerMethod1( $files, $event, $flow )"
      flow-files-submitted="$flow.upload()"
+     low-complete="someHandlerMethod2( $files, $event, $flow )"
      flow-file-success="$file.msg = $message">
 
 <! ------------------------------------ ->
@@ -25,8 +26,6 @@
      <th>#</th>
      <th>Name</th>
      <th>Size</th>
-     <th>Relative Path</th>
-     <th>Unique Identifier</th>
      <th>#Chunks</th>
      <th>Progress</th>
      <th>Paused</th>
@@ -40,8 +39,6 @@
      <td>{{$index+1}}</td>
      <td>{{file.name}}</td>
      <td>{{file.size}}</td>
-     <td>{{file.relativePath}}</td>
-     <td>{{file.uniqueIdentifier}}</td>
      <td>{{file.chunks.length}}</td>
      <td>{{file.progress()}}</td>
      <td>{{file.paused}}</td>
